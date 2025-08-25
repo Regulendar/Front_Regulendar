@@ -2,6 +2,13 @@ import { defaultConfig } from '@tamagui/config/v4';
 import { createTamagui, createTokens } from 'tamagui';
 
 const tokens = createTokens({
+  colors: {
+    darkGreen: '#00B906',
+    lightGreen: '#B9E937',
+    darkGray: '#424242',
+    white: '#FFFFFF',
+    black: '#000000',
+  },
   size: {
     true: 4,
     x1: 4,
@@ -14,6 +21,23 @@ const tokens = createTokens({
     x8: 32,
     x9: 36,
     x10: 40,
+    x11: 44,
+    x12: 48,
+    x13: 52,
+    x14: 56,
+    x15: 60,
+    x16: 64,
+    x17: 68,
+    x18: 72,
+    x19: 76,
+    x20: 80,
+    x21: 84,
+    x22: 88,
+    x23: 92,
+    x24: 96,
+    x25: 100,
+    x37_5: 150,
+    x50: 200,
   },
   zIndex: {
     true: 0,

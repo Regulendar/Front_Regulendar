@@ -69683,6 +69683,162 @@
           "name": "t-size-x10",
           "val": 40,
           "variable": ""
+        },
+        "x11": {
+          "isVar": true,
+          "key": "$x11",
+          "name": "t-size-x11",
+          "val": 44,
+          "variable": ""
+        },
+        "x12": {
+          "isVar": true,
+          "key": "$x12",
+          "name": "t-size-x12",
+          "val": 48,
+          "variable": ""
+        },
+        "x13": {
+          "isVar": true,
+          "key": "$x13",
+          "name": "t-size-x13",
+          "val": 52,
+          "variable": ""
+        },
+        "x14": {
+          "isVar": true,
+          "key": "$x14",
+          "name": "t-size-x14",
+          "val": 56,
+          "variable": ""
+        },
+        "x15": {
+          "isVar": true,
+          "key": "$x15",
+          "name": "t-size-x15",
+          "val": 60,
+          "variable": ""
+        },
+        "x16": {
+          "isVar": true,
+          "key": "$x16",
+          "name": "t-size-x16",
+          "val": 64,
+          "variable": ""
+        },
+        "x17": {
+          "isVar": true,
+          "key": "$x17",
+          "name": "t-size-x17",
+          "val": 68,
+          "variable": ""
+        },
+        "x18": {
+          "isVar": true,
+          "key": "$x18",
+          "name": "t-size-x18",
+          "val": 72,
+          "variable": ""
+        },
+        "x19": {
+          "isVar": true,
+          "key": "$x19",
+          "name": "t-size-x19",
+          "val": 76,
+          "variable": ""
+        },
+        "x20": {
+          "isVar": true,
+          "key": "$x20",
+          "name": "t-size-x20",
+          "val": 80,
+          "variable": ""
+        },
+        "x21": {
+          "isVar": true,
+          "key": "$x21",
+          "name": "t-size-x21",
+          "val": 84,
+          "variable": ""
+        },
+        "x22": {
+          "isVar": true,
+          "key": "$x22",
+          "name": "t-size-x22",
+          "val": 88,
+          "variable": ""
+        },
+        "x23": {
+          "isVar": true,
+          "key": "$x23",
+          "name": "t-size-x23",
+          "val": 92,
+          "variable": ""
+        },
+        "x24": {
+          "isVar": true,
+          "key": "$x24",
+          "name": "t-size-x24",
+          "val": 96,
+          "variable": ""
+        },
+        "x25": {
+          "isVar": true,
+          "key": "$x25",
+          "name": "t-size-x25",
+          "val": 100,
+          "variable": ""
+        },
+        "x37_5": {
+          "isVar": true,
+          "key": "$x37_5",
+          "name": "t-size-x37_5",
+          "val": 150,
+          "variable": ""
+        },
+        "x50": {
+          "isVar": true,
+          "key": "$x50",
+          "name": "t-size-x50",
+          "val": 200,
+          "variable": ""
+        }
+      },
+      "colors": {
+        "darkGreen": {
+          "isVar": true,
+          "key": "$darkGreen",
+          "name": "t-colors-darkGreen",
+          "val": "#00B906",
+          "variable": ""
+        },
+        "lightGreen": {
+          "isVar": true,
+          "key": "$lightGreen",
+          "name": "t-colors-lightGreen",
+          "val": "#B9E937",
+          "variable": ""
+        },
+        "darkGray": {
+          "isVar": true,
+          "key": "$darkGray",
+          "name": "t-colors-darkGray",
+          "val": "#424242",
+          "variable": ""
+        },
+        "white": {
+          "isVar": true,
+          "key": "$white",
+          "name": "t-colors-white",
+          "val": "#FFFFFF",
+          "variable": ""
+        },
+        "black": {
+          "isVar": true,
+          "key": "$black",
+          "name": "t-colors-black",
+          "val": "#000000",
+          "variable": ""
         }
       }
     },
@@ -70436,6 +70592,160 @@
         "key": "$x10",
         "name": "t-size-x10",
         "val": 40,
+        "variable": ""
+      },
+      "$size.x11": {
+        "isVar": true,
+        "key": "$x11",
+        "name": "t-size-x11",
+        "val": 44,
+        "variable": ""
+      },
+      "$size.x12": {
+        "isVar": true,
+        "key": "$x12",
+        "name": "t-size-x12",
+        "val": 48,
+        "variable": ""
+      },
+      "$size.x13": {
+        "isVar": true,
+        "key": "$x13",
+        "name": "t-size-x13",
+        "val": 52,
+        "variable": ""
+      },
+      "$size.x14": {
+        "isVar": true,
+        "key": "$x14",
+        "name": "t-size-x14",
+        "val": 56,
+        "variable": ""
+      },
+      "$size.x15": {
+        "isVar": true,
+        "key": "$x15",
+        "name": "t-size-x15",
+        "val": 60,
+        "variable": ""
+      },
+      "$size.x16": {
+        "isVar": true,
+        "key": "$x16",
+        "name": "t-size-x16",
+        "val": 64,
+        "variable": ""
+      },
+      "$size.x17": {
+        "isVar": true,
+        "key": "$x17",
+        "name": "t-size-x17",
+        "val": 68,
+        "variable": ""
+      },
+      "$size.x18": {
+        "isVar": true,
+        "key": "$x18",
+        "name": "t-size-x18",
+        "val": 72,
+        "variable": ""
+      },
+      "$size.x19": {
+        "isVar": true,
+        "key": "$x19",
+        "name": "t-size-x19",
+        "val": 76,
+        "variable": ""
+      },
+      "$size.x20": {
+        "isVar": true,
+        "key": "$x20",
+        "name": "t-size-x20",
+        "val": 80,
+        "variable": ""
+      },
+      "$size.x21": {
+        "isVar": true,
+        "key": "$x21",
+        "name": "t-size-x21",
+        "val": 84,
+        "variable": ""
+      },
+      "$size.x22": {
+        "isVar": true,
+        "key": "$x22",
+        "name": "t-size-x22",
+        "val": 88,
+        "variable": ""
+      },
+      "$size.x23": {
+        "isVar": true,
+        "key": "$x23",
+        "name": "t-size-x23",
+        "val": 92,
+        "variable": ""
+      },
+      "$size.x24": {
+        "isVar": true,
+        "key": "$x24",
+        "name": "t-size-x24",
+        "val": 96,
+        "variable": ""
+      },
+      "$size.x25": {
+        "isVar": true,
+        "key": "$x25",
+        "name": "t-size-x25",
+        "val": 100,
+        "variable": ""
+      },
+      "$size.x37_5": {
+        "isVar": true,
+        "key": "$x37_5",
+        "name": "t-size-x37_5",
+        "val": 150,
+        "variable": ""
+      },
+      "$size.x50": {
+        "isVar": true,
+        "key": "$x50",
+        "name": "t-size-x50",
+        "val": 200,
+        "variable": ""
+      },
+      "$colors.darkGreen": {
+        "isVar": true,
+        "key": "$darkGreen",
+        "name": "t-colors-darkGreen",
+        "val": "#00B906",
+        "variable": ""
+      },
+      "$colors.lightGreen": {
+        "isVar": true,
+        "key": "$lightGreen",
+        "name": "t-colors-lightGreen",
+        "val": "#B9E937",
+        "variable": ""
+      },
+      "$colors.darkGray": {
+        "isVar": true,
+        "key": "$darkGray",
+        "name": "t-colors-darkGray",
+        "val": "#424242",
+        "variable": ""
+      },
+      "$colors.white": {
+        "isVar": true,
+        "key": "$white",
+        "name": "t-colors-white",
+        "val": "#FFFFFF",
+        "variable": ""
+      },
+      "$colors.black": {
+        "isVar": true,
+        "key": "$black",
+        "name": "t-colors-black",
+        "val": "#000000",
         "variable": ""
       }
     },
