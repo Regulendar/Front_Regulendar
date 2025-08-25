@@ -15,9 +15,22 @@ const tokens = createTokens({
     x9: 36,
     x10: 40,
   },
+  zIndex: {
+    true: 0,
+    x1: 0,
+    x2: 1,
+    x3: 2,
+    x4: 3,
+    x5: 4,
+    x6: 5,
+    x7: 10,
+    x8: 50,
+    x9: 100,
+    x10: 1000,
+  },
 });
 
-export const tamaguiConfig = createTamagui({
+export const config = createTamagui({
   ...defaultConfig,
 
   tokens: { ...defaultConfig.tokens, ...tokens },
@@ -39,7 +52,7 @@ export const tamaguiConfig = createTamagui({
   settings: { ...defaultConfig.settings, styleCompat: 'react-native' },
 });
 
-export type AppConfig = typeof tamaguiConfig;
+export type AppConfig = typeof config;
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
