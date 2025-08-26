@@ -56,7 +56,6 @@ const tokens = createTokens({
 
 export const config = createTamagui({
   ...defaultConfig,
-
   tokens: { ...defaultConfig.tokens, ...tokens },
   media: {
     ...defaultConfig.media,

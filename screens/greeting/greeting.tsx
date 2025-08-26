@@ -1,10 +1,14 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Stack, Text } from 'tamagui';
+import { Stack, Text, getTokenValue } from 'tamagui';
 
 export const GreetingScreen = memo(() => {
+  const backgroundColor = useMemo(() => {
+    const color = getTokenValue('$colors.darkGreen');
+    return color;
+  }, []);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#00B906' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor }}>
       <Stack flex={1} justify="center" items="center" gap="$size.x2">
         <Text fontSize="$12" fontWeight="800" color="$colors.white">
           Regulendar
