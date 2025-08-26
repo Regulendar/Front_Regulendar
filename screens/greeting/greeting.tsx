@@ -4,9 +4,9 @@ import { Stack, Text } from 'tamagui';
 
 export const GreetingScreen = memo(() => {
   return (
-    <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: '#00B906' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#00B906' }}>
       <Stack flex={1} justify="center" items="center" gap="$size.x2">
-        <Text fontSize="$11" fontWeight="800" color="$colors.white">
+        <Text fontSize="$12" fontWeight="800" color="$colors.white">
           Regulendar
         </Text>
         <Text fontSize="$8" fontWeight="700" color="$colors.white">
