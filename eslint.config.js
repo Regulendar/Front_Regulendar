@@ -9,6 +9,7 @@ module.exports = defineConfig([
     plugins: { 'unused-imports': unusedImports },
     rules: {
       'unused-imports/no-unused-imports': 'warn',
+      'react/display-name': 'off',
     },
     ignores: ['dist/*', '.expo/*'],
   },
