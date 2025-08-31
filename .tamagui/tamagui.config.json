@@ -69826,6 +69826,20 @@
           "val": "#424242",
           "variable": ""
         },
+        "backgroundWhite": {
+          "isVar": true,
+          "key": "$backgroundWhite",
+          "name": "t-colors-backgroundWhite",
+          "val": "#FEFEFE",
+          "variable": ""
+        },
+        "backgroundBlack": {
+          "isVar": true,
+          "key": "$backgroundBlack",
+          "name": "t-colors-backgroundBlack",
+          "val": "#1C1C1C",
+          "variable": ""
+        },
         "white": {
           "isVar": true,
           "key": "$white",
@@ -70732,6 +70746,20 @@
         "key": "$darkGray",
         "name": "t-colors-darkGray",
         "val": "#424242",
+        "variable": ""
+      },
+      "$colors.backgroundWhite": {
+        "isVar": true,
+        "key": "$backgroundWhite",
+        "name": "t-colors-backgroundWhite",
+        "val": "#FEFEFE",
+        "variable": ""
+      },
+      "$colors.backgroundBlack": {
+        "isVar": true,
+        "key": "$backgroundBlack",
+        "name": "t-colors-backgroundBlack",
+        "val": "#1C1C1C",
         "variable": ""
       },
       "$colors.white": {

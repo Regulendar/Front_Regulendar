@@ -6,6 +6,8 @@ const tokens = createTokens({
     darkGreen: '#00B906',
     lightGreen: '#B9E937',
     darkGray: '#424242',
+    backgroundWhite: '#FEFEFE',
+    backgroundBlack: '#1C1C1C',
     white: '#FFFFFF',
     black: '#000000',
   },
