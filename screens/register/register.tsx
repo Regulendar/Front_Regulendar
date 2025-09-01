@@ -1,32 +1,42 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { memo, useMemo } from 'react';
-import { ColorValue } from 'react-native';
+import { memo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, getTokenValue, Stack, Text } from 'tamagui';
+import { Button, Stack, Text } from 'tamagui';
 
 export const RegisterScreen = memo(() => {
-  const gradientColors = useMemo<[ColorValue, ColorValue]>(() => {
-    const color1: ColorValue = getTokenValue('$colors.darkGreen');
-    const color2: ColorValue = getTokenValue('$colors.lightGreen');
-    return [color1, color2];
-  }, []);
   return (
-    <LinearGradient colors={gradientColors} style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <Stack flex={1} justify="space-between" items="center">
-          <Stack flex={1} width="100%" borderWidth={1}>
-            <Text>asdf</Text>
-          </Stack>
-          <Stack width="100%" borderWidth={1} justify="space-around" px="$size.x4" mb="$size.x10" gap="$size.x2">
-            <Button height="auto" px="$size.x6" py="$size.x3" bg="$colors.backgroundWhite">
-              <Text fontSize="$9">Register</Text>
-            </Button>
-            <Button height="auto" px="$size.x6" py="$size.x3" bg="$colors.backgroundWhite">
-              <Text fontSize="$9">Register</Text>
-            </Button>
-          </Stack>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Stack flex={1} justify="space-between" items="center">
+        <Stack flex={1} justify="center" items="center" gap="$size.x2">
+          <Text fontSize="$12" fontWeight="800" color="$colors.componentGreen">
+            Regulendar
+          </Text>
+          <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
+            정기적인 모임 관리의 시작
+          </Text>
         </Stack>
-      </SafeAreaView>
-    </LinearGradient>
+        <Stack width="100%" justify="space-around" px="$size.x4" mb="$size.x6" gap="$size.x2">
+          <Button
+            height="auto"
+            px="$size.x6"
+            py="$size.x3"
+            bg="$colors.componentGreen"
+            pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}>
+            <Text fontSize="$8" fontWeight="700" color="$colors.white">
+              회원 가입
+            </Text>
+          </Button>
+          <Button
+            height="auto"
+            px="$size.x6"
+            py="$size.x3"
+            bg="$colors.componentGreen"
+            pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}>
+            <Text fontSize="$8" fontWeight="700" color="$colors.white">
+              로그인
+            </Text>
+          </Button>
+        </Stack>
+      </Stack>
+    </SafeAreaView>
   );
 });
