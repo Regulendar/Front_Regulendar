@@ -1,2 +1,2 @@
-export * from './input';
 export * from './register';
+export * from './signIn';
