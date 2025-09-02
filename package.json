@@ -43,11 +43,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@supabase/supabase-js": "^2.56.1",
     "@tamagui/babel-plugin": "^1.132.21",
     "@types/react": "~19.0.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
     "eslint-plugin-unused-imports": "^4.2.0",
+    "react-native-url-polyfill": "^2.0.0",
     "typescript": "~5.8.3"
   },
   "private": true
