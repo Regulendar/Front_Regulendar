@@ -69819,6 +69819,13 @@
           "val": "#B9E937",
           "variable": ""
         },
+        "componentGreen": {
+          "isVar": true,
+          "key": "$componentGreen",
+          "name": "t-colors-componentGreen",
+          "val": "#3ABF67",
+          "variable": ""
+        },
         "darkGray": {
           "isVar": true,
           "key": "$darkGray",
@@ -70739,6 +70746,13 @@
         "key": "$lightGreen",
         "name": "t-colors-lightGreen",
         "val": "#B9E937",
+        "variable": ""
+      },
+      "$colors.componentGreen": {
+        "isVar": true,
+        "key": "$componentGreen",
+        "name": "t-colors-componentGreen",
+        "val": "#3ABF67",
         "variable": ""
       },
       "$colors.darkGray": {

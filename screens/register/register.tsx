@@ -1,8 +1,15 @@
-import { memo } from 'react';
+import { useRouter } from 'expo-router';
+import { memo, useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Stack, Text } from 'tamagui';
 
 export const RegisterScreen = memo(() => {
+  const router = useRouter();
+
+  const onPressSignIn = useCallback(() => {
+    return router.push('/register/signIn/signIn');
+  }, [router]);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Stack flex={1} justify="space-between" items="center">
@@ -30,7 +37,8 @@ export const RegisterScreen = memo(() => {
             px="$size.x6"
             py="$size.x3"
             bg="$colors.componentGreen"
-            pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}>
+            pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
+            onPress={onPressSignIn}>
             <Text fontSize="$8" fontWeight="700" color="$colors.white">
               로그인
             </Text>
