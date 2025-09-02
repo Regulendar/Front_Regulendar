@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient, processLock } from '@supabase/supabase-js';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const supabasePublicKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLIC_KEY;
@@ -12,12 +12,30 @@ if (!supabaseUrl || !supabasePublicKey) {
 console.log('Supabase URL:', supabaseUrl);
 console.log('Supabase Public Key:', supabasePublicKey);
 
-export const supabase = createClient(supabaseUrl, supabasePublicKey, {
+const isPlatformWeb = Platform.OS === 'web';
+
+const supabase = createClient(supabaseUrl, supabasePublicKey, {
   auth: {
-    ...(Platform.OS !== 'web' ? { storage: AsyncStorage } : {}),
+    ...(isPlatformWeb ? {} : { storage: AsyncStorage }),
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
     lock: processLock,
   },
 });
+
+if (!isPlatformWeb) {
+  AppState.addEventListener('change', (state) => {
+    const isAppStateActive = state === 'active';
+    if (isAppStateActive) {
+      supabase.auth.startAutoRefresh();
+    } else {
+      supabase.auth.stopAutoRefresh();
+    }
+  });
+}
+
+const supabaseAuth = supabase.auth;
+const supabaseDB = supabase.storage;
+
+export { supabase, supabaseAuth, supabaseDB };
