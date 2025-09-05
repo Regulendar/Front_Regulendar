@@ -11,7 +11,7 @@ export const RegisterScreen = memo(() => {
   }, [router]);
 
   const handlePressSignUp = useCallback(() => {
-    return router.push('/register/sinUp/signUp');
+    return router.push('/register/signUp/signUp');
   }, [router]);
 
   return (
