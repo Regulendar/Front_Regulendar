@@ -9,9 +9,6 @@ if (!supabaseUrl || !supabasePublicKey) {
   throw new Error('Supabase URL or Public Key is not defined');
 }
 
-console.log('Supabase URL:', supabaseUrl);
-console.log('Supabase Public Key:', supabasePublicKey);
-
 const isPlatformWeb = Platform.OS === 'web';
 
 const supabase = createClient(supabaseUrl, supabasePublicKey, {
