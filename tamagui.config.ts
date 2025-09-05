@@ -6,9 +6,10 @@ const tokens = createTokens({
     darkGreen: '#00B906',
     lightGreen: '#B9E937',
     componentGreen: '#3ABF67',
-
+    lightGray: '#c3c0c0',
+    mediumGray: '#888888',
     darkGray: '#424242',
-    backgroundWhite: '#FEFEFE',
+    backgroundWhite: '#F5F5F5',
     backgroundBlack: '#1C1C1C',
     white: '#FFFFFF',
     black: '#000000',
@@ -42,6 +43,8 @@ const tokens = createTokens({
     x25: 100,
     x37_5: 150,
     x50: 200,
+    fluid: '100%',
+    fit: 'auto',
   },
   zIndex: {
     true: 0,

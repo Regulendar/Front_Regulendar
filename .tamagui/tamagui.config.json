@@ -69802,6 +69802,20 @@
           "name": "t-size-x50",
           "val": 200,
           "variable": ""
+        },
+        "fluid": {
+          "isVar": true,
+          "key": "$fluid",
+          "name": "t-size-fluid",
+          "val": "100%",
+          "variable": ""
+        },
+        "fit": {
+          "isVar": true,
+          "key": "$fit",
+          "name": "t-size-fit",
+          "val": "auto",
+          "variable": ""
         }
       },
       "colors": {
@@ -69826,6 +69840,20 @@
           "val": "#3ABF67",
           "variable": ""
         },
+        "lightGray": {
+          "isVar": true,
+          "key": "$lightGray",
+          "name": "t-colors-lightGray",
+          "val": "#c3c0c0",
+          "variable": ""
+        },
+        "mediumGray": {
+          "isVar": true,
+          "key": "$mediumGray",
+          "name": "t-colors-mediumGray",
+          "val": "#888888",
+          "variable": ""
+        },
         "darkGray": {
           "isVar": true,
           "key": "$darkGray",
@@ -69837,7 +69865,7 @@
           "isVar": true,
           "key": "$backgroundWhite",
           "name": "t-colors-backgroundWhite",
-          "val": "#FEFEFE",
+          "val": "#F5F5F5",
           "variable": ""
         },
         "backgroundBlack": {
@@ -70734,6 +70762,20 @@
         "val": 200,
         "variable": ""
       },
+      "$size.fluid": {
+        "isVar": true,
+        "key": "$fluid",
+        "name": "t-size-fluid",
+        "val": "100%",
+        "variable": ""
+      },
+      "$size.fit": {
+        "isVar": true,
+        "key": "$fit",
+        "name": "t-size-fit",
+        "val": "auto",
+        "variable": ""
+      },
       "$colors.darkGreen": {
         "isVar": true,
         "key": "$darkGreen",
@@ -70755,6 +70797,20 @@
         "val": "#3ABF67",
         "variable": ""
       },
+      "$colors.lightGray": {
+        "isVar": true,
+        "key": "$lightGray",
+        "name": "t-colors-lightGray",
+        "val": "#c3c0c0",
+        "variable": ""
+      },
+      "$colors.mediumGray": {
+        "isVar": true,
+        "key": "$mediumGray",
+        "name": "t-colors-mediumGray",
+        "val": "#888888",
+        "variable": ""
+      },
       "$colors.darkGray": {
         "isVar": true,
         "key": "$darkGray",
@@ -70766,7 +70822,7 @@
         "isVar": true,
         "key": "$backgroundWhite",
         "name": "t-colors-backgroundWhite",
-        "val": "#FEFEFE",
+        "val": "#F5F5F5",
         "variable": ""
       },
       "$colors.backgroundBlack": {
