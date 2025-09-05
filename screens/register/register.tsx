@@ -6,8 +6,12 @@ import { Button, Stack, Text } from 'tamagui';
 export const RegisterScreen = memo(() => {
   const router = useRouter();
 
-  const onPressSignIn = useCallback(() => {
+  const handlePressSignIn = useCallback(() => {
     return router.push('/register/signIn/signIn');
+  }, [router]);
+
+  const handlePressSignUp = useCallback(() => {
+    return router.push('/register/sinUp/signUp');
   }, [router]);
 
   return (
@@ -27,7 +31,8 @@ export const RegisterScreen = memo(() => {
             px="$size.x6"
             py="$size.x3"
             bg="$colors.componentGreen"
-            pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}>
+            pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
+            onPress={handlePressSignUp}>
             <Text fontSize="$8" fontWeight="700" color="$colors.white">
               회원 가입
             </Text>
@@ -38,7 +43,7 @@ export const RegisterScreen = memo(() => {
             py="$size.x3"
             bg="$colors.componentGreen"
             pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
-            onPress={onPressSignIn}>
+            onPress={handlePressSignIn}>
             <Text fontSize="$8" fontWeight="700" color="$colors.white">
               로그인
             </Text>

@@ -1,5 +1,5 @@
 import { SignInScreen } from '@/screens';
 
-export default function Input() {
+export default function SignIn() {
   return <SignInScreen />;
 }
