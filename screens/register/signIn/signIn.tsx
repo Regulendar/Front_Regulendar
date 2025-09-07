@@ -10,43 +10,53 @@ import { supabaseAuth } from '@/libs';
 export const SignInScreen = memo(() => {
   const [emailOrNumber, setEmailOrNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isLoggingInFailed, setIsLoggingInFailed] = useState<boolean>(false);
+  const [isSignInFailed, setIsSignInFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
 
   const handleChangeEmailOrNumber = useCallback((text: string) => {
-    setEmailOrNumber(text);
+    return setEmailOrNumber(text);
   }, []);
 
   const handleChangePassword = useCallback((text: string) => {
-    setPassword(text);
+    return setPassword(text);
   }, []);
 
   const handlePressSignIn = useCallback(async () => {
-    const hasEmailOrPhone = emailOrNumber.length > 0;
-    const hasPassword = password.length > 0;
-    const isInputValid = hasEmailOrPhone && hasPassword;
-    if (!isInputValid) {
-      return;
-    }
-    const isValidEmail = isEmail(emailOrNumber);
-    const isValidPhoneNumber = isMobilePhone(emailOrNumber, 'ko-KR');
+    const isEmailValid = isEmail(emailOrNumber) && emailOrNumber.length > 0;
+    const isValidPhoneNumber = isMobilePhone(emailOrNumber, 'ko-KR') && emailOrNumber.length > 0;
 
-    if (isValidEmail) {
-      supabaseAuth.signInWithPassword({ email: emailOrNumber, password });
+    if (!isEmailValid && !isValidPhoneNumber) {
+      console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
       return;
     }
-    if (isValidPhoneNumber) {
-      const { data, error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
+
+    if (isEmailValid) {
+      console.log('이메일로 로그인 시도');
+      const { error } = await supabaseAuth.signInWithPassword({ email: emailOrNumber, password });
       if (error) {
-        setIsLoggingInFailed(true);
+        console.log('error', error);
+        setIsSignInFailed(true);
         return;
       }
+      // TODO(@Milgam06): MainScreen Route
+      return;
+    }
+
+    if (isValidPhoneNumber) {
+      const { error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
+      if (error) {
+        console.log('error', error);
+        setIsSignInFailed(true);
+        return;
+      }
+      // TODO(@Milgam06): MainScreen Route
+
       return;
     }
   }, [emailOrNumber, password]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Stack flex={1} width="$fluid" px="$size.x5" py="$size.x10" gap="$size.x20">
+    <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+      <Stack flex={1} width="$fluid" px="$size.x5" py="$size.x10" justify="space-between">
         <Stack items="center" gap="$size.x8">
           <Stack width="$fluid" gap="$size.x2">
             <Text fontSize="$9" fontWeight="800" color="$colors.black">
@@ -58,6 +68,8 @@ export const SignInScreen = memo(() => {
           </Stack>
           <Stack width="$fluid" gap="$size.x5">
             <Input
+              value={emailOrNumber}
+              onChangeText={handleChangeEmailOrNumber}
               w="$fluid"
               placeholder="example@example.com"
               labelContent="이메일 or 전화번호"
@@ -67,9 +79,10 @@ export const SignInScreen = memo(() => {
               borderColor="$colors.lightGray"
               fontWeight="500"
               focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
-              onChangeText={handleChangeEmailOrNumber}
             />
             <Input
+              value={password}
+              onChangeText={handleChangePassword}
               w="$fluid"
               placeholder="password"
               labelContent="비밀번호"
@@ -79,7 +92,6 @@ export const SignInScreen = memo(() => {
               borderColor="$colors.lightGray"
               fontWeight="500"
               focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
-              onChangeText={handleChangePassword}
             />
           </Stack>
         </Stack>
