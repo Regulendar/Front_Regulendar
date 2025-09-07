@@ -21,8 +21,8 @@ export const SignInScreen = memo(() => {
   }, []);
 
   const handlePressSignIn = useCallback(async () => {
-    const isEmailValid = isEmail(emailOrNumber) && emailOrNumber.length > 0;
-    const isValidPhoneNumber = isMobilePhone(emailOrNumber, 'ko-KR') && emailOrNumber.length > 0;
+    const isEmailValid = isEmail(emailOrNumber);
+    const isValidPhoneNumber = isMobilePhone(emailOrNumber, 'ko-KR');
 
     if (!isEmailValid && !isValidPhoneNumber) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
