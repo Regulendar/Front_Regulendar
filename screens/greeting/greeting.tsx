@@ -16,9 +16,9 @@ export const GreetingScreen = memo(() => {
     }
     const isUserLoggedIn = !!data?.user;
     if (isUserLoggedIn) {
-      route.navigate('/register/register');
       // #TODO(@Milgam06): MainScreen으로 변경
     }
+    route.navigate('/register/register');
     return;
   });
 
