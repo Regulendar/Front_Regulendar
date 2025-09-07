@@ -7,11 +7,11 @@ export const RegisterScreen = memo(() => {
   const router = useRouter();
 
   const handlePressSignIn = useCallback(() => {
-    return router.push('/register/signIn/signIn');
+    router.push('/register/signIn/signIn');
   }, [router]);
 
   const handlePressSignUp = useCallback(() => {
-    return router.push('/register/signUp/signUp');
+    router.push('/register/signUp/signUp');
   }, [router]);
 
   return (

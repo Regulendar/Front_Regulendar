@@ -13,11 +13,11 @@ export const SignInScreen = memo(() => {
   const [isSignInFailed, setIsSignInFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
 
   const handleChangeEmailOrNumber = useCallback((text: string) => {
-    return setEmailOrNumber(text);
+    setEmailOrNumber(text);
   }, []);
 
   const handleChangePassword = useCallback((text: string) => {
-    return setPassword(text);
+    setPassword(text);
   }, []);
 
   const handlePressSignIn = useCallback(async () => {
@@ -30,10 +30,8 @@ export const SignInScreen = memo(() => {
     }
 
     if (isEmailValid) {
-      console.log('이메일로 로그인 시도');
       const { error } = await supabaseAuth.signInWithPassword({ email: emailOrNumber, password });
       if (error) {
-        console.log('error', error);
         setIsSignInFailed(true);
         return;
       }
@@ -44,7 +42,6 @@ export const SignInScreen = memo(() => {
     if (isValidPhoneNumber) {
       const { error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
       if (error) {
-        console.log('error', error);
         setIsSignInFailed(true);
         return;
       }

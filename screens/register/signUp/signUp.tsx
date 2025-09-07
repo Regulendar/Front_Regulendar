@@ -22,27 +22,27 @@ export const SignUpScreen = memo(() => {
   const [loginType, setLoginType] = useState<ILoginType>('EMAIL');
 
   const handlePressEmailLoginType = useCallback(() => {
-    return setLoginType('EMAIL');
+    setLoginType('EMAIL');
   }, []);
 
   const handlePressPhoneLoginType = useCallback(() => {
-    return setLoginType('PHONE');
+    setLoginType('PHONE');
   }, []);
 
   const handleChangeEmail = useCallback((text: string) => {
-    return setEmail(text);
+    setEmail(text);
   }, []);
 
   const handleChangePhone = useCallback((text: string) => {
-    return setPhone(text);
+    setPhone(text);
   }, []);
 
   const handleChangePassword = useCallback((text: string) => {
-    return setPassword(text);
+    setPassword(text);
   }, []);
 
   const handleChangeConfirmPassword = useCallback((text: string) => {
-    return setConfirmPassword(text);
+    setConfirmPassword(text);
   }, []);
 
   const handlePressSignUp = useCallback(async () => {
@@ -50,8 +50,6 @@ export const SignUpScreen = memo(() => {
     const isValidPhoneNumber = isMobilePhone(phone, 'ko-KR') && phone.length > 0;
     if (!isEmailValid && !isValidPhoneNumber) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
-      console.log('email', email);
-      console.log('phone', phone);
       return;
     }
 
@@ -76,7 +74,6 @@ export const SignUpScreen = memo(() => {
     const { error: SignUpError } = await supabaseAuth.signUp(signUpPayload);
     if (SignUpError) {
       setIsSignUpFailed(true);
-      console.log('error', SignUpError);
       return;
     }
 
@@ -92,7 +89,7 @@ export const SignUpScreen = memo(() => {
     const { error: SignInError } = await supabaseAuth.signInWithPassword(signInPayload);
     if (SignInError) {
       setIsSignUpFailed(true);
-      console.log('error', SignInError);
+
       return;
     }
     // TODO(@Milgam06): MainScreen Route
