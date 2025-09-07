@@ -10,6 +10,7 @@ import { supabaseAuth } from '@/libs';
 export const SignInScreen = memo(() => {
   const [emailOrNumber, setEmailOrNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isLoggingInFailed, setIsLoggingInFailed] = useState<boolean>(false);
 
   const handleChangeEmailOrNumber = useCallback((text: string) => {
     setEmailOrNumber(text);
@@ -19,7 +20,7 @@ export const SignInScreen = memo(() => {
     setPassword(text);
   }, []);
 
-  const handlePressSignIn = useCallback(() => {
+  const handlePressSignIn = useCallback(async () => {
     const hasEmailOrPhone = emailOrNumber.length > 0;
     const hasPassword = password.length > 0;
     const isInputValid = hasEmailOrPhone && hasPassword;
@@ -34,7 +35,11 @@ export const SignInScreen = memo(() => {
       return;
     }
     if (isValidPhoneNumber) {
-      supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
+      const { data, error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
+      if (error) {
+        setIsLoggingInFailed(true);
+        return;
+      }
       return;
     }
   }, [emailOrNumber, password]);
