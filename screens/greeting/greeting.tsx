@@ -9,11 +9,7 @@ export const GreetingScreen = memo(() => {
   const route = useRouter();
 
   useDidMount(async () => {
-    const { data, error } = await supabaseAuth.getUser();
-    if (error) {
-      console.error('Error fetching user:', error);
-      return;
-    }
+    const { data } = await supabaseAuth.getUser();
     const isUserLoggedIn = !!data?.user;
     if (isUserLoggedIn) {
       // #TODO(@Milgam06): MainScreen으로 변경
