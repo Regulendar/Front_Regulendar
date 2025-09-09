@@ -8,12 +8,15 @@ import { Button, Stack, Text } from 'tamagui';
 import { Input } from '@/components';
 import { supabaseAuth } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
+import { useRouter } from 'expo-router';
 import { useDidUpdate } from 'rooks';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 type ILoginType = 'EMAIL' | 'PHONE';
 
 export const SignUpScreen = memo(() => {
+  const route = useRouter();
+
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -94,8 +97,8 @@ export const SignUpScreen = memo(() => {
       setIsSignUpFailed(true);
       return;
     }
-    // TODO(@Milgam06): MainScreen Route
-  }, [confirmPassword, email, loginType, password, phone]);
+    route.navigate('/home/home');
+  }, [confirmPassword, email, loginType, password, phone, route]);
 
   useDidUpdate(() => {
     const isLoginTypeEmail = loginType === 'EMAIL';
