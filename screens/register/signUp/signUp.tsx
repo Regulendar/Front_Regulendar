@@ -9,7 +9,7 @@ import { Input } from '@/components';
 import { supabaseAuth } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { useDidUpdate } from 'rooks';
-import { isEmail, isMobilePhone } from 'validator';
+import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 type ILoginType = 'EMAIL' | 'PHONE';
 
@@ -46,19 +46,22 @@ export const SignUpScreen = memo(() => {
   }, []);
 
   const handlePressSignUp = useCallback(async () => {
-    const isValidInput = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
+    const isInputValid = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
+    const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1 });
 
-    if (!isValidInput) {
+    if (!isPasswordValid) {
+      console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
+      return;
+    }
+    if (!isInputValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
       return;
     }
-
     const isSamePassword = password === confirmPassword;
     if (!isSamePassword) {
       console.log('비밀번호가 일치하지 않습니다.');
       return;
     }
-
     const emailSignUpPayload: SignUpWithPasswordCredentials = {
       email,
       password,
@@ -89,7 +92,6 @@ export const SignUpScreen = memo(() => {
     const { error: SignInError } = await supabaseAuth.signInWithPassword(signInPayload);
     if (SignInError) {
       setIsSignUpFailed(true);
-
       return;
     }
     // TODO(@Milgam06): MainScreen Route

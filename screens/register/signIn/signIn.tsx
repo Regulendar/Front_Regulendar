@@ -1,7 +1,7 @@
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Stack, Text } from 'tamagui';
-import { isEmail, isMobilePhone } from 'validator';
+import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 import { Input } from '@/components';
 import { supabaseAuth } from '@/libs';
@@ -22,9 +22,17 @@ export const SignInScreen = memo(() => {
 
   const handlePressSignIn = useCallback(async () => {
     const isEmailValid = isEmail(emailOrNumber);
-    const isValidPhoneNumber = isMobilePhone(emailOrNumber, 'ko-KR');
+    const isPhoneNumberValid = isMobilePhone(emailOrNumber, 'ko-KR');
+    const isPasswordValid = isStrongPassword(password, {
+      minLength: 6,
+    });
 
-    if (!isEmailValid && !isValidPhoneNumber) {
+    if (!isPasswordValid) {
+      console.log('비밀번호 형식이 올바르지 않습니다.');
+      return;
+    }
+
+    if (!isEmailValid && !isPhoneNumberValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
       return;
     }
@@ -39,7 +47,7 @@ export const SignInScreen = memo(() => {
       return;
     }
 
-    if (isValidPhoneNumber) {
+    if (isPhoneNumberValid) {
       const { error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
       if (error) {
         setIsSignInFailed(true);
