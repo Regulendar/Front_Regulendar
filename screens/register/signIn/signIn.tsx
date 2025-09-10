@@ -26,7 +26,7 @@ export const SignInScreen = memo(() => {
     const isPhoneNumberValid = isMobilePhone(emailOrNumber, 'ko-KR');
     const isPasswordValid = isStrongPassword(password, {
       minLength: 6,
-      minUppercase: 0,
+      minUppercase: 1,
       minNumbers: 0,
       minSymbols: 0,
     });
