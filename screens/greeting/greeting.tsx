@@ -12,9 +12,9 @@ export const GreetingScreen = memo(() => {
     const { data } = await supabaseAuth.getUser();
     const isUserLoggedIn = !!data?.user;
     if (isUserLoggedIn) {
-      route.navigate('/home/home');
+      route.replace('/home/home');
     }
-    route.navigate('/register/register');
+    route.replace('/register/register');
     return;
   });
 

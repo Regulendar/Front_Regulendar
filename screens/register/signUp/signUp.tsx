@@ -92,7 +92,7 @@ export const SignUpScreen = memo(() => {
       setIsSignUpFailed(true);
       return;
     }
-    route.navigate('/home/home');
+    route.replace('/home/home');
   }, [confirmPassword, email, loginType, password, phone, route]);
 
   useDidUpdate(() => {
