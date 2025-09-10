@@ -13,6 +13,7 @@ export const GreetingScreen = memo(() => {
     const isUserLoggedIn = !!data?.user;
     if (isUserLoggedIn) {
       route.replace('/home/home');
+      return;
     }
     route.replace('/register/register');
     return;
