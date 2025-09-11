@@ -7,7 +7,7 @@ import { Stack, Text } from 'tamagui';
 export const HomeScreen = memo(() => {
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
-      <Stack flex={1} width="$fluid" borderWidth={1} justify="space-between" items="center">
+      <Stack flex={1} width="$fluid" justify="space-between" items="center">
         <Calendar />
         <Text>HomeScreen</Text>
       </Stack>
