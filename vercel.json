@@ -1,0 +1,29 @@
+{
+  "name": "back-regulendar-vercel",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/graphql.ts": {
+      "runtime": "nodejs22.x",
+      "maxDuration": 120,
+      "memory": 1024
+    }
+  },
+  "rewrites": [{ "source": "/graphql", "destination": "/api/graphql" }],
+  "regions": ["icn1"],
+  "headers": [
+    {
+      "source": "/api/graphql",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://yourapp.example.com"
+        },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ]
+}
