@@ -6,7 +6,7 @@
   "functions": {
     "api/graphql.ts": {
       "runtime": "nodejs22.x",
-      "maxDuration": 120,
+      "maxDuration": 60,
       "memory": 1024
     }
   },
