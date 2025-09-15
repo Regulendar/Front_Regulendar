@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "name": "back-regulendar-vercel",
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "version": 2,
+  "regions": ["icn1"],
   "functions": {
     "api/graphql.ts": {
       "runtime": "nodejs22.x",
@@ -10,7 +11,6 @@
     }
   },
   "rewrites": [{ "source": "/graphql", "destination": "/api/graphql" }],
-  "regions": ["icn1"],
   "headers": [
     {
       "source": "/api/graphql",
