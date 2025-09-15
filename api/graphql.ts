@@ -1,4 +1,3 @@
-// api/graphql.ts  (serverless 엔트리)
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createApp } from '../src/main';
 
