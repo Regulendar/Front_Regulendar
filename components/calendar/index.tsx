@@ -1,5 +1,9 @@
-import { memo, useMemo, useState } from 'react';
+import { DUMMY_EVENTS } from '@/dummy';
+import { IEventType } from '@/types';
+import { formatDate, getToday } from '@/utils';
+import { memo, useState } from 'react';
 import { DateData, LocaleConfig, Calendar as RNCalendar } from 'react-native-calendars';
+import { useDidMount } from 'rooks';
 import { Circle, Stack, Text } from 'tamagui';
 
 LocaleConfig.locales['kr'] = {
@@ -13,26 +17,29 @@ LocaleConfig.defaultLocale = 'kr';
 
 type IDayComponentProps = {
   date: DateData;
-  isMarked?: boolean;
 };
 
 export const Calendar = memo(() => {
-  const today = useMemo(() => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const monthString = month < 10 ? `0${month}` : `${month}`;
-    const day = date.getDate();
-    const dayString = day < 10 ? `0${day}` : `${day}`;
-    const todayDateString = `${year}-${monthString}-${dayString}`;
-    return todayDateString;
-  }, []);
+  const { today, month } = getToday();
+  const [monthEvents, setMonthEvents] = useState<IEventType[]>(DUMMY_EVENTS);
   const [selectedDate, setSelectedDate] = useState<string>(today);
+  //TODO(@Milgam06): 월별 이벤트 불러오기
 
-  const DayComponent = memo<IDayComponentProps>(({ date, isMarked }) => {
-    const isSelected = selectedDate === date.dateString;
-    const isToday = today === date.dateString;
-    const day = date.day;
+  useDidMount(() => {
+    console.log(`fetch events for month: ${month}`);
+  });
+
+  const DayComponent = memo<IDayComponentProps>(({ date: { dateString, day } }) => {
+    const isSelected = selectedDate === dateString;
+    const isToday = today === dateString;
+    const hasEvent = monthEvents.some((event) => {
+      const { dateString: eventDateString } = formatDate({
+        year: event.eventDateYear,
+        month: event.eventDateMonth,
+        day: event.eventDateDay,
+      });
+      return eventDateString === dateString;
+    });
     const todayTextColor = isToday ? '$colors.componentGreen' : '$colors.black';
     const dayTextColor = isSelected ? '$colors.white' : todayTextColor;
     const backgroundColor = isSelected ? '$colors.componentGreen' : 'transparent';
@@ -44,17 +51,18 @@ export const Calendar = memo(() => {
         justify="space-between"
         items="center"
         bg={backgroundColor}
-        style={{ borderRadius: 6, paddingVertical: 6 }}
+        style={{ borderRadius: 6, paddingVertical: 8 }}
         onPress={() => {
-          setSelectedDate(date.dateString);
+          setSelectedDate(dateString);
         }}>
         <Text fontSize="$6" fontWeight={dayTextFontWeight} color={dayTextColor}>
           {day}
         </Text>
-        {isSelected && <Circle size="$x1_5" bg={isSelected ? '$colors.white' : '$colors.backgroundBlack'} />}
+        {hasEvent && <Circle size="$x1_5" bg={isSelected ? '$colors.white' : '$colors.componentGreen'} />}
       </Stack>
     );
   });
+
   return (
     <Stack width="$fluid" px="$size.x2">
       <RNCalendar
@@ -75,12 +83,15 @@ export const Calendar = memo(() => {
           textDayHeaderFontWeight: 900,
           textDayHeaderFontSize: 16,
           calendarBackground: 'transparent',
-          weekVerticalMargin: 4,
+          weekVerticalMargin: 5,
         }}
         dayComponent={({ date }) => {
           const hasNotDate = !date;
           if (hasNotDate) return;
           return <DayComponent date={date} />;
+        }}
+        onMonthChange={({ month }) => {
+          console.log('month changed', month);
         }}
         hideExtraDays
         onDayPress={({ dateString }) => {
