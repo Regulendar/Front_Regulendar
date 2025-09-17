@@ -33,6 +33,5 @@ if (!isPlatformWeb) {
 }
 
 const supabaseAuth = supabase.auth;
-const supabaseDB = supabase.storage;
 
-export { supabase, supabaseAuth, supabaseDB };
+export { supabase, supabaseAuth };
