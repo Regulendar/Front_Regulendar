@@ -29,7 +29,10 @@ model User {
 model Event {
   eventId String @id @default(cuid())
   eventTitle String
-  eventStartAt DateTime @db.Date
+  eventStartAt String
+  eventDateYear Int
+  eventDateMonth Int
+  eventDateDay Int
   eventDuration Int
   participants User[]
   hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId])

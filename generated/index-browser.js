@@ -132,6 +132,9 @@ exports.Prisma.EventScalarFieldEnum = {
   eventId: 'eventId',
   eventTitle: 'eventTitle',
   eventStartAt: 'eventStartAt',
+  eventDateYear: 'eventDateYear',
+  eventDateMonth: 'eventDateMonth',
+  eventDateDay: 'eventDateDay',
   eventDuration: 'eventDuration',
   hostOrganizationId: 'hostOrganizationId'
 };
