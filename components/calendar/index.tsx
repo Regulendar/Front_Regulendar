@@ -3,7 +3,6 @@ import { IEventType } from '@/types';
 import { formatDate, getToday } from '@/utils';
 import { memo, useCallback, useState } from 'react';
 import { DateData, LocaleConfig, Calendar as RNCalendar } from 'react-native-calendars';
-import { useDidMount } from 'rooks';
 import { Circle, Stack, Text } from 'tamagui';
 
 LocaleConfig.locales['kr'] = {
@@ -30,10 +29,6 @@ export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
   const [monthEvents, setMonthEvents] = useState<IEventType[]>(DUMMY_EVENTS);
   const [selectedDate, setSelectedDate] = useState<string>(value);
   //TODO(@Milgam06): 월별 이벤트 불러오기
-
-  useDidMount(() => {
-    console.log(`fetch events for month: ${month}`);
-  });
 
   const DayComponent = memo<IDayComponentProps>(({ date: { dateString, day } }) => {
     const isSelected = selectedDate === dateString;
@@ -104,6 +99,7 @@ export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
           return <DayComponent date={date} />;
         }}
         onMonthChange={({ month }) => {
+          // TODO(@Milgam06): 월 변경시 월별이벤트 fetching function 추가
           console.log('month changed', month);
         }}
         hideExtraDays
