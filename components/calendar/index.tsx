@@ -25,7 +25,6 @@ type ICalendarProps = {
 
 export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
   const { today, month } = getToday();
-
   const [monthEvents, setMonthEvents] = useState<IEventType[]>(DUMMY_EVENTS);
   const [selectedDate, setSelectedDate] = useState<string>(value);
   //TODO(@Milgam06): 월별 이벤트 불러오기
@@ -100,7 +99,6 @@ export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
         }}
         onMonthChange={({ month }) => {
           // TODO(@Milgam06): 월 변경시 월별이벤트 fetching function 추가
-          console.log('month changed', month);
         }}
         hideExtraDays
       />
