@@ -5,9 +5,10 @@ import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 import { Input } from '@/components';
 import { supabaseAuth } from '@/libs';
+import { useRouter } from 'expo-router';
 
-// TODO(@Milgam06): Button 추가 필요
 export const SignInScreen = memo(() => {
+  const route = useRouter();
   const [emailOrNumber, setEmailOrNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isSignInFailed, setIsSignInFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
@@ -25,6 +26,9 @@ export const SignInScreen = memo(() => {
     const isPhoneNumberValid = isMobilePhone(emailOrNumber, 'ko-KR');
     const isPasswordValid = isStrongPassword(password, {
       minLength: 6,
+      minUppercase: 1,
+      minNumbers: 0,
+      minSymbols: 0,
     });
 
     if (!isPasswordValid) {
@@ -43,7 +47,7 @@ export const SignInScreen = memo(() => {
         setIsSignInFailed(true);
         return;
       }
-      // TODO(@Milgam06): MainScreen Route
+      route.replace('/home/home');
       return;
     }
 
@@ -53,11 +57,11 @@ export const SignInScreen = memo(() => {
         setIsSignInFailed(true);
         return;
       }
-      // TODO(@Milgam06): MainScreen Route
+      route.replace('/home/home');
 
       return;
     }
-  }, [emailOrNumber, password]);
+  }, [emailOrNumber, password, route]);
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>

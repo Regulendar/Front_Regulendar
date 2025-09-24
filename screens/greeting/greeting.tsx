@@ -12,9 +12,10 @@ export const GreetingScreen = memo(() => {
     const { data } = await supabaseAuth.getUser();
     const isUserLoggedIn = !!data?.user;
     if (isUserLoggedIn) {
-      // #TODO(@Milgam06): MainScreen으로 변경
+      route.replace('/home/home');
+      return;
     }
-    route.navigate('/register/register');
+    route.replace('/register/register');
     return;
   });
 

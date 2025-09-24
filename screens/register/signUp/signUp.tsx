@@ -8,12 +8,15 @@ import { Button, Stack, Text } from 'tamagui';
 import { Input } from '@/components';
 import { supabaseAuth } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
+import { useRouter } from 'expo-router';
 import { useDidUpdate } from 'rooks';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 type ILoginType = 'EMAIL' | 'PHONE';
 
 export const SignUpScreen = memo(() => {
+  const route = useRouter();
+
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -47,7 +50,7 @@ export const SignUpScreen = memo(() => {
 
   const handlePressSignUp = useCallback(async () => {
     const isInputValid = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
-    const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1 });
+    const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1, minNumbers: 0, minSymbols: 0 });
 
     if (!isPasswordValid) {
       console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
@@ -62,17 +65,10 @@ export const SignUpScreen = memo(() => {
       console.log('비밀번호가 일치하지 않습니다.');
       return;
     }
-    const emailSignUpPayload: SignUpWithPasswordCredentials = {
-      email,
+    const signUpPayload: SignUpWithPasswordCredentials = {
+      ...(loginType === 'EMAIL' ? { email } : { phone }),
       password,
     };
-
-    const phoneSignUpPayload: SignUpWithPasswordCredentials = {
-      phone,
-      password,
-    };
-
-    const signUpPayload = loginType === 'EMAIL' ? emailSignUpPayload : phoneSignUpPayload;
 
     const { error: SignUpError } = await supabaseAuth.signUp(signUpPayload);
     if (SignUpError) {
@@ -94,8 +90,8 @@ export const SignUpScreen = memo(() => {
       setIsSignUpFailed(true);
       return;
     }
-    // TODO(@Milgam06): MainScreen Route
-  }, [confirmPassword, email, loginType, password, phone]);
+    route.replace('/home/home');
+  }, [confirmPassword, email, loginType, password, phone, route]);
 
   useDidUpdate(() => {
     const isLoginTypeEmail = loginType === 'EMAIL';
