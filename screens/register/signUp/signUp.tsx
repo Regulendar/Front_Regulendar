@@ -53,7 +53,6 @@ export const SignUpScreen = memo(() => {
     const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1, minNumbers: 0, minSymbols: 0 });
 
     if (!isPasswordValid) {
-      console.log('password', password, isPasswordValid);
       console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
       return;
     }
@@ -70,7 +69,6 @@ export const SignUpScreen = memo(() => {
       ...(loginType === 'EMAIL' ? { email } : { phone }),
       password,
     };
-    console.log('payload type', signUpPayload);
 
     const { error: SignUpError } = await supabaseAuth.signUp(signUpPayload);
     if (SignUpError) {
