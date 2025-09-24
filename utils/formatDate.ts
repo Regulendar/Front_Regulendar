@@ -11,6 +11,11 @@ type IFormatDate = (date: IFormatDateProps) => { year: number; month: number; da
 export const formatDate: IFormatDate = (date) => {
   const isDateString = typeof date === 'string';
   if (isDateString) {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const isValidFormat = dateRegex.test(date);
+    if (!isValidFormat) {
+      throw new Error('Invalid date format. Expected format: YYYY-MM-DD');
+    }
     const [yearString, monthString, dayString] = date.split('-');
     const year = Number(yearString);
     const month = Number(monthString);
