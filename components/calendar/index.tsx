@@ -1,7 +1,7 @@
 import { DUMMY_EVENTS } from '@/dummy';
 import { IEventType } from '@/types';
 import { formatDate, getToday } from '@/utils';
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { DateData, LocaleConfig, Calendar as RNCalendar } from 'react-native-calendars';
 import { useDidMount } from 'rooks';
 import { Circle, Stack, Text } from 'tamagui';
@@ -19,10 +19,16 @@ type IDayComponentProps = {
   date: DateData;
 };
 
-export const Calendar = memo(() => {
+type ICalendarProps = {
+  value: string;
+  onDayChange: (date: string) => void;
+};
+
+export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
   const { today, month } = getToday();
+
   const [monthEvents, setMonthEvents] = useState<IEventType[]>(DUMMY_EVENTS);
-  const [selectedDate, setSelectedDate] = useState<string>(today);
+  const [selectedDate, setSelectedDate] = useState<string>(value);
   //TODO(@Milgam06): 월별 이벤트 불러오기
 
   useDidMount(() => {
@@ -44,6 +50,11 @@ export const Calendar = memo(() => {
     const dayTextColor = isSelected ? '$colors.white' : todayTextColor;
     const backgroundColor = isSelected ? '$colors.componentGreen' : 'transparent';
     const dayTextFontWeight = isSelected ? 700 : 500;
+
+    const onDayPress = useCallback(() => {
+      onDayChange(dateString);
+      setSelectedDate(dateString);
+    }, [dateString]);
     return (
       <Stack
         width="$fluid"
@@ -51,10 +62,12 @@ export const Calendar = memo(() => {
         justify="space-between"
         items="center"
         bg={backgroundColor}
-        style={{ borderRadius: 6, paddingVertical: 8 }}
-        onPress={() => {
-          setSelectedDate(dateString);
-        }}>
+        gap="$size.x1"
+        style={{
+          borderRadius: 6,
+          paddingVertical: 8,
+        }}
+        onPress={onDayPress}>
         <Text fontSize="$6" fontWeight={dayTextFontWeight} color={dayTextColor}>
           {day}
         </Text>
@@ -83,7 +96,7 @@ export const Calendar = memo(() => {
           textDayHeaderFontWeight: 900,
           textDayHeaderFontSize: 16,
           calendarBackground: 'transparent',
-          weekVerticalMargin: 5,
+          weekVerticalMargin: 2,
         }}
         dayComponent={({ date }) => {
           const hasNotDate = !date;
@@ -94,9 +107,6 @@ export const Calendar = memo(() => {
           console.log('month changed', month);
         }}
         hideExtraDays
-        onDayPress={({ dateString }) => {
-          setSelectedDate(dateString);
-        }}
       />
     </Stack>
   );

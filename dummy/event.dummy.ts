@@ -37,4 +37,13 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateDay: 18,
     eventDuration: 0,
   },
+  {
+    id: '5',
+    eventTitle: 'Gym Session',
+    eventStartAt: '2025-09-18T18:00:00',
+    eventDateYear: 2025,
+    eventDateMonth: 9,
+    eventDateDay: 18,
+    eventDuration: 60,
+  },
 ];
