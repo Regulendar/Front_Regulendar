@@ -69879,7 +69879,7 @@
           "isVar": true,
           "key": "$lightGray",
           "name": "t-colors-lightGray",
-          "val": "#c3c0c0",
+          "val": "#c3c3c3",
           "variable": ""
         },
         "mediumGray": {
@@ -70871,7 +70871,7 @@
         "isVar": true,
         "key": "$lightGray",
         "name": "t-colors-lightGray",
-        "val": "#c3c0c0",
+        "val": "#c3c3c3",
         "variable": ""
       },
       "$colors.mediumGray": {
