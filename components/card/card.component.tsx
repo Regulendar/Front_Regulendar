@@ -31,7 +31,7 @@ export const Card = memo<ICardProps>(
         bg={backgroundColor}
         borderRadius="$size.x3"
         overflow="hidden"
-        pressStyle={{ opacity: 0.8 }}>
+        pressStyle={{ opacity: 0.6 }}>
         {placement === 'header' && (
           <TamaguiCard.Header width="$fluid" flex={1} p={0}>
             {children}
