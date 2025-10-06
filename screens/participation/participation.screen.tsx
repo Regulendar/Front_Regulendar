@@ -12,11 +12,19 @@ type IOrganizationCardComponentProps = {
   organizationDescription: string;
   organizationMemberCount: number;
   organizationImageUrl: string;
+  onPressOrganizationCard: () => void;
 };
 
 export const ParticipationScreen = memo(() => {
   const OrganizationCardComponent = memo<IOrganizationCardComponentProps>(
-    ({ organizationId, organizationName, organizationDescription, organizationMemberCount, organizationImageUrl }) => {
+    ({
+      organizationId,
+      organizationName,
+      organizationDescription,
+      organizationMemberCount,
+      organizationImageUrl,
+      onPressOrganizationCard,
+    }) => {
       return (
         <Stack
           key={organizationId}
@@ -29,7 +37,8 @@ export const ParticipationScreen = memo(() => {
           borderColor="$colors.lightGray"
           px="$size.x4"
           pressStyle={{ opacity: 0.6 }}
-          style={{ borderRadius: 16 }}>
+          style={{ borderRadius: 16 }}
+          onPress={onPressOrganizationCard}>
           <Stack flex={1} height="$fluid" justify="space-between" py="$size.x4" style={{ paddingRight: 8 }}>
             <Stack gap="$size.x1">
               <Text fontSize="$7" fontWeight="700" numberOfLines={1} ellipsizeMode="tail">
@@ -56,6 +65,10 @@ export const ParticipationScreen = memo(() => {
 
   const handleChangeSearchOrganization = useCallback((text: string) => {
     setSearchedOrganization(text);
+  }, []);
+
+  const handlePressOrganizationCard = useCallback(() => {
+    //TODO(@Milgam06): organization 페이지로 이동. mmkv로 organizationId 저장
   }, []);
 
   useDidMount(() => {
@@ -108,6 +121,7 @@ export const ParticipationScreen = memo(() => {
                     organizationDescription={organizationDescription}
                     organizationMemberCount={memberCount}
                     organizationImageUrl="https://picsum.photos/200/300"
+                    onPressOrganizationCard={handlePressOrganizationCard}
                   />
                 );
               })}
