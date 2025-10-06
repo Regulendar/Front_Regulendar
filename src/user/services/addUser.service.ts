@@ -21,20 +21,26 @@ export class AddUserService {
         HttpStatus.BAD_REQUEST,
       );
     }
+    try {
+      await this.prismaService.user.create({
+        data: {
+          id,
+          name,
+          email,
+          phoneNumber: phone,
+          password,
+        },
+      });
 
-    await this.prismaService.user.create({
-      data: {
-        id,
-        name,
-        email,
-        phoneNumber: phone,
-        password,
-      },
-    });
-
-    return {
-      status: HttpStatus.OK,
-      message: 'User created successfully',
-    };
+      return {
+        status: HttpStatus.OK,
+        message: 'User created successfully',
+      };
+    } catch (error) {
+      throw new HttpException(
+        `Failed to create user: ${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 }
