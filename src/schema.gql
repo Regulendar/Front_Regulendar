@@ -1,0 +1,46 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AddUserOutputDto {
+  status: Float!
+  message: String!
+}
+
+type GetUserOutputDto {
+  id: String!
+  name: String!
+  email: String
+  phone: String
+  password: String!
+}
+
+type DeleteUserOutputDto {
+  status: Float!
+  message: String!
+}
+
+type Query {
+  getUser(input: GetUserInputDto!): GetUserOutputDto!
+}
+
+input GetUserInputDto {
+  id: String!
+}
+
+type Mutation {
+  addUser(input: AddUserInputDto!): AddUserOutputDto!
+  deleteUser(input: DeleteUserInputDto!): DeleteUserOutputDto!
+}
+
+input AddUserInputDto {
+  id: String!
+  name: String!
+  email: String
+  phone: String
+  password: String!
+}
+
+input DeleteUserInputDto {
+  id: String!
+}
