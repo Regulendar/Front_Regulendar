@@ -68,9 +68,12 @@ export const ParticipationScreen = memo(() => {
     setSearchedOrganization(text);
   }, []);
 
-  const handlePressOrganizationCard = useCallback(() => {
-    //TODO(@Milgam06): organization 페이지로 이동. mmkv로 organizationId 저장
-  }, []);
+  const handlePressOrganizationCard = useCallback(
+    (organizationId: string) => () => {
+      //TODO(@Milgam06): organization 페이지로 이동. mmkv로 organizationId 저장
+    },
+    []
+  );
 
   useDidMount(() => {
     //TODO(@Milgam06): 조직 리스트 패칭
@@ -123,7 +126,7 @@ export const ParticipationScreen = memo(() => {
                     organizationDescription={organizationDescription}
                     organizationMemberCount={memberCount}
                     organizationImageUrl="https://picsum.photos/200/300"
-                    onPressOrganizationCard={handlePressOrganizationCard}
+                    onPressOrganizationCard={handlePressOrganizationCard(id)}
                   />
                 );
               })}

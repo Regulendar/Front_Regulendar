@@ -1,5 +1,4 @@
-import { IEventType } from './event.type';
-import { IUserType } from './user.type';
+import { IEventType, IUserType } from '.';
 
 export type IOrganizationType = {
   id: string;
