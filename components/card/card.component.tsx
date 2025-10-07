@@ -44,7 +44,7 @@ export const Card = memo<ICardProps>(
         )}
         {backgroundImg && (
           <TamaguiCard.Background>
-            <Image flex={1} source={{ uri: backgroundImg }} width="fluid" height="fluid" objectFit="cover" />
+            <Image flex={1} source={{ uri: backgroundImg }} width="$fluid" height="$fluid" objectFit="cover" />
           </TamaguiCard.Background>
         )}
       </TamaguiCard>
