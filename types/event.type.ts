@@ -1,3 +1,6 @@
+import { IOrganizationType } from './organization.type';
+import { IUserType } from './user.type';
+
 export type IEventType = {
   id: string;
   eventTitle: string;
@@ -6,4 +9,7 @@ export type IEventType = {
   eventDateMonth: number;
   eventDateDay: number;
   eventDuration: number;
+  participation: IUserType[];
+  hostOrganization: IOrganizationType;
+  hostOrganizationId: IOrganizationType['id'];
 };

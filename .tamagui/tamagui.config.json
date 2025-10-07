@@ -69796,11 +69796,39 @@
           "val": 100,
           "variable": ""
         },
+        "x30": {
+          "isVar": true,
+          "key": "$x30",
+          "name": "t-size-x30",
+          "val": 120,
+          "variable": ""
+        },
+        "x35": {
+          "isVar": true,
+          "key": "$x35",
+          "name": "t-size-x35",
+          "val": 140,
+          "variable": ""
+        },
         "x37_5": {
           "isVar": true,
           "key": "$x37_5",
           "name": "t-size-x37_5",
           "val": 150,
+          "variable": ""
+        },
+        "x40": {
+          "isVar": true,
+          "key": "$x40",
+          "name": "t-size-x40",
+          "val": 160,
+          "variable": ""
+        },
+        "x45": {
+          "isVar": true,
+          "key": "$x45",
+          "name": "t-size-x45",
+          "val": 180,
           "variable": ""
         },
         "x50": {
@@ -69851,7 +69879,7 @@
           "isVar": true,
           "key": "$lightGray",
           "name": "t-colors-lightGray",
-          "val": "#c3c0c0",
+          "val": "#c3c3c3",
           "variable": ""
         },
         "mediumGray": {
@@ -70762,11 +70790,39 @@
         "val": 100,
         "variable": ""
       },
+      "$size.x30": {
+        "isVar": true,
+        "key": "$x30",
+        "name": "t-size-x30",
+        "val": 120,
+        "variable": ""
+      },
+      "$size.x35": {
+        "isVar": true,
+        "key": "$x35",
+        "name": "t-size-x35",
+        "val": 140,
+        "variable": ""
+      },
       "$size.x37_5": {
         "isVar": true,
         "key": "$x37_5",
         "name": "t-size-x37_5",
         "val": 150,
+        "variable": ""
+      },
+      "$size.x40": {
+        "isVar": true,
+        "key": "$x40",
+        "name": "t-size-x40",
+        "val": 160,
+        "variable": ""
+      },
+      "$size.x45": {
+        "isVar": true,
+        "key": "$x45",
+        "name": "t-size-x45",
+        "val": 180,
         "variable": ""
       },
       "$size.x50": {
@@ -70815,7 +70871,7 @@
         "isVar": true,
         "key": "$lightGray",
         "name": "t-colors-lightGray",
-        "val": "#c3c0c0",
+        "val": "#c3c3c3",
         "variable": ""
       },
       "$colors.mediumGray": {
