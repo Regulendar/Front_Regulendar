@@ -61,6 +61,7 @@ export const ParticipationScreen = memo(() => {
   );
 
   const [organizations, setOrganizations] = useState<IOrganizationType[]>([]);
+  const [filteredOrganizations, setFilteredOrganizations] = useState<IOrganizationType[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
 
   const handleChangeSearchOrganization = useCallback((text: string) => {
@@ -74,20 +75,21 @@ export const ParticipationScreen = memo(() => {
   useDidMount(() => {
     //TODO(@Milgam06): 조직 리스트 패칭
     setOrganizations(DUMMY_ORGANIZATIONS);
+    setFilteredOrganizations(DUMMY_ORGANIZATIONS);
   });
 
   useDidUpdate(() => {
     //TODO(@Milgam06): 검색 시, 업데이트된 searchedOrganization 값으로, 패칭한 리스트 내에서 필터링
     const isSearchEmpty = searchedOrganization.trim() === '';
     if (isSearchEmpty) {
-      setOrganizations(DUMMY_ORGANIZATIONS);
+      setFilteredOrganizations(organizations);
       return;
     }
     const filteredOrganizations = organizations.filter(({ organizationName }) => {
       const isOrganizationNameMatch = organizationName.includes(searchedOrganization);
       return isOrganizationNameMatch;
     });
-    setOrganizations(filteredOrganizations);
+    setFilteredOrganizations(filteredOrganizations);
   }, [searchedOrganization]);
 
   return (
@@ -111,7 +113,7 @@ export const ParticipationScreen = memo(() => {
           />
           <ScrollView flex={1} width="$fluid">
             <Stack flex={1} width="$fluid" gap="$size.x2">
-              {organizations.map(({ id, organizationName, organizationDescription, members }) => {
+              {filteredOrganizations.map(({ id, organizationName, organizationDescription, members }) => {
                 const memberCount = members.length;
                 return (
                   <OrganizationCardComponent
