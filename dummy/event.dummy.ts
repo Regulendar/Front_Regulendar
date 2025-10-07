@@ -1,5 +1,5 @@
 import { IEventType } from '@/types';
-import { DUMMY_ORGANIZATIONS } from './organization.dummy';
+import { DUMMY_ORGANIZATIONS } from '.';
 
 export const DUMMY_EVENTS: IEventType[] = [
   {
