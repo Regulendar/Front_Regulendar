@@ -1,5 +1,4 @@
 import { IEventType } from '@/types';
-import { DUMMY_ORGANIZATIONS } from '.';
 
 export const DUMMY_EVENTS: IEventType[] = [
   {
@@ -11,8 +10,14 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateDay: 30,
     eventDuration: 60,
     participation: [],
-    hostOrganization: DUMMY_ORGANIZATIONS[0],
-    hostOrganizationId: DUMMY_ORGANIZATIONS[0].id,
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+    hostOrganizationId: 'org-1',
   },
   {
     id: '2',
@@ -23,8 +28,14 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateDay: 20,
     eventDuration: 30,
     participation: [],
-    hostOrganization: DUMMY_ORGANIZATIONS[1],
-    hostOrganizationId: DUMMY_ORGANIZATIONS[1].id,
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+    hostOrganizationId: 'org-1',
   },
   {
     id: '3',
@@ -35,8 +46,14 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateDay: 1,
     eventDuration: 90,
     participation: [],
-    hostOrganization: DUMMY_ORGANIZATIONS[2],
-    hostOrganizationId: DUMMY_ORGANIZATIONS[2].id,
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+    hostOrganizationId: 'org-1',
   },
   {
     id: '4',
@@ -47,8 +64,14 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateDay: 18,
     eventDuration: 0,
     participation: [],
-    hostOrganization: DUMMY_ORGANIZATIONS[3],
-    hostOrganizationId: DUMMY_ORGANIZATIONS[3].id,
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+    hostOrganizationId: 'org-1',
   },
   {
     id: '5',
@@ -59,7 +82,13 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateDay: 18,
     eventDuration: 60,
     participation: [],
-    hostOrganization: DUMMY_ORGANIZATIONS[4],
-    hostOrganizationId: DUMMY_ORGANIZATIONS[4].id,
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+    hostOrganizationId: 'org-1',
   },
 ];
