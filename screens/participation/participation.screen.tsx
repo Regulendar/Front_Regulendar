@@ -1,6 +1,7 @@
 import { Input } from '@/components';
 import { DUMMY_ORGANIZATIONS } from '@/dummy';
 import { IOrganizationType } from '@/types';
+import { useRouter } from 'expo-router';
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
@@ -60,6 +61,8 @@ export const ParticipationScreen = memo(() => {
     }
   );
 
+  const route = useRouter();
+
   const [organizations, setOrganizations] = useState<IOrganizationType[]>([]);
   const [filteredOrganizations, setFilteredOrganizations] = useState<IOrganizationType[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
@@ -70,9 +73,10 @@ export const ParticipationScreen = memo(() => {
 
   const handlePressOrganizationCard = useCallback(
     (organizationId: string) => () => {
-      //TODO(@Milgam06): organization 페이지로 이동. mmkv로 organizationId 저장
+      route.navigate(`/organization/${organizationId}`);
+      //TODO(@Milgam06): mmkv로 organizationId 저장
     },
-    []
+    [route]
   );
 
   useDidMount(() => {
