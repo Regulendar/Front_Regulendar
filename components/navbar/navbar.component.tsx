@@ -22,29 +22,31 @@ export const Navbar = memo<INavbarProps>(({ itemValue, navbarItems, onChangeItem
     [onChangeItemValue]
   );
   return (
-    <Stack width="$fluid" borderWidth={1} justify="center" items="center" px="$size.x2" py="$size.x10">
+    <Stack width="$fluid" justify="center" items="center" px="$size.x4" py="$size.x5">
       <Stack
         width="$fluid"
         flexDirection="row"
         justify="space-between"
         items="center"
-        borderWidth={1}
-        style={{ borderRadius: 12 }}>
+        bg="$colors.darkGreen"
+        style={{ borderRadius: 48 }}
+        px="$size.x3"
+        py="$size.x2"
+        boxShadow="0 0 20px rgba(0, 0, 0, 0.4)">
         {navbarItems.map(({ icon, value }, index) => {
           const isSelected = itemValue === value;
-
           return (
             <Stack
               key={index}
               width="$fit"
-              borderWidth={1}
-              p="$size.x2"
-              bg={isSelected ? '$colors.componentGreen' : 'transparent'}
+              p="$size.x3"
+              bg={isSelected ? '$colors.backgroundWhite' : 'transparent'}
+              boxShadow={isSelected ? '0 4px 10px rgba(0,0,0,0.1)' : ''}
               style={{
                 borderRadius: 48,
               }}
               onPress={handlePressItem(value)}>
-              <FontAwesomeIcon size={28} icon={icon} color={isSelected ? '#FFF' : '#000000'} />
+              <FontAwesomeIcon size={28} icon={icon} color={isSelected ? '#00B906' : '#f5f5f5'} />
             </Stack>
           );
         })}
