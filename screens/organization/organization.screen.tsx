@@ -21,7 +21,6 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
   ];
 
   const handleChangeNavbarItem = useCallback((value: string) => {
-    console.log('asfd');
     setSelectedItem(value);
   }, []);
 
