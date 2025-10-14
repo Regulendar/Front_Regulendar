@@ -3,9 +3,10 @@ import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Stack, Text } from 'tamagui';
+import { Stack } from 'tamagui';
+import { OrganizationHomeSubScreen } from './subScreens';
 
 type IOrganizationScreenProps = {
   organizationId: string;
@@ -20,6 +21,13 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
     { value: 'Messages', icon: faMessage },
   ];
 
+  const renderSubScreen = useMemo(() => {
+    switch (selectedItem) {
+      case 'Home':
+        return <OrganizationHomeSubScreen />;
+    }
+  }, [selectedItem]);
+
   const handleChangeNavbarItem = useCallback((value: string) => {
     setSelectedItem(value);
   }, []);
@@ -27,9 +35,7 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
   return (
     <Stack flex={1}>
       <SafeAreaView edges={['top']} style={{ flex: 1 }}>
-        <Stack flex={1} width="$fluid">
-          <Text>{organizationId} Organization Screen</Text>
-        </Stack>
+        {renderSubScreen}
       </SafeAreaView>
       <Navbar itemValue={selectedItem} navbarItems={navbarItems} onChangeItemValue={handleChangeNavbarItem} />
     </Stack>
