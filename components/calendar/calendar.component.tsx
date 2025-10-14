@@ -59,7 +59,7 @@ export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
         gap="$size.x1"
         style={{
           borderRadius: 6,
-          paddingVertical: 8,
+          paddingVertical: 6,
         }}
         onPress={onDayPress}>
         <Text fontSize="$6" fontWeight={dayTextFontWeight} color={dayTextColor}>
