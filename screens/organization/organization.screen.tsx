@@ -1,8 +1,7 @@
 import { INavbarItem, Navbar } from '@/components';
-import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
+import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
-import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
-import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack } from 'tamagui';
@@ -12,18 +11,23 @@ type IOrganizationScreenProps = {
   organizationId: string;
 };
 
+enum EOrganizationScreenItem {
+  Home = 'Home',
+  Calendar = 'Calendar',
+  Profile = 'Profile',
+}
+
 export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organizationId }) => {
-  const [selectedItem, setSelectedItem] = useState<string>('Home');
+  const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Home);
   const navbarItems: INavbarItem[] = [
-    { value: 'Home', icon: faHome },
-    { value: 'Search', icon: faSearch },
-    { value: 'Notifications', icon: faBell },
-    { value: 'Messages', icon: faMessage },
+    { value: EOrganizationScreenItem.Home, icon: faHome },
+    { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
+    { value: EOrganizationScreenItem.Profile, icon: faUser },
   ];
 
   const renderSubScreen = useMemo(() => {
     switch (selectedItem) {
-      case 'Home':
+      case EOrganizationScreenItem.Home:
         return <OrganizationHomeSubScreen />;
     }
   }, [selectedItem]);
