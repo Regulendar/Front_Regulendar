@@ -44,8 +44,7 @@ export const Navbar = memo<INavbarProps>(({ itemValue, navbarItems, onChangeItem
         items="center"
         bg="$colors.darkGreen"
         style={{ borderRadius: 48 }}
-        px="$size.x3"
-        py="$size.x2"
+        p="$size.x2"
         boxShadow="0 0 20px rgba(0, 0, 0, 0.4)">
         {navbarItems.map(({ icon, value }, index) => {
           const isSelected = itemValue === value;
@@ -60,7 +59,7 @@ export const Navbar = memo<INavbarProps>(({ itemValue, navbarItems, onChangeItem
                 borderRadius: 48,
               }}
               onPress={handlePressItem(value)}>
-              <FontAwesomeIcon size={28} icon={icon} color={isSelected ? '#00B906' : '#f5f5f5'} />
+              <FontAwesomeIcon size={24} icon={icon} color={isSelected ? '#00B906' : '#f5f5f5'} />
             </Stack>
           );
         })}

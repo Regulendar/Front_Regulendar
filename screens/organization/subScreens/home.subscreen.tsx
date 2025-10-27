@@ -79,7 +79,7 @@ export const OrganizationHomeSubScreen = memo(() => {
                 rightActionsWidth={swipeableContentWidth}
                 renderRightActions={({ drag, onClose }) => <RightSwipeableComponent drag={drag} onClose={onClose} />}
                 renderLeftActions={({ drag, onClose }) => <LeftSwipeableComponent drag={drag} onClose={onClose} />}
-                containerStyle={{ paddingHorizontal: 8 }}>
+                containerStyle={{ paddingHorizontal: 4 }}>
                 <Stack
                   width="$fluid"
                   px="$size.x5"
