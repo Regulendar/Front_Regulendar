@@ -67,34 +67,42 @@ export const OrganizationHomeSubScreen = memo(() => {
   return (
     <Stack flex={1} width="$fluid" justify="space-between" items="center">
       <Calendar value={selectedDate} onDayChange={setSelectedDate} />
-      <ScrollView flex={1} width="$fluid">
-        <Stack flex={1} width="$fluid" gap="$size.x2">
-          {currentEvents.map((event) => {
-            return (
-              <Swipeable
-                key={event.id}
-                hasOvershoot={false}
-                leftActionsWidth={swipeableContentWidth}
-                swipeDirections="both"
-                rightActionsWidth={swipeableContentWidth}
-                renderRightActions={({ drag, onClose }) => <RightSwipeableComponent drag={drag} onClose={onClose} />}
-                renderLeftActions={({ drag, onClose }) => <LeftSwipeableComponent drag={drag} onClose={onClose} />}
-                containerStyle={{ paddingHorizontal: 4 }}>
-                <Stack
-                  width="$fluid"
-                  px="$size.x5"
-                  py="$size.x8"
-                  borderWidth="$size.x0_5"
-                  borderColor="$colors.mediumGray"
-                  style={{ borderRadius: 8 }}>
-                  <Text>{event.eventTitle}</Text>
-                  <Text>{event.eventDuration}</Text>
-                </Stack>
-              </Swipeable>
-            );
-          })}
+      {currentEvents.length === 0 ? (
+        <Stack flex={1} width="$fluid" justify="center" items="center">
+          <Text fontSize="$7" fontWeight={500} color="$colors.mediumGray">
+            일정이 없습니다.
+          </Text>
         </Stack>
-      </ScrollView>
+      ) : (
+        <ScrollView flex={1} width="$fluid">
+          <Stack flex={1} width="$fluid" gap="$size.x2">
+            {currentEvents.map((event) => {
+              return (
+                <Swipeable
+                  key={event.id}
+                  hasOvershoot={false}
+                  leftActionsWidth={swipeableContentWidth}
+                  swipeDirections="both"
+                  rightActionsWidth={swipeableContentWidth}
+                  renderRightActions={({ drag, onClose }) => <RightSwipeableComponent drag={drag} onClose={onClose} />}
+                  renderLeftActions={({ drag, onClose }) => <LeftSwipeableComponent drag={drag} onClose={onClose} />}
+                  containerStyle={{ paddingHorizontal: 4 }}>
+                  <Stack
+                    width="$fluid"
+                    px="$size.x5"
+                    py="$size.x8"
+                    borderWidth="$size.x0_5"
+                    borderColor="$colors.mediumGray"
+                    style={{ borderRadius: 8 }}>
+                    <Text>{event.eventTitle}</Text>
+                    <Text>{event.eventDuration}</Text>
+                  </Stack>
+                </Swipeable>
+              );
+            })}
+          </Stack>
+        </ScrollView>
+      )}
     </Stack>
   );
 });
