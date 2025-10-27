@@ -20,14 +20,14 @@ enum EOrganizationScreenItem {
 export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organizationId }) => {
   const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Home);
   const navbarItems: INavbarItem[] = [
-    { value: EOrganizationScreenItem.Home, icon: faHome },
     { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
+    { value: EOrganizationScreenItem.Home, icon: faHome },
     { value: EOrganizationScreenItem.Profile, icon: faUser },
   ];
 
   const renderSubScreen = useMemo(() => {
     switch (selectedItem) {
-      case EOrganizationScreenItem.Home:
+      case EOrganizationScreenItem.Calendar:
         return <OrganizationHomeSubScreen />;
     }
   }, [selectedItem]);

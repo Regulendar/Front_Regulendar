@@ -1,4 +1,5 @@
 import { memo, ReactNode, useCallback, useMemo, useRef } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import RNGHSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { SharedValue } from 'react-native-reanimated';
 
@@ -14,6 +15,7 @@ type ISwipeableProps = {
   renderRightActions?: ({ drag, onClose }: IRenderActionsProps) => ReactNode;
   leftActionsWidth?: number;
   rightActionsWidth?: number;
+  containerStyle?: StyleProp<ViewStyle>;
   children: ReactNode;
 };
 
@@ -25,6 +27,7 @@ export const Swipeable = memo<ISwipeableProps>(
     renderRightActions,
     leftActionsWidth,
     rightActionsWidth,
+    containerStyle,
     children,
   }) => {
     const { hasLeftSwipe, hasRightSwipe } = useMemo(() => {
@@ -46,7 +49,7 @@ export const Swipeable = memo<ISwipeableProps>(
     return (
       <RNGHSwipeable
         ref={swipeableRef}
-        containerStyle={{ width: '100%', height: 'auto' }}
+        containerStyle={[{ width: '100%', height: 'auto' }, containerStyle]}
         overshootLeft={hasOvershoot}
         overshootRight={hasOvershoot}
         leftThreshold={hasLeftSwipe ? leftActionsWidth : 0}
