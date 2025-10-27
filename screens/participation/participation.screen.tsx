@@ -34,7 +34,7 @@ export const ParticipationScreen = memo(() => {
           flexDirection="row"
           justify="space-between"
           items="center"
-          borderWidth={1}
+          borderWidth="$size.x0_25"
           borderColor="$colors.lightGray"
           px="$size.x4"
           pressStyle={{ opacity: 0.6 }}

@@ -87,7 +87,7 @@ export const SignInScreen = memo(() => {
               px="$size.x3"
               borderColor="$colors.lightGray"
               fontWeight="500"
-              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
+              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: '$size.x0_5' }}
             />
             <Input
               value={password}
@@ -100,7 +100,7 @@ export const SignInScreen = memo(() => {
               px="$size.x3"
               borderColor="$colors.lightGray"
               fontWeight="500"
-              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
+              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: '$size.x0_5' }}
             />
           </Stack>
         </Stack>

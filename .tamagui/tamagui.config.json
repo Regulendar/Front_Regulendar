@@ -69614,6 +69614,20 @@
           "val": 4,
           "variable": ""
         },
+        "x0_25": {
+          "isVar": true,
+          "key": "$x0_25",
+          "name": "t-size-x0_25",
+          "val": 1,
+          "variable": ""
+        },
+        "x0_5": {
+          "isVar": true,
+          "key": "$x0_5",
+          "name": "t-size-x0_5",
+          "val": 2,
+          "variable": ""
+        },
         "x1": {
           "isVar": true,
           "key": "$x1",
@@ -70606,6 +70620,20 @@
         "key": "$true",
         "name": "t-size-true",
         "val": 4,
+        "variable": ""
+      },
+      "$size.x0_25": {
+        "isVar": true,
+        "key": "$x0_25",
+        "name": "t-size-x0_25",
+        "val": 1,
+        "variable": ""
+      },
+      "$size.x0_5": {
+        "isVar": true,
+        "key": "$x0_5",
+        "name": "t-size-x0_5",
+        "val": 2,
         "variable": ""
       },
       "$size.x1": {
