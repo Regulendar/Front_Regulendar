@@ -9,7 +9,7 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateMonth: 9,
     eventDateDay: 30,
     eventDuration: 60,
-    participation: [],
+    participationId: [],
     hostOrganization: {
       id: 'org-1',
       organizationName: 'Organization One',
@@ -17,7 +17,6 @@ export const DUMMY_EVENTS: IEventType[] = [
       members: [],
       events: [],
     },
-    hostOrganizationId: 'org-1',
   },
   {
     id: '2',
@@ -27,7 +26,7 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateMonth: 9,
     eventDateDay: 20,
     eventDuration: 30,
-    participation: [],
+    participationId: [],
     hostOrganization: {
       id: 'org-1',
       organizationName: 'Organization One',
@@ -35,7 +34,6 @@ export const DUMMY_EVENTS: IEventType[] = [
       members: [],
       events: [],
     },
-    hostOrganizationId: 'org-1',
   },
   {
     id: '3',
@@ -45,7 +43,7 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateMonth: 10,
     eventDateDay: 1,
     eventDuration: 90,
-    participation: [],
+    participationId: ['0e47473c-924e-417e-918a-cc48d6b71fd2'],
     hostOrganization: {
       id: 'org-1',
       organizationName: 'Organization One',
@@ -53,7 +51,6 @@ export const DUMMY_EVENTS: IEventType[] = [
       members: [],
       events: [],
     },
-    hostOrganizationId: 'org-1',
   },
   {
     id: '4',
@@ -63,7 +60,7 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateMonth: 9,
     eventDateDay: 18,
     eventDuration: 0,
-    participation: [],
+    participationId: [],
     hostOrganization: {
       id: 'org-1',
       organizationName: 'Organization One',
@@ -71,7 +68,6 @@ export const DUMMY_EVENTS: IEventType[] = [
       members: [],
       events: [],
     },
-    hostOrganizationId: 'org-1',
   },
   {
     id: '5',
@@ -81,7 +77,7 @@ export const DUMMY_EVENTS: IEventType[] = [
     eventDateMonth: 9,
     eventDateDay: 18,
     eventDuration: 60,
-    participation: [],
+    participationId: [],
     hostOrganization: {
       id: 'org-1',
       organizationName: 'Organization One',
@@ -89,6 +85,5 @@ export const DUMMY_EVENTS: IEventType[] = [
       members: [],
       events: [],
     },
-    hostOrganizationId: 'org-1',
   },
 ];
