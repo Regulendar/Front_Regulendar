@@ -1,9 +1,11 @@
 import { INavbarItem, Navbar } from '@/components';
+import { supabaseAuth } from '@/libs';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDidMount } from 'rooks';
 import { Stack } from 'tamagui';
 import { OrganizationHomeSubScreen } from './subScreens';
 
@@ -18,6 +20,7 @@ enum EOrganizationScreenItem {
 }
 
 export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organizationId }) => {
+  const [userId, setUserId] = useState<string>('');
   const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Home);
   const navbarItems: INavbarItem[] = [
     { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
@@ -28,13 +31,26 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
   const renderSubScreen = useMemo(() => {
     switch (selectedItem) {
       case EOrganizationScreenItem.Calendar:
-        return <OrganizationHomeSubScreen />;
+        return <OrganizationHomeSubScreen userId={userId} />;
     }
-  }, [selectedItem]);
+  }, [selectedItem, userId]);
+
+  const fetchUserId = useCallback(async () => {
+    const { data } = await supabaseAuth.getUser();
+    const hasUserData = !!data?.user;
+    if (!hasUserData) {
+      return;
+    }
+    setUserId(data.user.id);
+  }, []);
 
   const handleChangeNavbarItem = useCallback((value: string) => {
     setSelectedItem(value);
   }, []);
+
+  useDidMount(async () => {
+    await fetchUserId();
+  });
 
   return (
     <Stack flex={1}>
