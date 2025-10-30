@@ -56,8 +56,7 @@ export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
         justify="space-between"
         items="center"
         bg={backgroundColor}
-        gap="$size.x1"
-        py="$size.x1_5"
+        py="$size.x2"
         style={{
           borderRadius: 6,
         }}
