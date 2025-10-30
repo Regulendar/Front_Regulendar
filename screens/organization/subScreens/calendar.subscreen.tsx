@@ -35,7 +35,7 @@ type IEventSwipeableComponentProps = {
   event: IEventType;
 } & IRenderActionsProps;
 
-export const OrganizationHomeSubScreen = memo<IOrganizationHomeSubScreen>(({ userId }) => {
+export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({ userId }) => {
   const { today } = getToday();
   const AnimatedStack = Animated.createAnimatedComponent(Stack);
   const swipeableContentWidth = getTokenValue('$size.x30');

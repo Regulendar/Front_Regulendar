@@ -7,7 +7,7 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount } from 'rooks';
 import { Stack } from 'tamagui';
-import { OrganizationHomeSubScreen } from './subScreens';
+import { OrganizationCalendarSubScreen } from './subScreens';
 
 type IOrganizationScreenProps = {
   organizationId: string;
@@ -31,7 +31,7 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
   const renderSubScreen = useMemo(() => {
     switch (selectedItem) {
       case EOrganizationScreenItem.Calendar:
-        return <OrganizationHomeSubScreen userId={userId} />;
+        return <OrganizationCalendarSubScreen userId={userId} />;
     }
   }, [selectedItem, userId]);
 
