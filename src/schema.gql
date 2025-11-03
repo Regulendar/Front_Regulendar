@@ -10,9 +10,20 @@ type AddUserOutputDto {
 type GetUserOutputDto {
   id: String!
   name: String!
-  email: String
-  phone: String
-  password: String!
+  profileImage: String
+  eventIds: [String!]!
+  organizationMember: [OrganizationMemberDto!]!
+}
+
+type OrganizationMemberDto {
+  userId: String!
+  organizationId: String!
+  role: OrganizationRole!
+}
+
+enum OrganizationRole {
+  ADMIN
+  MEMBER
 }
 
 type DeleteUserOutputDto {
@@ -34,11 +45,8 @@ type Mutation {
 }
 
 input AddUserInputDto {
-  id: String!
   name: String!
-  email: String
-  phone: String
-  password: String!
+  profileImage: String
 }
 
 input DeleteUserInputDto {

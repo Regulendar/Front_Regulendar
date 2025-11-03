@@ -12,6 +12,9 @@ export class GetUserService {
         where: {
           id,
         },
+        include: {
+          organizationMember: true,
+        },
       });
 
       if (!user) {

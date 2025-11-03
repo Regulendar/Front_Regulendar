@@ -1,26 +1,23 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  InputType,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql';
 import { IsEnum, IsString, IsUUID } from 'class-validator';
-import { UserDto } from './user.dto';
+import { OrganizationRole } from '@prisma/client';
 
-enum OrganizationRole {
-  ADMIN = 'ADMIN',
-  MEMBER = 'MEMBER',
-}
+registerEnumType(OrganizationRole, {
+  name: 'OrganizationRole',
+});
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })
 export class OrganizationMemberDto {
   @Field(() => String)
   @IsString()
-  id: string;
-
-  @Field(() => String)
-  @IsString()
   @IsUUID()
   userId: string;
-
-  @Field(() => UserDto)
-  user: UserDto;
 
   @Field(() => String)
   @IsString()
