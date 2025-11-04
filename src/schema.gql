@@ -67,6 +67,16 @@ type DeleteEventOutputDto {
   status: Float!
 }
 
+type JoinEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type UnJoinEventOutputDto {
+  message: String!
+  status: Float!
+}
+
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
   getEvent(input: GetEventInputDto!): GetEventOutputDto!
@@ -85,6 +95,8 @@ type Mutation {
   deleteUser(input: DeleteUserInputDto!): DeleteUserOutputDto!
   createEvent(input: CreateEventInputDto!): CreateEventOutputDto!
   deleteEvent(input: DeleteEventInputDto!): DeleteEventOutputDto!
+  joinEvent(input: JoinEventInputDto!): JoinEventOutputDto!
+  unJoinEvent(input: UnJoinEventInputDto!): UnJoinEventOutputDto!
 }
 
 input AddUserInputDto {
@@ -106,4 +118,14 @@ input CreateEventInputDto {
 
 input DeleteEventInputDto {
   id: String!
+}
+
+input JoinEventInputDto {
+  eventId: String!
+  userId: String!
+}
+
+input UnJoinEventInputDto {
+  eventId: String!
+  userId: String!
 }
