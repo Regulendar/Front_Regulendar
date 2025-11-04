@@ -21,7 +21,9 @@ export class GetUserService {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
 
-      return user;
+      return {
+        user,
+      };
     } catch (error) {
       throw new HttpException(
         `Failed to get user: ${error.message}`,

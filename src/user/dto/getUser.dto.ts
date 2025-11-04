@@ -10,4 +10,7 @@ export class GetUserInputDto {
 }
 
 @ObjectType()
-export class GetUserOutputDto extends UserDto {}
+export class GetUserOutputDto {
+  @Field(() => UserDto)
+  user: UserDto;
+}

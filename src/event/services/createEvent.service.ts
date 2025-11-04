@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma';
 import { CreateEventInputDto, CreateEventOutputDto } from '../dto';
 
@@ -6,7 +6,7 @@ import { CreateEventInputDto, CreateEventOutputDto } from '../dto';
 export class CreateEventService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async excute({
+  async execute({
     eventTitle,
     eventStartAt,
     eventDateYear,
@@ -40,10 +40,10 @@ export class CreateEventService {
         message: 'Event created successfully',
       };
     } catch (error) {
-      return {
-        status: HttpStatus.BAD_REQUEST,
-        message: `Failed to create event: ${error.message}`,
-      };
+      throw new HttpException(
+        `Failed to create event: ${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

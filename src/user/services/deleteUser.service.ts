@@ -11,12 +11,16 @@ export class DeleteUserService {
       await this.prismaService.user.delete({
         where: { id },
       });
+
       return {
         status: HttpStatus.OK,
         message: 'User deleted successfully',
       };
     } catch (error) {
-      throw new HttpException(`User not found: ${error}`, HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        `Failed to delete user: ${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

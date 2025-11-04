@@ -38,9 +38,9 @@ export class CreateEventInputDto {
 
 @ObjectType()
 export class CreateEventOutputDto {
-  @Field(() => Number)
-  status: HttpStatus;
-
   @Field(() => String)
   message: string;
+
+  @Field(() => Number)
+  status: HttpStatus;
 }

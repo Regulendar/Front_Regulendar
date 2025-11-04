@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma';
 import { AddUserInputDto, AddUserOutputDto } from '../dto';
 
@@ -24,10 +24,10 @@ export class AddUserService {
         message: 'User created successfully',
       };
     } catch (error) {
-      return {
-        status: HttpStatus.BAD_REQUEST,
-        message: `Failed to create user: ${error.message}`,
-      };
+      throw new HttpException(
+        `Failed to create user: ${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

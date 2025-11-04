@@ -14,9 +14,9 @@ export class AddUserInputDto {
 
 @ObjectType()
 export class AddUserOutputDto {
-  @Field(() => Number)
-  status: HttpStatus;
-
   @Field(() => String)
   message: string;
+
+  @Field(() => Number)
+  status: HttpStatus;
 }

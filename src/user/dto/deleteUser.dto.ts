@@ -12,9 +12,9 @@ export class DeleteUserInputDto {
 
 @ObjectType()
 export class DeleteUserOutputDto {
-  @Field(() => Number)
-  status: HttpStatus;
-
   @Field(() => String)
   message: string;
+
+  @Field(() => Number)
+  status: HttpStatus;
 }
