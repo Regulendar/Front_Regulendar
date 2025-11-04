@@ -9,14 +9,14 @@ export class CreateEventService {
   async execute({
     eventTitle,
     eventStartAt,
-    eventDateYear,
-    eventDateMonth,
-    eventDateDay,
     eventDuration,
     hostOrganizationId,
     hostUserId,
   }: CreateEventInputDto): Promise<CreateEventOutputDto> {
     try {
+      const eventDateYear = eventStartAt.getUTCFullYear();
+      const eventDateMonth = eventStartAt.getUTCMonth() + 1;
+      const eventDateDay = eventStartAt.getDate();
       await this.prismaService.event.create({
         data: {
           eventTitle,
