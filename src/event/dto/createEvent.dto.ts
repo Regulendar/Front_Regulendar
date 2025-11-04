@@ -7,19 +7,8 @@ export class CreateEventInputDto {
   @Field(() => String)
   eventTitle: string;
 
-  @Field(() => String)
-  eventStartAt: string;
-
-  @Field(() => Number)
-  eventDateYear: number;
-
-  @Field(() => Number)
-  @IsNumber()
-  eventDateMonth: number;
-
-  @Field(() => Number)
-  @IsNumber()
-  eventDateDay: number;
+  @Field(() => Date)
+  eventStartAt: Date;
 
   @Field(() => Number)
   @IsNumber()

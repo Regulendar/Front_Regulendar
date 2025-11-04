@@ -12,8 +12,8 @@ export class EventDto {
   @IsString()
   eventTitle: string;
 
-  @Field(() => String)
-  eventStartAt: string;
+  @Field(() => Date)
+  eventStartAt: Date;
 
   @Field(() => Number)
   eventDateYear: number;
