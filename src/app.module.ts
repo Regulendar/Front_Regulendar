@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './user';
 import { PrismaModule } from './prisma';
 import { EventModule } from './event';
+import { UtilModule } from './utils';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { EventModule } from './event';
       graphiql: true,
     }),
     PrismaModule,
+    UtilModule,
     UserModule,
     EventModule,
   ],
