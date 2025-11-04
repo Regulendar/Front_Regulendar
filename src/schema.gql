@@ -40,11 +40,38 @@ type CreateEventOutputDto {
   status: Float!
 }
 
+type GetEventOutputDto {
+  event: EventDto!
+}
+
+type EventDto {
+  eventId: String!
+  eventTitle: String!
+  eventStartAt: DateTime!
+  eventDateYear: Float!
+  eventDateMonth: Float!
+  eventDateDay: Float!
+  eventDuration: Float!
+  participationId: [String!]!
+  hostOrganizationId: String!
+  hostUserId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
+  getEvent(input: GetEventInputDto!): GetEventOutputDto!
 }
 
 input GetUserInputDto {
+  id: String!
+}
+
+input GetEventInputDto {
   id: String!
 }
 
@@ -70,8 +97,3 @@ input CreateEventInputDto {
   hostOrganizationId: String!
   hostUserId: String!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
