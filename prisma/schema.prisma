@@ -39,6 +39,7 @@ model Event {
   participationId String[]
   hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId])
   hostOrganizationId String
+  hostUserId String
 }
 
 model Organization {

@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsString } from 'class-validator';
+import { IsString, IsUUID } from 'class-validator';
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })
@@ -33,5 +33,11 @@ export class EventDto {
 
   @Field(() => String)
   @IsString()
+  @IsUUID()
   hostOrganizationId: string;
+
+  @Field(() => String)
+  @IsString()
+  @IsUUID()
+  hostUserId: string;
 }
