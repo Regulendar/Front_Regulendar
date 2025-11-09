@@ -19,7 +19,6 @@ export class UnJoinEventService {
       if (!hasUser) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
-
       const hasEvent = await this.validationUtil.validateEvent(eventId);
       if (!hasEvent) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
