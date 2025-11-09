@@ -13,7 +13,7 @@ export class GetUserService {
           id,
         },
         include: {
-          organizationMember: true,
+          organizationMembers: true,
         },
       });
 

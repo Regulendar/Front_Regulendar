@@ -16,7 +16,7 @@ type UserDto {
   name: String!
   profileImage: String
   eventIds: [String!]!
-  organizationMember: [OrganizationMemberDto!]!
+  organizationMembers: [OrganizationMemberDto!]!
 }
 
 type OrganizationMemberDto {
@@ -52,7 +52,7 @@ type EventDto {
   eventDateMonth: Float!
   eventDateDay: Float!
   eventDuration: Float!
-  participationId: [String!]!
+  participationIds: [String!]!
   hostOrganizationId: String!
   hostUserId: String!
 }

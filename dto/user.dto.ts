@@ -22,5 +22,5 @@ export class UserDto {
   eventIds: string[];
 
   @Field(() => [OrganizationMemberDto])
-  organizationMember: OrganizationMemberDto[];
+  organizationMembers: OrganizationMemberDto[];
 }

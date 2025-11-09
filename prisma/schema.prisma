@@ -25,7 +25,7 @@ model User {
   name     String
   profileImage String?
   eventIds String[] 
-  organizationMember OrganizationMember[]
+  organizationMembers OrganizationMember[]
 }
 
 model Event {
@@ -36,7 +36,7 @@ model Event {
   eventDateMonth Int
   eventDateDay Int
   eventDuration Int
-  participationId String[]
+  participationIds String[]
   hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId])
   hostOrganizationId String
   hostUserId String
@@ -47,7 +47,7 @@ model Organization {
   organizationName String
   organizationDescription String?
   events Event[]
-  OrganizationMember OrganizationMember[]
+  organizationMembers OrganizationMember[]
 }
 
 model OrganizationMember {

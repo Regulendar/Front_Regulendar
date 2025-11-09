@@ -29,7 +29,7 @@ export class EventDto {
 
   @Field(() => [String])
   @IsString({ each: true })
-  participationId: string[];
+  participationIds: string[];
 
   @Field(() => String)
   @IsString()

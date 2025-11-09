@@ -31,7 +31,7 @@ export class CreateEventService {
             },
           },
           hostUserId,
-          participationId: [],
+          participationIds: [],
         },
       });
 

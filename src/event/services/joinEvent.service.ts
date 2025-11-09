@@ -24,13 +24,13 @@ export class JoinEventService {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
       }
 
-      const { participationId } = await this.prismaService.event.findUnique({
+      const { participationIds } = await this.prismaService.event.findUnique({
         where: { eventId },
         select: {
-          participationId: true,
+          participationIds: true,
         },
       });
-      const isUserParticipating = participationId.includes(userId);
+      const isUserParticipating = participationIds.includes(userId);
       if (isUserParticipating) {
         throw new HttpException(
           'User is already participating in this event',
@@ -52,11 +52,11 @@ export class JoinEventService {
         },
       });
 
-      const updatedParticipation = [...participationId, userId];
+      const updatedParticipation = [...participationIds, userId];
       await this.prismaService.event.update({
         where: { eventId },
         data: {
-          participationId: {
+          participationIds: {
             set: updatedParticipation,
           },
         },
