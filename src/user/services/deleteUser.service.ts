@@ -16,9 +16,79 @@ export class DeleteUserService {
       if (!hasUser) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
+      const { eventIds, organizationMembers } =
+        await this.prismaService.user.findUnique({
+          where: { id },
+          select: {
+            eventIds: true,
+            organizationMembers: true,
+          },
+        });
 
-      await this.prismaService.user.delete({
-        where: { id },
+      await this.prismaService.$transaction(async (tx) => {
+        const hostedEvents = await tx.event.findMany({
+          where: { eventId: { in: eventIds }, hostUserId: id },
+        });
+        const hasHostedEvents = hostedEvents.length > 0;
+        if (hasHostedEvents) {
+          throw new HttpException(
+            'Cannot delete user who is hosting events',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+
+        const updateParticipationIdsInEvent = eventIds.map(async (eventId) => {
+          const { participationIds } = await tx.event.findUnique({
+            where: { eventId },
+            select: {
+              participationIds: true,
+            },
+          });
+          const updatedParticipationIds = participationIds.filter(
+            (participantId) => {
+              return participantId !== id;
+            },
+          );
+          await tx.event.update({
+            where: { eventId },
+            data: {
+              participationIds: {
+                set: updatedParticipationIds,
+              },
+            },
+          });
+        });
+
+        const isOrganizationOwner = organizationMembers.some(({ role }) => {
+          return role === 'OWNER';
+        });
+        if (isOrganizationOwner) {
+          throw new HttpException(
+            'Cannot delete user who is an organization owner',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+        const deleteOrganizationMembers = organizationMembers.map(
+          async ({ organizationId }) => {
+            await tx.organizationMember.delete({
+              where: {
+                organizationId_userId: {
+                  organizationId,
+                  userId: id,
+                },
+              },
+            });
+          },
+        );
+
+        await Promise.all([
+          updateParticipationIdsInEvent,
+          deleteOrganizationMembers,
+        ]);
+
+        await tx.user.delete({
+          where: { id },
+        });
       });
 
       return {
