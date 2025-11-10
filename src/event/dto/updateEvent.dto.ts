@@ -1,7 +1,8 @@
 import { HttpStatus } from '@nestjs/common';
-import { Field } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsDate, IsString } from 'class-validator';
 
+@InputType()
 export class UpdateEventInputDto {
   @Field(() => String)
   eventId: string;
@@ -18,6 +19,7 @@ export class UpdateEventInputDto {
   eventDuration?: number;
 }
 
+@ObjectType()
 export class UpdateEventOutputDto {
   @Field(() => String)
   message: string;
