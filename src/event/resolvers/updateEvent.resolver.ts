@@ -10,6 +10,6 @@ export class UpdateEventResolver {
   async updateEvent(
     @Args('input') input: UpdateEventInputDto,
   ): Promise<UpdateEventOutputDto> {
-    return await this.updateEventService.updateEvent(input);
+    return await this.updateEventService.execute(input);
   }
 }

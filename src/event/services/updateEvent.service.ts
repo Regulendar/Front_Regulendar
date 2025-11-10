@@ -11,7 +11,7 @@ export class UpdateEventService {
     private readonly dateConverterUtil: DateConverterUtil,
   ) {}
 
-  async updateEvent({
+  async execute({
     eventId,
     eventTitle,
     eventStartAt,
