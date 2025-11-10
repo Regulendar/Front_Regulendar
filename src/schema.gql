@@ -77,9 +77,14 @@ type UnJoinEventOutputDto {
   status: Float!
 }
 
+type GetEventsOutputDto {
+  events: [EventDto!]!
+}
+
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
   getEvent(input: GetEventInputDto!): GetEventOutputDto!
+  getEvents(input: GetEventsInputDto!): GetEventsOutputDto!
 }
 
 input GetUserInputDto {
@@ -88,6 +93,14 @@ input GetUserInputDto {
 
 input GetEventInputDto {
   id: String!
+}
+
+input GetEventsInputDto {
+  userId: String
+  organizationId: String
+  eventDateYear: Float
+  eventDateMonth: Float
+  eventDateDay: Float
 }
 
 type Mutation {
