@@ -7,6 +7,9 @@ export class DateConverterUtil {
     month: number;
     day: number;
   } {
+    if (!date) {
+      throw new Error('Date parameter is required');
+    }
     const year = date.getUTCFullYear();
     const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
