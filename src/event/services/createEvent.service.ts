@@ -1,10 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma';
 import { CreateEventInputDto, CreateEventOutputDto } from '../dto';
+import { DateConverterUtil } from 'src/utils';
 
 @Injectable()
 export class CreateEventService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly dateConverterUtil: DateConverterUtil,
+  ) {}
 
   async execute({
     eventTitle,
@@ -14,9 +18,12 @@ export class CreateEventService {
     hostUserId,
   }: CreateEventInputDto): Promise<CreateEventOutputDto> {
     try {
-      const eventDateYear = eventStartAt.getUTCFullYear();
-      const eventDateMonth = eventStartAt.getUTCMonth() + 1;
-      const eventDateDay = eventStartAt.getDate();
+      const {
+        year: eventDateYear,
+        month: eventDateMonth,
+        day: eventDateDay,
+      } = this.dateConverterUtil.convertDateToDayParts(eventStartAt);
+
       await this.prismaService.event.create({
         data: {
           eventTitle,
