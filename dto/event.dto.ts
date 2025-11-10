@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsString, IsUUID } from 'class-validator';
+import { IsDate, IsString, IsUUID } from 'class-validator';
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })
@@ -13,6 +13,7 @@ export class EventDto {
   eventTitle: string;
 
   @Field(() => Date)
+  @IsDate()
   eventStartAt: Date;
 
   @Field(() => Number)
