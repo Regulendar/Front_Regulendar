@@ -1,13 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { DeleteUserInputDto, DeleteUserOutputDto } from '../dto';
 import { PrismaService } from 'src/prisma';
-import { ValidationUtil } from 'src/utils';
+import { ValidatorUtil } from 'src/utils';
 
 @Injectable()
 export class DeleteUserService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly validationUtil: ValidationUtil,
+    private readonly validationUtil: ValidatorUtil,
   ) {}
 
   async execute({ id }: DeleteUserInputDto): Promise<DeleteUserOutputDto> {

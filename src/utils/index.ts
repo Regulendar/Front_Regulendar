@@ -1,2 +1,2 @@
-export * from './validation.util';
+export * from './validator.util';
 export * from './util.module';

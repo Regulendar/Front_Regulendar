@@ -1,13 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma';
 import { DeleteEventInputDto, DeleteEventOutputDto } from '../dto';
-import { ValidationUtil } from 'src/utils';
+import { ValidatorUtil } from 'src/utils';
 
 @Injectable()
 export class DeleteEventService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly validationUtil: ValidationUtil,
+    private readonly validationUtil: ValidatorUtil,
   ) {}
 
   async execute({ id }: DeleteEventInputDto): Promise<DeleteEventOutputDto> {

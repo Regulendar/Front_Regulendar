@@ -1,9 +1,9 @@
 import { Global, Module } from '@nestjs/common';
-import { ValidationUtil } from './validation.util';
+import { ValidatorUtil } from './validator.util';
 
 @Global()
 @Module({
-  providers: [ValidationUtil],
-  exports: [ValidationUtil],
+  providers: [ValidatorUtil],
+  exports: [ValidatorUtil],
 })
 export class UtilModule {}
