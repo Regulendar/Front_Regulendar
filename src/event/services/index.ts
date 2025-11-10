@@ -4,3 +4,4 @@ export * from './deleteEvent.service';
 export * from './joinEvent.service';
 export * from './unJoinEvent.service';
 export * from './getEvents.service';
+export * from './updateEvent.service';

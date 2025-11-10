@@ -4,3 +4,4 @@ export * from './deleteEvent.dto';
 export * from './joinEvent.dto';
 export * from './unJoinEvent.dto';
 export * from './getEvents.dto';
+export * from './updateEvent.dto';
