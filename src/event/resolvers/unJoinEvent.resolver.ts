@@ -10,6 +10,6 @@ export class UnJoinEventResolver {
   async unJoinEvent(
     @Args('input') input: UnJoinEventInputDto,
   ): Promise<UnJoinEventOutputDto> {
-    return this.unJoinEventService.execute(input);
+    return await this.unJoinEventService.execute(input);
   }
 }

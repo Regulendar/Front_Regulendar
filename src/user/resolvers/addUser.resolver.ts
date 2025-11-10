@@ -10,6 +10,6 @@ export class AddUserResolver {
   async addUser(
     @Args('input') input: AddUserInputDto,
   ): Promise<AddUserOutputDto> {
-    return this.addUserService.execute(input);
+    return await this.addUserService.execute(input);
   }
 }

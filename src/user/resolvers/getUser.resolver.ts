@@ -10,6 +10,6 @@ export class GetUserResolver {
   async getUser(
     @Args('input') input: GetUserInputDto,
   ): Promise<GetUserOutputDto> {
-    return this.getUserService.execute(input);
+    return await this.getUserService.execute(input);
   }
 }

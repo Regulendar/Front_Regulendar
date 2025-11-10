@@ -10,6 +10,6 @@ export class CreateEventResolver {
   async createEvent(
     @Args('input') input: CreateEventInputDto,
   ): Promise<CreateEventOutputDto> {
-    return this.createEventService.execute(input);
+    return await this.createEventService.execute(input);
   }
 }

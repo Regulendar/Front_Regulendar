@@ -10,6 +10,6 @@ export class JoinEventResolver {
   async joinEvent(
     @Args('input') input: JoinEventInputDto,
   ): Promise<JoinEventOutputDto> {
-    return this.joinEventService.execute(input);
+    return await this.joinEventService.execute(input);
   }
 }

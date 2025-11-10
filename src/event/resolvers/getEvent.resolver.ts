@@ -10,6 +10,6 @@ export class GetEventResolver {
   async getEvent(
     @Args('input') input: GetEventInputDto,
   ): Promise<GetEventOutputDto> {
-    return this.getEventService.execute(input);
+    return await this.getEventService.execute(input);
   }
 }

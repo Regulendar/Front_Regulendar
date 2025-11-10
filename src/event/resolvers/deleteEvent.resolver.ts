@@ -10,6 +10,6 @@ export class DeleteEventResolver {
   async deleteEvent(
     @Args('input') input: DeleteEventInputDto,
   ): Promise<DeleteEventOutputDto> {
-    return this.deleteEventService.execute(input);
+    return await this.deleteEventService.execute(input);
   }
 }

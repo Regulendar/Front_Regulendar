@@ -10,6 +10,6 @@ export class DeleteUserResolver {
   async deleteUser(
     @Args('input') input: DeleteUserInputDto,
   ): Promise<DeleteUserOutputDto> {
-    return this.deleteUserService.execute(input);
+    return await this.deleteUserService.execute(input);
   }
 }
