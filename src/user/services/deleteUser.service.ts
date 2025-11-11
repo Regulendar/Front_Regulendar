@@ -37,27 +37,30 @@ export class DeleteUserService {
           );
         }
 
-        const updateParticipationIdsInEvent = eventIds.map(async (eventId) => {
-          const { participationIds } = await tx.event.findUnique({
-            where: { eventId },
-            select: {
-              participationIds: true,
-            },
-          });
-          const updatedParticipationIds = participationIds.filter(
-            (participantId) => {
-              return participantId !== id;
-            },
-          );
-          await tx.event.update({
-            where: { eventId },
-            data: {
-              participationIds: {
-                set: updatedParticipationIds,
-              },
-            },
-          });
+        const events = await tx.event.findMany({
+          where: { eventId: { in: eventIds } },
+          select: {
+            eventId: true,
+            participationIds: true,
+          },
         });
+        const updateParticipationIdsInEvent = events.map(
+          ({ eventId, participationIds }) => {
+            const updatedParticipationIds = participationIds.filter(
+              (participantId) => {
+                return participantId !== id;
+              },
+            );
+            return tx.event.update({
+              where: { eventId },
+              data: {
+                participationIds: {
+                  set: updatedParticipationIds,
+                },
+              },
+            });
+          },
+        );
 
         const isOrganizationOwner = organizationMembers.some(({ role }) => {
           return role === 'OWNER';
@@ -68,6 +71,7 @@ export class DeleteUserService {
             HttpStatus.BAD_REQUEST,
           );
         }
+
         const deleteOrganizationMembers = organizationMembers.map(
           async ({ organizationId }) => {
             await tx.organizationMember.delete({

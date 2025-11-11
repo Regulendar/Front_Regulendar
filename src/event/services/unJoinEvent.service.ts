@@ -1,50 +1,45 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma';
 import { UnJoinEventInputDto, UnJoinEventOutputDto } from '../dto';
-import { ValidatorUtil } from 'src/utils';
 
 @Injectable()
 export class UnJoinEventService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly validatorUtil: ValidatorUtil,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   async execute({
     eventId,
     userId,
   }: UnJoinEventInputDto): Promise<UnJoinEventOutputDto> {
     try {
-      const hasUser = await this.validatorUtil.validateUser(userId);
-      if (!hasUser) {
-        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-      }
-      const hasEvent = await this.validatorUtil.validateEvent(eventId);
-      if (!hasEvent) {
-        throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
-      }
-
-      const { participationIds } = await this.prismaService.event.findUnique({
-        where: { eventId },
-        select: { participationIds: true },
-      });
-      const isUserParticipating = participationIds.includes(userId);
-      if (!isUserParticipating) {
-        throw new HttpException(
-          'User is not participating in this event',
-          HttpStatus.FORBIDDEN,
-        );
-      }
-
       await this.prismaService.$transaction(async (tx) => {
-        const { eventIds } = await tx.user.findUnique({
+        const user = await tx.user.findUnique({
           where: { id: userId },
           select: { eventIds: true },
         });
-        const updatedEventIds = eventIds.filter((id) => {
+        if (!user) {
+          throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+        }
+
+        const event = await tx.event.findUnique({
+          where: { eventId },
+          select: { participationIds: true },
+        });
+        if (!event) {
+          throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
+        }
+
+        const isUserParticipating = event.participationIds.includes(userId);
+        if (!isUserParticipating) {
+          throw new HttpException(
+            'User is not participating in this event',
+            HttpStatus.FORBIDDEN,
+          );
+        }
+
+        const updatedEventIds = user.eventIds.filter((id) => {
           return id !== eventId;
         });
-        const updatedParticipation = participationIds.filter((id) => {
+        const updatedParticipation = event.participationIds.filter((id) => {
           return id !== userId;
         });
 
