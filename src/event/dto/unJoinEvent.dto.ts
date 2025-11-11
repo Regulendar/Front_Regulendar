@@ -1,10 +1,11 @@
 import { HttpStatus } from '@nestjs/common';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsUUID } from 'class-validator';
+import { IsString, IsUUID } from 'class-validator';
 
 @InputType()
 export class UnJoinEventInputDto {
   @Field(() => String)
+  @IsString()
   eventId: string;
 
   @Field(() => String)
