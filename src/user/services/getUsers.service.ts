@@ -22,14 +22,13 @@ export class GetUsersService {
           if (!hasEvent) {
             throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
           }
-          const { participationIds } = await this.prismaService.event.findFirst(
-            {
+          const { participationIds } =
+            await this.prismaService.event.findUnique({
               where: { eventId },
               select: {
                 participationIds: true,
               },
-            },
-          );
+            });
           const users = await this.prismaService.user.findMany({
             where: { id: { in: participationIds } },
             include: { organizationMembers: true },
