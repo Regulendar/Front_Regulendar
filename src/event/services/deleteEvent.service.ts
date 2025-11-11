@@ -36,7 +36,9 @@ export class DeleteEventService {
               await tx.user.update({
                 where: { id: participationId },
                 data: {
-                  eventIds: {},
+                  eventIds: {
+                    set: updatedEventIds,
+                  },
                 },
               });
             }

@@ -82,8 +82,8 @@ export class DeleteUserService {
         );
 
         await Promise.all([
-          updateParticipationIdsInEvent,
-          deleteOrganizationMembers,
+          ...updateParticipationIdsInEvent,
+          ...deleteOrganizationMembers,
         ]);
 
         await tx.user.delete({
