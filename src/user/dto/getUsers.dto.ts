@@ -13,6 +13,7 @@ export class GetUsersInputDto {
   userIds?: string[];
 
   @Field(() => String, { nullable: true })
+  @IsString()
   eventId?: string;
 }
 

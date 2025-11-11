@@ -1,13 +1,15 @@
 import { HttpStatus } from '@nestjs/common';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsNumber, IsString, IsUUID } from 'class-validator';
+import { IsDate, IsNumber, IsString, IsUUID } from 'class-validator';
 
 @InputType()
 export class CreateEventInputDto {
   @Field(() => String)
+  @IsString()
   eventTitle: string;
 
   @Field(() => Date)
+  @IsDate()
   eventStartAt: Date;
 
   @Field(() => Number)
@@ -15,12 +17,10 @@ export class CreateEventInputDto {
   eventDuration: number;
 
   @Field(() => String)
-  @IsString()
   @IsUUID()
   hostOrganizationId: string;
 
   @Field(() => String)
-  @IsString()
   @IsUUID()
   hostUserId: string;
 }

@@ -7,7 +7,6 @@ import { OrganizationMemberDto } from './organizationMember.dto';
 @InputType({ isAbstract: true })
 export class OrganizationDto {
   @Field(() => String)
-  @IsString()
   @IsUUID()
   organizationId: string;
 

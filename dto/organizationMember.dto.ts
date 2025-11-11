@@ -4,7 +4,7 @@ import {
   ObjectType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { IsEnum, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsUUID } from 'class-validator';
 import { OrganizationRole } from '@prisma/client';
 
 registerEnumType(OrganizationRole, {
@@ -15,12 +15,10 @@ registerEnumType(OrganizationRole, {
 @InputType({ isAbstract: true })
 export class OrganizationMemberDto {
   @Field(() => String)
-  @IsString()
   @IsUUID()
   userId: string;
 
   @Field(() => String)
-  @IsString()
   @IsUUID()
   organizationId: string;
 
