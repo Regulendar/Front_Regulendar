@@ -36,31 +36,34 @@ export class UnJoinEventService {
         );
       }
 
-      const { eventIds } = await this.prismaService.user.findUnique({
-        where: { id: userId },
-        select: { eventIds: true },
-      });
-      const updatedEventIds = eventIds.filter((id) => {
-        return id !== eventId;
-      });
-      await this.prismaService.user.update({
-        where: { id: userId },
-        data: {
-          eventIds: {
-            set: updatedEventIds,
+      await this.prismaService.$transaction(async (tx) => {
+        const { eventIds } = await tx.user.findUnique({
+          where: { id: userId },
+          select: { eventIds: true },
+        });
+        const updatedEventIds = eventIds.filter((id) => {
+          return id !== eventId;
+        });
+        const updatedParticipation = participationIds.filter((id) => {
+          return id !== userId;
+        });
+
+        await tx.user.update({
+          where: { id: userId },
+          data: {
+            eventIds: {
+              set: updatedEventIds,
+            },
           },
-        },
-      });
-      const updatedParticipation = participationIds.filter((id) => {
-        return id !== userId;
-      });
-      await this.prismaService.event.update({
-        where: { eventId },
-        data: {
-          participationIds: {
-            set: updatedParticipation,
+        });
+        await tx.event.update({
+          where: { eventId },
+          data: {
+            participationIds: {
+              set: updatedParticipation,
+            },
           },
-        },
+        });
       });
 
       return {
