@@ -5,6 +5,7 @@ import { UserModule } from './user';
 import { PrismaModule } from './prisma';
 import { EventModule } from './event';
 import { UtilModule } from './utils';
+import { OrganizationModule } from './organization';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UtilModule } from './utils';
     }),
     PrismaModule,
     UtilModule,
+    OrganizationModule,
     UserModule,
     EventModule,
   ],

@@ -91,6 +91,11 @@ type UpdateEventOutputDto {
   status: Float!
 }
 
+type CreateOrganizationOutputDto {
+  message: String!
+  status: Float!
+}
+
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
   getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
@@ -121,6 +126,7 @@ input GetEventsInputDto {
 }
 
 type Mutation {
+  createOrganization(input: CreateOrganizationInputDto!): CreateOrganizationOutputDto!
   addUser(input: AddUserInputDto!): AddUserOutputDto!
   deleteUser(input: DeleteUserInputDto!): DeleteUserOutputDto!
   createEvent(input: CreateEventInputDto!): CreateEventOutputDto!
@@ -128,6 +134,12 @@ type Mutation {
   joinEvent(input: JoinEventInputDto!): JoinEventOutputDto!
   unJoinEvent(input: UnJoinEventInputDto!): UnJoinEventOutputDto!
   updateEvent(input: UpdateEventInputDto!): UpdateEventOutputDto!
+}
+
+input CreateOrganizationInputDto {
+  ownerUserId: String!
+  organizationName: String!
+  organizationDescription: String
 }
 
 input AddUserInputDto {
