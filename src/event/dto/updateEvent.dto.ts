@@ -5,6 +5,7 @@ import { IsDate, IsString } from 'class-validator';
 @InputType()
 export class UpdateEventInputDto {
   @Field(() => String)
+  @IsString()
   eventId: string;
 
   @Field(() => String, { nullable: true })
