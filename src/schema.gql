@@ -26,6 +26,7 @@ type OrganizationMemberDto {
 }
 
 enum OrganizationRole {
+  OWNER
   ADMIN
   MEMBER
 }
@@ -33,6 +34,10 @@ enum OrganizationRole {
 type DeleteUserOutputDto {
   message: String!
   status: Float!
+}
+
+type GetUsersOutputDto {
+  users: [UserDto!]!
 }
 
 type CreateEventOutputDto {
@@ -81,14 +86,26 @@ type GetEventsOutputDto {
   events: [EventDto!]!
 }
 
+type UpdateEventOutputDto {
+  message: String!
+  status: Float!
+}
+
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
+  getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
   getEvent(input: GetEventInputDto!): GetEventOutputDto!
   getEvents(input: GetEventsInputDto!): GetEventsOutputDto!
 }
 
 input GetUserInputDto {
   id: String!
+}
+
+input GetUsersInputDto {
+  organizationId: String
+  userIds: [String!]
+  eventId: String
 }
 
 input GetEventInputDto {
@@ -110,6 +127,7 @@ type Mutation {
   deleteEvent(input: DeleteEventInputDto!): DeleteEventOutputDto!
   joinEvent(input: JoinEventInputDto!): JoinEventOutputDto!
   unJoinEvent(input: UnJoinEventInputDto!): UnJoinEventOutputDto!
+  updateEvent(input: UpdateEventInputDto!): UpdateEventOutputDto!
 }
 
 input AddUserInputDto {
@@ -141,4 +159,11 @@ input JoinEventInputDto {
 input UnJoinEventInputDto {
   eventId: String!
   userId: String!
+}
+
+input UpdateEventInputDto {
+  eventId: String!
+  eventTitle: String
+  eventStartAt: DateTime
+  eventDuration: Float
 }
