@@ -7,7 +7,9 @@ export class GetUserResolver {
   constructor(private readonly getUserService: GetUserService) {}
 
   @Query(() => GetUserOutputDto)
-  async getUser(@Args('input') input: GetUserInputDto) {
-    return this.getUserService.execute(input);
+  async getUser(
+    @Args('input') input: GetUserInputDto,
+  ): Promise<GetUserOutputDto> {
+    return await this.getUserService.execute(input);
   }
 }

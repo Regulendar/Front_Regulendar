@@ -3,6 +3,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './user';
 import { PrismaModule } from './prisma';
+import { EventModule } from './event';
+import { UtilModule } from './utils';
 
 @Module({
   imports: [
@@ -12,7 +14,9 @@ import { PrismaModule } from './prisma';
       graphiql: true,
     }),
     PrismaModule,
+    UtilModule,
     UserModule,
+    EventModule,
   ],
 })
 export class AppModule {}

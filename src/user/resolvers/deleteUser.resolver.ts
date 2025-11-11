@@ -7,7 +7,9 @@ export class DeleteUserResolver {
   constructor(private readonly deleteUserService: DeleteUserService) {}
 
   @Mutation(() => DeleteUserOutputDto)
-  async deleteUser(@Args('input') input: DeleteUserInputDto) {
-    return this.deleteUserService.execute(input);
+  async deleteUser(
+    @Args('input') input: DeleteUserInputDto,
+  ): Promise<DeleteUserOutputDto> {
+    return await this.deleteUserService.execute(input);
   }
 }

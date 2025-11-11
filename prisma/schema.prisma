@@ -14,33 +14,48 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
 
 model User {
-  id       String @id @db.Uuid
-  email    String?
-  phoneNumber String?
+  id       String @id @default(uuid())
   name     String
-  password String
-  events Event[] 
-  organization Organization[]
+  profileImage String?
+  eventIds String[] 
+  organizationMembers OrganizationMember[]
 }
 
 model Event {
   eventId String @id @default(cuid())
   eventTitle String
-  eventStartAt String
+  eventStartAt DateTime
   eventDateYear Int
   eventDateMonth Int
   eventDateDay Int
   eventDuration Int
-  participants User[]
+  participationIds String[]
   hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId])
   hostOrganizationId String
+  hostUserId String
 }
 
 model Organization {
   organizationId String @id @default(uuid())
   organizationName String
-  members User[]
+  organizationDescription String?
   events Event[]
+  organizationMembers OrganizationMember[]
+}
+
+model OrganizationMember {
+  @@id([organizationId, userId])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [organizationId])
+  role OrganizationRole @default(MEMBER)
 }

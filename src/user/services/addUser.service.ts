@@ -7,28 +7,15 @@ export class AddUserService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute({
-    id,
     name,
-    email,
-    phone,
-    password,
+    profileImage,
   }: AddUserInputDto): Promise<AddUserOutputDto> {
-    const hasNotUserData = !email && !phone;
-
-    if (hasNotUserData) {
-      throw new HttpException(
-        'Email or phone number is required',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
     try {
       await this.prismaService.user.create({
         data: {
-          id,
           name,
-          email,
-          phoneNumber: phone,
-          password,
+          profileImage,
+          eventIds: [],
         },
       });
 

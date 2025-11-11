@@ -1,17 +1,11 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import {
-  IsEmail,
-  IsPhoneNumber,
-  IsString,
-  IsStrongPassword,
-  IsUUID,
-} from 'class-validator';
+import { IsString, IsUUID } from 'class-validator';
+import { OrganizationMemberDto } from './organizationMember.dto';
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })
 export class UserDto {
   @Field(() => String)
-  @IsString()
   @IsUUID()
   id: string;
 
@@ -20,22 +14,12 @@ export class UserDto {
   name: string;
 
   @Field(() => String, { nullable: true })
-  @IsEmail()
-  @IsString()
-  email?: string;
+  profileImage?: string;
 
-  @Field(() => String, { nullable: true })
-  @IsPhoneNumber('KR')
-  @IsString()
-  phone?: string;
+  @Field(() => [String])
+  @IsString({ each: true })
+  eventIds: string[];
 
-  @Field(() => String)
-  @IsString()
-  @IsStrongPassword({
-    minLength: 6,
-    minUppercase: 1,
-    minNumbers: 0,
-    minSymbols: 0,
-  })
-  password: string;
+  @Field(() => [OrganizationMemberDto])
+  organizationMembers: OrganizationMemberDto[];
 }

@@ -3,44 +3,167 @@
 # ------------------------------------------------------
 
 type AddUserOutputDto {
-  status: Float!
   message: String!
+  status: Float!
 }
 
 type GetUserOutputDto {
+  user: UserDto!
+}
+
+type UserDto {
   id: String!
   name: String!
-  email: String
-  phone: String
-  password: String!
+  profileImage: String
+  eventIds: [String!]!
+  organizationMembers: [OrganizationMemberDto!]!
+}
+
+type OrganizationMemberDto {
+  userId: String!
+  organizationId: String!
+  role: OrganizationRole!
+}
+
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  MEMBER
 }
 
 type DeleteUserOutputDto {
-  status: Float!
   message: String!
+  status: Float!
+}
+
+type GetUsersOutputDto {
+  users: [UserDto!]!
+}
+
+type CreateEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetEventOutputDto {
+  event: EventDto!
+}
+
+type EventDto {
+  eventId: String!
+  eventTitle: String!
+  eventStartAt: DateTime!
+  eventDateYear: Float!
+  eventDateMonth: Float!
+  eventDateDay: Float!
+  eventDuration: Float!
+  participationIds: [String!]!
+  hostOrganizationId: String!
+  hostUserId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DeleteEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type JoinEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type UnJoinEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetEventsOutputDto {
+  events: [EventDto!]!
+}
+
+type UpdateEventOutputDto {
+  message: String!
+  status: Float!
 }
 
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
+  getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
+  getEvent(input: GetEventInputDto!): GetEventOutputDto!
+  getEvents(input: GetEventsInputDto!): GetEventsOutputDto!
 }
 
 input GetUserInputDto {
   id: String!
 }
 
+input GetUsersInputDto {
+  organizationId: String
+  userIds: [String!]
+  eventId: String
+}
+
+input GetEventInputDto {
+  id: String!
+}
+
+input GetEventsInputDto {
+  userId: String
+  organizationId: String
+  eventDateYear: Float
+  eventDateMonth: Float
+  eventDateDay: Float
+}
+
 type Mutation {
   addUser(input: AddUserInputDto!): AddUserOutputDto!
   deleteUser(input: DeleteUserInputDto!): DeleteUserOutputDto!
+  createEvent(input: CreateEventInputDto!): CreateEventOutputDto!
+  deleteEvent(input: DeleteEventInputDto!): DeleteEventOutputDto!
+  joinEvent(input: JoinEventInputDto!): JoinEventOutputDto!
+  unJoinEvent(input: UnJoinEventInputDto!): UnJoinEventOutputDto!
+  updateEvent(input: UpdateEventInputDto!): UpdateEventOutputDto!
 }
 
 input AddUserInputDto {
-  id: String!
   name: String!
-  email: String
-  phone: String
-  password: String!
+  profileImage: String
 }
 
 input DeleteUserInputDto {
   id: String!
+}
+
+input CreateEventInputDto {
+  eventTitle: String!
+  eventStartAt: DateTime!
+  eventDuration: Float!
+  hostOrganizationId: String!
+  hostUserId: String!
+}
+
+input DeleteEventInputDto {
+  id: String!
+}
+
+input JoinEventInputDto {
+  eventId: String!
+  userId: String!
+}
+
+input UnJoinEventInputDto {
+  eventId: String!
+  userId: String!
+}
+
+input UpdateEventInputDto {
+  eventId: String!
+  eventTitle: String
+  eventStartAt: DateTime
+  eventDuration: Float
 }

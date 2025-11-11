@@ -7,7 +7,9 @@ export class AddUserResolver {
   constructor(private readonly addUserService: AddUserService) {}
 
   @Mutation(() => AddUserOutputDto)
-  async addUser(@Args('input') input: AddUserInputDto) {
-    return this.addUserService.execute(input);
+  async addUser(
+    @Args('input') input: AddUserInputDto,
+  ): Promise<AddUserOutputDto> {
+    return await this.addUserService.execute(input);
   }
 }
