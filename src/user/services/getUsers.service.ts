@@ -7,7 +7,7 @@ import { ValidatorUtil } from 'src/utils';
 export class GetUsersService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly validationUtil: ValidatorUtil,
+    private readonly validatorUtil: ValidatorUtil,
   ) {}
 
   async execute({
@@ -18,7 +18,7 @@ export class GetUsersService {
     try {
       switch (true) {
         case !!eventId: {
-          const hasEvent = await this.validationUtil.validateEvent(eventId);
+          const hasEvent = await this.validatorUtil.validateEvent(eventId);
           if (!hasEvent) {
             throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
           }
@@ -39,7 +39,7 @@ export class GetUsersService {
 
         case !!organizationId: {
           const hasOrganization =
-            await this.validationUtil.validateOrganization(organizationId);
+            await this.validatorUtil.validateOrganization(organizationId);
           if (!hasOrganization) {
             throw new HttpException(
               'Organization not found',

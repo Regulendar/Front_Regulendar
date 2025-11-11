@@ -7,12 +7,12 @@ import { ValidatorUtil } from 'src/utils';
 export class DeleteEventService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly validationUtil: ValidatorUtil,
+    private readonly validatorUtil: ValidatorUtil,
   ) {}
 
   async execute({ id }: DeleteEventInputDto): Promise<DeleteEventOutputDto> {
     try {
-      const hasEvent = await this.validationUtil.validateEvent(id);
+      const hasEvent = await this.validatorUtil.validateEvent(id);
       if (!hasEvent) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
       }

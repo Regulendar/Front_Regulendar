@@ -7,12 +7,12 @@ import { ValidatorUtil } from 'src/utils';
 export class DeleteUserService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly validationUtil: ValidatorUtil,
+    private readonly validatorUtil: ValidatorUtil,
   ) {}
 
   async execute({ id }: DeleteUserInputDto): Promise<DeleteUserOutputDto> {
     try {
-      const hasUser = await this.validationUtil.validateUser(id);
+      const hasUser = await this.validatorUtil.validateUser(id);
       if (!hasUser) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }

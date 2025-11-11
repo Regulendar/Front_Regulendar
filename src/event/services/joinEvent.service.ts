@@ -7,7 +7,7 @@ import { ValidatorUtil } from 'src/utils';
 export class JoinEventService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly validationUtil: ValidatorUtil,
+    private readonly validatorUtil: ValidatorUtil,
   ) {}
 
   async execute({
@@ -15,11 +15,11 @@ export class JoinEventService {
     userId,
   }: JoinEventInputDto): Promise<JoinEventOutputDto> {
     try {
-      const hasUser = await this.validationUtil.validateUser(userId);
+      const hasUser = await this.validatorUtil.validateUser(userId);
       if (!hasUser) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
-      const hasEvent = await this.validationUtil.validateEvent(eventId);
+      const hasEvent = await this.validatorUtil.validateEvent(eventId);
       if (!hasEvent) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
       }
