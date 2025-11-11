@@ -9,30 +9,21 @@ export class ValidatorUtil {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
     });
-    if (!user) {
-      return false;
-    }
-    return true;
+    return !!user;
   }
 
   async validateEvent(eventId: string): Promise<boolean> {
     const event = await this.prismaService.event.findUnique({
       where: { eventId },
     });
-    if (!event) {
-      return false;
-    }
-    return true;
+    return !!event;
   }
 
   async validateOrganization(organizationId: string): Promise<boolean> {
     const organization = await this.prismaService.organization.findUnique({
       where: { organizationId },
     });
-    if (!organization) {
-      return false;
-    }
-    return true;
+    return !!organization;
   }
 
   async validateOrganizationMember(
@@ -48,9 +39,6 @@ export class ValidatorUtil {
           },
         },
       });
-    if (!organizationMember) {
-      return false;
-    }
-    return true;
+    return !!organizationMember;
   }
 }
