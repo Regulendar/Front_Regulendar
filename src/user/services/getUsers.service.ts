@@ -72,6 +72,13 @@ export class GetUsersService {
           });
           return { users };
         }
+
+        default: {
+          throw new HttpException(
+            'At least one filter (organizationId, eventId, userIds) must be provided',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
       }
     } catch (error) {
       throw new HttpException(
