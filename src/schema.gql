@@ -96,6 +96,11 @@ type CreateOrganizationOutputDto {
   status: Float!
 }
 
+type DeleteOrganizationOutputDto {
+  message: String!
+  status: Float!
+}
+
 type Query {
   getUser(input: GetUserInputDto!): GetUserOutputDto!
   getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
@@ -127,6 +132,7 @@ input GetEventsInputDto {
 
 type Mutation {
   createOrganization(input: CreateOrganizationInputDto!): CreateOrganizationOutputDto!
+  deleteOrganization(input: DeleteOrganizationInputDto!): DeleteOrganizationOutputDto!
   addUser(input: AddUserInputDto!): AddUserOutputDto!
   deleteUser(input: DeleteUserInputDto!): DeleteUserOutputDto!
   createEvent(input: CreateEventInputDto!): CreateEventOutputDto!
@@ -140,6 +146,10 @@ input CreateOrganizationInputDto {
   ownerUserId: String!
   organizationName: String!
   organizationDescription: String
+}
+
+input DeleteOrganizationInputDto {
+  id: String!
 }
 
 input AddUserInputDto {
