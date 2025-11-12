@@ -4,7 +4,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 @InputType()
 export class DeleteEventInputDto {
   @Field(() => String)
-  id: string;
+  eventId: string;
 }
 
 @ObjectType()

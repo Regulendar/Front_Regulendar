@@ -6,7 +6,7 @@ import { IsUUID } from 'class-validator';
 export class DeleteOrganizationInputDto {
   @Field(() => String)
   @IsUUID()
-  id: string;
+  organizationId: string;
 }
 
 @ObjectType()
