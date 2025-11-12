@@ -146,7 +146,7 @@ input GetUsersInputDto {
 }
 
 input GetEventInputDto {
-  id: String!
+  eventId: String!
 }
 
 input GetEventsInputDto {
@@ -178,7 +178,7 @@ input CreateOrganizationInputDto {
 }
 
 input DeleteOrganizationInputDto {
-  id: String!
+  organizationId: String!
 }
 
 input JoinOrganizationInputDto {
@@ -209,7 +209,7 @@ input CreateEventInputDto {
 }
 
 input DeleteEventInputDto {
-  id: String!
+  eventId: String!
 }
 
 input JoinEventInputDto {

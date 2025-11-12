@@ -10,9 +10,11 @@ export class DeleteEventService {
     private readonly validatorUtil: ValidatorUtil,
   ) {}
 
-  async execute({ id }: DeleteEventInputDto): Promise<DeleteEventOutputDto> {
+  async execute({
+    eventId,
+  }: DeleteEventInputDto): Promise<DeleteEventOutputDto> {
     try {
-      const hasEvent = await this.validatorUtil.validateEvent(id);
+      const hasEvent = await this.validatorUtil.validateEvent(eventId);
       if (!hasEvent) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
       }
@@ -20,7 +22,7 @@ export class DeleteEventService {
       await this.prismaService.$transaction(async (tx) => {
         const { participationIds, hostOrganizationId } =
           await tx.event.findUnique({
-            where: { eventId: id },
+            where: { eventId: eventId },
             select: { participationIds: true, hostOrganizationId: true },
           });
         const removeEventIdInUser = participationIds.map(
@@ -31,7 +33,7 @@ export class DeleteEventService {
             });
             if (user) {
               const updatedEventIds = user.eventIds.filter((eventId) => {
-                return eventId !== id;
+                return eventId !== eventId;
               });
               await tx.user.update({
                 where: { id: participationId },
@@ -49,13 +51,13 @@ export class DeleteEventService {
           where: { organizationId: hostOrganizationId },
           data: {
             events: {
-              delete: { eventId: id },
+              delete: { eventId: eventId },
             },
           },
         });
         await Promise.all(removeEventIdInUser);
         await tx.event.delete({
-          where: { eventId: id },
+          where: { eventId: eventId },
         });
       });
 

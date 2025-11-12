@@ -14,15 +14,16 @@ export class DeleteOrganizationService {
   ) {}
 
   async execute({
-    id,
+    organizationId,
   }: DeleteOrganizationInputDto): Promise<DeleteOrganizationOutputDto> {
     try {
-      const hasOrganization = await this.validatorUtil.validateOrganization(id);
+      const hasOrganization =
+        await this.validatorUtil.validateOrganization(organizationId);
       if (!hasOrganization) {
         throw new HttpException('Organization not found', HttpStatus.NOT_FOUND);
       }
       await this.prismaService.organization.delete({
-        where: { organizationId: id },
+        where: { organizationId: organizationId },
       });
       return {
         message: 'Organization deleted successfully',

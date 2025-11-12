@@ -6,10 +6,10 @@ import { GetEventInputDto, GetEventOutputDto } from '../dto';
 export class GetEventService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute({ id }: GetEventInputDto): Promise<GetEventOutputDto> {
+  async execute({ eventId }: GetEventInputDto): Promise<GetEventOutputDto> {
     try {
       const event = await this.prismaService.event.findUnique({
-        where: { eventId: id },
+        where: { eventId: eventId },
       });
       if (!event) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
