@@ -111,11 +111,28 @@ type UnJoinOrganizationOutputDto {
   status: Float!
 }
 
+type GetOrganizationOutputDto {
+  organization: OrganizationDto!
+}
+
+type OrganizationDto {
+  organizationId: String!
+  organizationName: String!
+  organizationDescription: String
+  events: [EventDto!]!
+  organizationMembers: [OrganizationMemberDto!]!
+}
+
 type Query {
+  getOrganization(input: GetOrganizationInputDto!): GetOrganizationOutputDto!
   getUser(input: GetUserInputDto!): GetUserOutputDto!
   getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
   getEvent(input: GetEventInputDto!): GetEventOutputDto!
   getEvents(input: GetEventsInputDto!): GetEventsOutputDto!
+}
+
+input GetOrganizationInputDto {
+  organizationId: String!
 }
 
 input GetUserInputDto {
