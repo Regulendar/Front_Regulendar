@@ -15,6 +15,8 @@ export class DeleteOrganizationService {
 
   async execute({
     organizationId,
+    userId,
+    nameConfirmation,
   }: DeleteOrganizationInputDto): Promise<DeleteOrganizationOutputDto> {
     try {
       const hasOrganization =
@@ -22,6 +24,35 @@ export class DeleteOrganizationService {
       if (!hasOrganization) {
         throw new HttpException('Organization not found', HttpStatus.NOT_FOUND);
       }
+
+      const { role } = await this.validatorUtil.checkOrgnizationMemberRole(
+        organizationId,
+        userId,
+      );
+      const isOrganizationOwner = role === 'OWNER';
+      if (!isOrganizationOwner) {
+        throw new HttpException(
+          'Only organization owners can delete the organization',
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
+      const { organizationName } =
+        await this.prismaService.organization.findUnique({
+          where: { organizationId },
+          select: {
+            organizationName: true,
+          },
+        });
+
+      const isValidNameConfirmation = organizationName === nameConfirmation;
+      if (!isValidNameConfirmation) {
+        throw new HttpException(
+          'Organization name confirmation does not match',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
       await this.prismaService.organization.delete({
         where: { organizationId: organizationId },
       });

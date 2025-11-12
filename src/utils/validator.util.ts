@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { $Enums } from '@prisma/client';
 import { PrismaService } from 'src/prisma';
 
 @Injectable()
@@ -40,5 +41,25 @@ export class ValidatorUtil {
         },
       });
     return !!organizationMember;
+  }
+
+  async checkOrgnizationMemberRole(
+    organizationId: string,
+    userId: string,
+  ): Promise<{ role: $Enums.OrganizationRole }> {
+    {
+      const { role } = await this.prismaService.organizationMember.findUnique({
+        where: {
+          organizationId_userId: {
+            organizationId,
+            userId,
+          },
+        },
+        select: {
+          role: true,
+        },
+      });
+      return { role };
+    }
   }
 }

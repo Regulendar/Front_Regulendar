@@ -179,6 +179,8 @@ input CreateOrganizationInputDto {
 
 input DeleteOrganizationInputDto {
   organizationId: String!
+  userId: String!
+  nameConfirmation: String!
 }
 
 input JoinOrganizationInputDto {
