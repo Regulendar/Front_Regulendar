@@ -15,9 +15,16 @@ export class JoinOrganizationService {
     organizationId,
   }: JoinOrganizationInputDto): Promise<JoinOrganizationOutputDto> {
     try {
-      const hasUser = await this.validatorUtil.validateOrganization(userId);
-      if (!hasUser) {
-        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      const hasOrganizationMember =
+        await this.validatorUtil.validateOrganizationMember(
+          organizationId,
+          userId,
+        );
+      if (hasOrganizationMember) {
+        throw new HttpException(
+          'User is already a member of the organization',
+          HttpStatus.BAD_REQUEST,
+        );
       }
 
       const hasOrganization =
