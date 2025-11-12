@@ -38,7 +38,7 @@ model Event {
   eventDateDay Int
   eventDuration Int
   participationIds String[]
-  hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId])
+  hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId], onDelete: Cascade)
   hostOrganizationId String
   hostUserId String
 }
@@ -56,6 +56,6 @@ model OrganizationMember {
   userId String
   user User @relation(fields: [userId], references: [id])
   organizationId String
-  organization Organization @relation(fields: [organizationId], references: [organizationId])
+  organization Organization @relation(fields: [organizationId], references: [organizationId], onDelete: Cascade)
   role OrganizationRole @default(MEMBER)
 }
