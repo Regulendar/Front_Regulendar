@@ -16,13 +16,26 @@ export class GetEventsService {
     try {
       const events = await this.prismaService.event.findMany({
         where: {
-          participationIds: {
-            has: userId,
-          },
+          ...(userId && {
+            eventParticipations: {
+              some: {
+                userId,
+              },
+            },
+          }),
           hostOrganizationId: organizationId,
           eventDateYear,
           eventDateMonth,
           eventDateDay,
+        },
+        include: {
+          eventParticipations: {
+            select: {
+              eventId: true,
+              userId: true,
+              role: true,
+            },
+          },
         },
       });
 

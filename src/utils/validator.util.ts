@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { $Enums } from '@prisma/client';
+import { EventRole, OrganizationRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma';
 
 @Injectable()
@@ -43,15 +43,51 @@ export class ValidatorUtil {
     return !!organizationMember;
   }
 
+  async validateEventParticipation(
+    eventId: string,
+    userId: string,
+  ): Promise<boolean> {
+    const eventParticipation =
+      await this.prismaService.eventParticipation.findUnique({
+        where: {
+          eventId_userId: {
+            eventId,
+            userId,
+          },
+        },
+      });
+    return !!eventParticipation;
+  }
+
   async checkOrgnizationMemberRole(
     organizationId: string,
     userId: string,
-  ): Promise<{ role: $Enums.OrganizationRole }> {
+  ): Promise<{ role: OrganizationRole }> {
     {
       const { role } = await this.prismaService.organizationMember.findUnique({
         where: {
           organizationId_userId: {
             organizationId,
+            userId,
+          },
+        },
+        select: {
+          role: true,
+        },
+      });
+      return { role };
+    }
+  }
+
+  async checkEventParticipationRole(
+    eventId: string,
+    userId: string,
+  ): Promise<{ role: EventRole }> {
+    {
+      const { role } = await this.prismaService.eventParticipation.findUnique({
+        where: {
+          eventId_userId: {
+            eventId,
             userId,
           },
         },

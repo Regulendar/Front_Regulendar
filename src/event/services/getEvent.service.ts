@@ -10,6 +10,15 @@ export class GetEventService {
     try {
       const event = await this.prismaService.event.findUnique({
         where: { eventId: eventId },
+        include: {
+          eventParticipations: {
+            select: {
+              eventId: true,
+              userId: true,
+              role: true,
+            },
+          },
+        },
       });
       if (!event) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);

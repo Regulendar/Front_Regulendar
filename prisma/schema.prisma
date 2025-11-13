@@ -20,12 +20,17 @@ enum OrganizationRole {
   MEMBER
 }
 
+enum EventRole {
+  HOST
+  PARTICIPANT
+}
+
 
 model User {
   id       String @id @default(uuid())
   name     String
   profileImage String?
-  eventIds String[] 
+  eventParticipations EventParticipation[]
   organizationMembers OrganizationMember[]
 }
 
@@ -37,10 +42,9 @@ model Event {
   eventDateMonth Int
   eventDateDay Int
   eventDuration Int
-  participationIds String[]
+  eventParticipations EventParticipation[]
   hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId], onDelete: Cascade)
   hostOrganizationId String
-  hostUserId String
 }
 
 model Organization {
@@ -58,4 +62,13 @@ model OrganizationMember {
   organizationId String
   organization Organization @relation(fields: [organizationId], references: [organizationId], onDelete: Cascade)
   role OrganizationRole @default(MEMBER)
+}
+
+model EventParticipation {
+  @@id([eventId, userId])
+  eventId String
+  event Event @relation(fields: [eventId], references: [eventId], onDelete: Cascade)
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  role EventRole @default(PARTICIPANT)
 }
