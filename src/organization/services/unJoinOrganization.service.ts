@@ -31,8 +31,20 @@ export class UnJoinOrganizationService {
         );
       }
 
+      const isOrganizationMember =
+        await this.validatorUtil.validateOrganizationMember(
+          organizationId,
+          userId,
+        );
+      if (!isOrganizationMember) {
+        throw new HttpException(
+          'User is not a member of this organization.',
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
       await this.prismaService.$transaction(async (tx) => {
-        const { role } = await tx.organizationMember.findUnique({
+        const organizationMember = await tx.organizationMember.findUnique({
           where: {
             organizationId_userId: {
               organizationId,
@@ -43,7 +55,14 @@ export class UnJoinOrganizationService {
             role: true,
           },
         });
-        const isOrganizationOwner = role === 'OWNER';
+        if (!organizationMember) {
+          throw new HttpException(
+            'Organization member not found.',
+            HttpStatus.NOT_FOUND,
+          );
+        }
+
+        const isOrganizationOwner = organizationMember.role === 'OWNER';
         if (isOrganizationOwner) {
           throw new HttpException(
             'Organization owner cannot leave the organization. Please transfer ownership before leaving.',
@@ -51,37 +70,31 @@ export class UnJoinOrganizationService {
           );
         }
 
-        const { events } = await tx.organization.findUnique({
-          where: { organizationId },
-          select: {
-            events: {
-              where: {
-                participationIds: {
-                  has: userId,
-                },
-              },
-              select: {
-                eventId: true,
-                participationIds: true,
-              },
+        const hostedEventParticipation = await tx.eventParticipation.findFirst({
+          where: {
+            userId,
+            role: 'HOST',
+            event: {
+              hostOrganizationId: organizationId,
             },
           },
         });
-        const unJoinOrganizationEvents = events.map(
-          ({ eventId, participationIds }) => {
-            const updatedParticipationIds = participationIds.filter((id) => {
-              return id !== userId;
-            });
-            return tx.event.update({
-              where: { eventId },
-              data: {
-                participationIds: {
-                  set: updatedParticipationIds,
-                },
-              },
-            });
+
+        if (hostedEventParticipation) {
+          throw new HttpException(
+            'Please transfer hosted events to another user before leaving the organization.',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+
+        await tx.eventParticipation.deleteMany({
+          where: {
+            userId,
+            event: {
+              hostOrganizationId: organizationId,
+            },
           },
-        );
+        });
 
         await tx.organizationMember.delete({
           where: {
@@ -91,7 +104,6 @@ export class UnJoinOrganizationService {
             },
           },
         });
-        await Promise.all(unJoinOrganizationEvents);
       });
 
       return {
@@ -99,7 +111,10 @@ export class UnJoinOrganizationService {
         status: HttpStatus.OK,
       };
     } catch (error) {
-      throw error;
+      throw new HttpException(
+        `Failed to leave organization: ${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

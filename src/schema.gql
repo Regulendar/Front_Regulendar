@@ -15,8 +15,19 @@ type UserDto {
   id: String!
   name: String!
   profileImage: String
-  eventIds: [String!]!
+  eventParticipations: [EventParticipationDto!]!
   organizationMembers: [OrganizationMemberDto!]!
+}
+
+type EventParticipationDto {
+  eventId: String!
+  userId: String!
+  role: EventRole!
+}
+
+enum EventRole {
+  HOST
+  PARTICIPANT
 }
 
 type OrganizationMemberDto {
@@ -57,9 +68,8 @@ type EventDto {
   eventDateMonth: Float!
   eventDateDay: Float!
   eventDuration: Float!
-  participationIds: [String!]!
+  eventParticipations: [EventParticipationDto!]!
   hostOrganizationId: String!
-  hostUserId: String!
 }
 
 """
@@ -212,6 +222,7 @@ input CreateEventInputDto {
 
 input DeleteEventInputDto {
   eventId: String!
+  userId: String!
 }
 
 input JoinEventInputDto {

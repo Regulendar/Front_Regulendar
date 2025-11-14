@@ -15,8 +15,12 @@ export class GetOrganizationService {
           organizationId,
         },
         include: {
-          events: true,
           organizationMembers: true,
+          events: {
+            include: {
+              eventParticipations: true,
+            },
+          },
         },
       });
 
