@@ -1,7 +1,6 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsString, IsUUID } from 'class-validator';
-import { EventDto } from './event.dto';
-import { OrganizationMemberDto } from './organizationMember.dto';
+import { EventDto, OrganizationMemberDto } from 'dto';
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })

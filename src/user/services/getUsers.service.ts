@@ -16,24 +16,40 @@ export class GetUsersService {
     userIds,
   }: GetUsersInputDto): Promise<GetUsersOutputDto> {
     try {
+      const hasUserIdsProps = Array.isArray(userIds) && userIds.length > 0;
       switch (true) {
         case !!eventId: {
           const hasEvent = await this.validatorUtil.validateEvent(eventId);
           if (!hasEvent) {
             throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
           }
-          const { participationIds } =
-            await this.prismaService.event.findUnique({
+
+          const eventParticipations =
+            await this.prismaService.eventParticipation.findMany({
               where: { eventId },
-              select: {
-                participationIds: true,
+              include: {
+                user: {
+                  include: {
+                    organizationMembers: true,
+                    eventParticipations: {
+                      select: {
+                        eventId: true,
+                        userId: true,
+                        role: true,
+                      },
+                    },
+                  },
+                },
               },
             });
-          const users = await this.prismaService.user.findMany({
-            where: { id: { in: participationIds } },
-            include: { organizationMembers: true },
-          });
-          return { users };
+          const hasEventParticipations = eventParticipations.length > 0;
+          if (!hasEventParticipations) {
+            return { users: [] };
+          }
+          const users = eventParticipations.map(({ user }) => user);
+          return {
+            users,
+          };
         }
 
         case !!organizationId: {
@@ -45,30 +61,41 @@ export class GetUsersService {
               HttpStatus.NOT_FOUND,
             );
           }
-          const { organizationMembers } =
-            await this.prismaService.organization.findFirst({
+          const organizationMembers =
+            await this.prismaService.organizationMember.findMany({
               where: { organizationId },
-              select: {
-                organizationMembers: {
-                  select: {
-                    user: {
-                      include: {
-                        organizationMembers: true,
-                      },
-                    },
+              include: {
+                user: {
+                  include: {
+                    organizationMembers: true,
+                    eventParticipations: true,
                   },
                 },
               },
             });
+          const hasOrganizationMembers = organizationMembers.length > 0;
+          if (!hasOrganizationMembers) {
+            return { users: [] };
+          }
           const users = organizationMembers.map(({ user }) => user);
+
           return { users };
         }
 
-        case !!userIds: {
+        case hasUserIdsProps: {
           const users = await this.prismaService.user.findMany({
-            where: { id: { in: userIds } },
-            include: { organizationMembers: true },
+            where: {
+              id: { in: userIds },
+            },
+            include: {
+              organizationMembers: true,
+              eventParticipations: true,
+            },
           });
+          const hasUsers = users.length > 0;
+          if (!hasUsers) {
+            return { users: [] };
+          }
           return { users };
         }
 

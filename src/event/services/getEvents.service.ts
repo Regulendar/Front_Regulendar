@@ -41,7 +41,7 @@ export class GetEventsService {
 
       const hasEvent = events && events.length > 0;
       if (!hasEvent) {
-        throw new HttpException('Events not found', HttpStatus.NOT_FOUND);
+        return { events: [] };
       }
 
       return { events };
