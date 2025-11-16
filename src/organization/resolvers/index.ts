@@ -3,3 +3,4 @@ export * from './deleteOrganization.resolver';
 export * from './joinOrganization.resolver';
 export * from './unJoinOrganization.resolver';
 export * from './getOrganization.resolver';
+export * from './getOrganizations.resolver';

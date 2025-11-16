@@ -101,12 +101,12 @@ type UpdateEventOutputDto {
   status: Float!
 }
 
-type CreateOrganizationOutputDto {
+type DeleteOrganizationOutputDto {
   message: String!
   status: Float!
 }
 
-type DeleteOrganizationOutputDto {
+type CreateOrganizationOutputDto {
   message: String!
   status: Float!
 }
@@ -133,8 +133,13 @@ type OrganizationDto {
   organizationMembers: [OrganizationMemberDto!]!
 }
 
+type GetOrganizationsOutputDto {
+  organizations: [OrganizationDto!]!
+}
+
 type Query {
   getOrganization(input: GetOrganizationInputDto!): GetOrganizationOutputDto!
+  getOrganizations(input: GetOrganizationsInputDto!): GetOrganizationsOutputDto!
   getUser(input: GetUserInputDto!): GetUserOutputDto!
   getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
   getEvent(input: GetEventInputDto!): GetEventOutputDto!
@@ -143,6 +148,12 @@ type Query {
 
 input GetOrganizationInputDto {
   organizationId: String!
+}
+
+input GetOrganizationsInputDto {
+  userId: String!
+  skip: Int
+  take: Int
 }
 
 input GetUserInputDto {
