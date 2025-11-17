@@ -4,7 +4,7 @@ import { EventDto } from 'dto';
 @InputType()
 export class GetEventInputDto {
   @Field(() => String)
-  id: string;
+  eventId: string;
 }
 
 @ObjectType()

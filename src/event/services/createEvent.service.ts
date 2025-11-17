@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { EventRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma';
 import { CreateEventInputDto, CreateEventOutputDto } from '../dto';
 import { DateConverterUtil } from 'src/utils';
@@ -24,22 +25,30 @@ export class CreateEventService {
         day: eventDateDay,
       } = this.dateConverterUtil.convertDateToDayParts(eventStartAt);
 
-      await this.prismaService.event.create({
-        data: {
-          eventTitle,
-          eventStartAt,
-          eventDateYear,
-          eventDateMonth,
-          eventDateDay,
-          eventDuration,
-          hostOrganization: {
-            connect: {
-              organizationId: hostOrganizationId,
+      await this.prismaService.$transaction(async (tx) => {
+        const { eventId } = await tx.event.create({
+          data: {
+            eventTitle,
+            eventStartAt,
+            eventDateYear,
+            eventDateMonth,
+            eventDateDay,
+            eventDuration,
+            hostOrganization: {
+              connect: {
+                organizationId: hostOrganizationId,
+              },
             },
           },
-          hostUserId,
-          participationIds: [],
-        },
+        });
+
+        await tx.eventParticipation.create({
+          data: {
+            eventId,
+            userId: hostUserId,
+            role: EventRole.HOST,
+          },
+        });
       });
 
       return {

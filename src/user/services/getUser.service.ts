@@ -14,6 +14,7 @@ export class GetUserService {
         },
         include: {
           organizationMembers: true,
+          eventParticipations: true,
         },
       });
 

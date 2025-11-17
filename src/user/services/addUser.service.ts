@@ -15,7 +15,6 @@ export class AddUserService {
         data: {
           name,
           profileImage,
-          eventIds: [],
         },
       });
 

@@ -3,9 +3,10 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsUUID } from 'class-validator';
 
 @InputType()
-export class DeleteEventInputDto {
+export class JoinOrganizationInputDto {
   @Field(() => String)
-  eventId: string;
+  @IsUUID()
+  organizationId: string;
 
   @Field(() => String)
   @IsUUID()
@@ -13,7 +14,7 @@ export class DeleteEventInputDto {
 }
 
 @ObjectType()
-export class DeleteEventOutputDto {
+export class JoinOrganizationOutputDto {
   @Field(() => String)
   message: string;
 

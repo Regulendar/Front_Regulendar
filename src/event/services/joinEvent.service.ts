@@ -23,44 +23,20 @@ export class JoinEventService {
       if (!hasEvent) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
       }
-
-      const { participationIds } = await this.prismaService.event.findUnique({
-        where: { eventId },
-        select: {
-          participationIds: true,
-        },
-      });
-      const isUserParticipating = participationIds.includes(userId);
-      if (isUserParticipating) {
+      const hasEventParticipation =
+        await this.validatorUtil.validateEventParticipation(eventId, userId);
+      if (hasEventParticipation) {
         throw new HttpException(
           'User is already participating in this event',
           HttpStatus.CONFLICT,
         );
       }
 
-      await this.prismaService.$transaction(async (tx) => {
-        const { eventIds } = await tx.user.findUnique({
-          where: { id: userId },
-          select: { eventIds: true },
-        });
-        const updatedEventIds = [...eventIds, eventId];
-        const updatedParticipation = [...participationIds, userId];
-        await tx.user.update({
-          where: { id: userId },
-          data: {
-            eventIds: {
-              set: updatedEventIds,
-            },
-          },
-        });
-        await tx.event.update({
-          where: { eventId },
-          data: {
-            participationIds: {
-              set: updatedParticipation,
-            },
-          },
-        });
+      await this.prismaService.eventParticipation.create({
+        data: {
+          eventId,
+          userId,
+        },
       });
 
       return {

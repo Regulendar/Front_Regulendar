@@ -10,52 +10,34 @@ export class DeleteEventService {
     private readonly validatorUtil: ValidatorUtil,
   ) {}
 
-  async execute({ id }: DeleteEventInputDto): Promise<DeleteEventOutputDto> {
+  async execute({
+    eventId,
+    userId,
+  }: DeleteEventInputDto): Promise<DeleteEventOutputDto> {
     try {
-      const hasEvent = await this.validatorUtil.validateEvent(id);
+      const hasEvent = await this.validatorUtil.validateEvent(eventId);
       if (!hasEvent) {
         throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
       }
 
-      await this.prismaService.$transaction(async (tx) => {
-        const { participationIds, hostOrganizationId } =
-          await tx.event.findUnique({
-            where: { eventId: id },
-            select: { participationIds: true, hostOrganizationId: true },
-          });
-        const removeEventIdInUser = participationIds.map(
-          async (participationId) => {
-            const user = await tx.user.findUnique({
-              where: { id: participationId },
-              select: { eventIds: true },
-            });
-            if (user) {
-              const updatedEventIds = user.eventIds.filter((eventId) => {
-                return eventId !== id;
-              });
-              await tx.user.update({
-                where: { id: participationId },
-                data: {
-                  eventIds: {
-                    set: updatedEventIds,
-                  },
-                },
-              });
-            }
-          },
+      const { role } = await this.validatorUtil.checkEventParticipationRole(
+        eventId,
+        userId,
+      );
+      const isEventHost = role === 'HOST';
+      if (!isEventHost) {
+        throw new HttpException(
+          'Only event hosts can delete the event',
+          HttpStatus.FORBIDDEN,
         );
+      }
 
-        await tx.organization.update({
-          where: { organizationId: hostOrganizationId },
-          data: {
-            events: {
-              delete: { eventId: id },
-            },
-          },
+      await this.prismaService.$transaction(async (tx) => {
+        await tx.eventParticipation.deleteMany({
+          where: { eventId },
         });
-        await Promise.all(removeEventIdInUser);
         await tx.event.delete({
-          where: { eventId: id },
+          where: { eventId },
         });
       });
 

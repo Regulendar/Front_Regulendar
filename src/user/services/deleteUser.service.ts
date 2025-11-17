@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { EventRole, OrganizationRole } from '@prisma/client';
 import { DeleteUserInputDto, DeleteUserOutputDto } from '../dto';
 import { PrismaService } from 'src/prisma';
 import { ValidatorUtil } from 'src/utils';
@@ -16,79 +17,60 @@ export class DeleteUserService {
       if (!hasUser) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
-      const { eventIds, organizationMembers } =
-        await this.prismaService.user.findUnique({
-          where: { id },
-          select: {
-            eventIds: true,
-            organizationMembers: true,
+      const userRelations = await this.prismaService.user.findUnique({
+        where: { id },
+        select: {
+          eventParticipations: {
+            select: {
+              eventId: true,
+              role: true,
+            },
           },
-        });
+          organizationMembers: {
+            select: {
+              organizationId: true,
+              role: true,
+            },
+          },
+        },
+      });
+
+      if (!userRelations) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+
+      const isHostingEvent = userRelations.eventParticipations.some(
+        ({ role }) => {
+          return role === EventRole.HOST;
+        },
+      );
+      if (isHostingEvent) {
+        throw new HttpException(
+          'Cannot delete user who is hosting events',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
+      const isOrganizationOwner = userRelations.organizationMembers.some(
+        ({ role }) => {
+          return role === OrganizationRole.OWNER;
+        },
+      );
+      if (isOrganizationOwner) {
+        throw new HttpException(
+          'Cannot delete user who is an organization owner',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
 
       await this.prismaService.$transaction(async (tx) => {
-        const hostedEvents = await tx.event.findMany({
-          where: { eventId: { in: eventIds }, hostUserId: id },
+        await tx.eventParticipation.deleteMany({
+          where: { userId: id },
         });
-        const hasHostedEvents = hostedEvents.length > 0;
-        if (hasHostedEvents) {
-          throw new HttpException(
-            'Cannot delete user who is hosting events',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
 
-        const events = await tx.event.findMany({
-          where: { eventId: { in: eventIds } },
-          select: {
-            eventId: true,
-            participationIds: true,
-          },
+        await tx.organizationMember.deleteMany({
+          where: { userId: id },
         });
-        const updateParticipationIdsInEvent = events.map(
-          ({ eventId, participationIds }) => {
-            const updatedParticipationIds = participationIds.filter(
-              (participantId) => {
-                return participantId !== id;
-              },
-            );
-            return tx.event.update({
-              where: { eventId },
-              data: {
-                participationIds: {
-                  set: updatedParticipationIds,
-                },
-              },
-            });
-          },
-        );
-
-        const isOrganizationOwner = organizationMembers.some(({ role }) => {
-          return role === 'OWNER';
-        });
-        if (isOrganizationOwner) {
-          throw new HttpException(
-            'Cannot delete user who is an organization owner',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-
-        const deleteOrganizationMembers = organizationMembers.map(
-          async ({ organizationId }) => {
-            await tx.organizationMember.delete({
-              where: {
-                organizationId_userId: {
-                  organizationId,
-                  userId: id,
-                },
-              },
-            });
-          },
-        );
-
-        await Promise.all([
-          ...updateParticipationIdsInEvent,
-          ...deleteOrganizationMembers,
-        ]);
 
         await tx.user.delete({
           where: { id },
