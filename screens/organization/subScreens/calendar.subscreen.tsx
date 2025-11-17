@@ -25,6 +25,74 @@ const DUMMY_DUMMY_EVENTS: IEventType[] = [
       events: [],
     },
   },
+  {
+    id: '5',
+    eventTitle: 'Project Deadline',
+    eventStartAt: '2025-09-18T23:59:00',
+    eventDateYear: 2025,
+    eventDateMonth: 9,
+    eventDateDay: 18,
+    eventDuration: 0,
+    participationId: ['0e47473c-924e-417e-918a-cc48d6b71fd2'],
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+  },
+  {
+    id: '7',
+    eventTitle: 'Project Deadline',
+    eventStartAt: '2025-09-18T23:59:00',
+    eventDateYear: 2025,
+    eventDateMonth: 9,
+    eventDateDay: 18,
+    eventDuration: 0,
+    participationId: ['0e47473c-924e-417e-918a-cc48d6b71fd2'],
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+  },
+  {
+    id: '1',
+    eventTitle: 'Project Deadline',
+    eventStartAt: '2025-09-18T23:59:00',
+    eventDateYear: 2025,
+    eventDateMonth: 9,
+    eventDateDay: 18,
+    eventDuration: 0,
+    participationId: ['0e47473c-924e-417e-918a-cc48d6b71fd2'],
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+  },
+  {
+    id: '2',
+    eventTitle: 'Project Deadline',
+    eventStartAt: '2025-09-18T23:59:00',
+    eventDateYear: 2025,
+    eventDateMonth: 9,
+    eventDateDay: 18,
+    eventDuration: 0,
+    participationId: ['0e47473c-924e-417e-918a-cc48d6b71fd2'],
+    hostOrganization: {
+      id: 'org-1',
+      organizationName: 'Organization One',
+      organizationDescription: 'Description for Organization One',
+      members: [],
+      events: [],
+    },
+  },
 ]; // For Testing SwipeableFunction #1
 
 type IOrganizationHomeSubScreen = {
@@ -151,19 +219,19 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
       </AnimatedStack>
     );
   });
-
   return (
     <Stack flex={1} width="$fluid" justify="space-between" items="center" gap="$size.x2">
-      <Calendar value={selectedDate} onDayChange={setSelectedDate} />
-      {!hasTodayEvents && (
-        <Stack flex={1} width="$fluid" justify="center" items="center">
-          <Text fontSize="$7" fontWeight="500" color="$colors.mediumGray">
-            일정이 없습니다.
-          </Text>
-        </Stack>
-      )}
       <ScrollView flex={1} width="$fluid">
-        <Stack gap="$size.x4">
+        <Calendar value={selectedDate} onDayChange={setSelectedDate} />
+        {!hasTodayEvents && (
+          <Stack flex={1} width="$fluid" justify="center" items="center">
+            <Text fontSize="$7" fontWeight="500" color="$colors.mediumGray">
+              일정이 없습니다.
+            </Text>
+          </Stack>
+        )}
+
+        <Stack flex={1} width="$fluid" gap="$size.x4">
           {hasParticipatedEvents && (
             <Stack width="$fluid" gap="$size.x2">
               <Stack width="$fluid" px="$size.x3">
