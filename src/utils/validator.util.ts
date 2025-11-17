@@ -59,7 +59,7 @@ export class ValidatorUtil {
     return !!eventParticipation;
   }
 
-  async checkOrgnizationMemberRole(
+  async checkOrganizationMemberRole(
     organizationId: string,
     userId: string,
   ): Promise<{ role: OrganizationRole }> {

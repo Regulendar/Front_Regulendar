@@ -25,7 +25,7 @@ export class DeleteOrganizationService {
         throw new HttpException('Organization not found', HttpStatus.NOT_FOUND);
       }
 
-      const { role } = await this.validatorUtil.checkOrgnizationMemberRole(
+      const { role } = await this.validatorUtil.checkOrganizationMemberRole(
         organizationId,
         userId,
       );
