@@ -83,6 +83,7 @@ export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
         }}
         monthFormat="MM월"
         theme={{
+          arrowColor: '#00B906',
           todayTextColor: '#00B906',
           textDayFontWeight: 700,
           textDayFontSize: 18,
