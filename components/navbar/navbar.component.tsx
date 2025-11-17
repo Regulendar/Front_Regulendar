@@ -35,7 +35,8 @@ export const Navbar = memo<INavbarProps>(({ itemValue, navbarItems, onChangeItem
       justify="center"
       items="center"
       px="$size.x4"
-      py="$size.x5"
+      pb="$size.x5"
+      pt="$size.x3"
       gap="$size.x2">
       <Stack
         flex={1}
