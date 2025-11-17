@@ -1,12 +1,14 @@
 import { INavbarItem, Navbar } from '@/components';
+import { DUMMY_ORGANIZATIONS } from '@/dummy';
 import { supabaseAuth } from '@/libs';
+import { IOrganizationType } from '@/types';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount } from 'rooks';
-import { Stack } from 'tamagui';
+import { Stack, Text } from 'tamagui';
 import { OrganizationCalendarSubScreen, OrganizationMainSubScreen } from './subScreens';
 
 type IOrganizationScreenProps = {
@@ -21,6 +23,7 @@ enum EOrganizationScreenItem {
 
 export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organizationId }) => {
   const [userId, setUserId] = useState<string>('');
+  const [organization, setOrganization] = useState<IOrganizationType>();
   const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Main);
   const navbarItems: INavbarItem[] = [
     { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
@@ -37,26 +40,41 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
     }
   }, [selectedItem, userId]);
 
-  const fetchUserId = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     const { data } = await supabaseAuth.getUser();
     const hasUserData = !!data?.user;
     if (!hasUserData) {
       return;
     }
     setUserId(data.user.id);
-  }, []);
+
+    // TODO(@Milgam06): Fetch organization data
+    const organizationData = DUMMY_ORGANIZATIONS.find(({ id }) => {
+      const hasOrganization = id === organizationId;
+      return hasOrganization;
+    });
+    if (!organizationData) {
+      return;
+    }
+    setOrganization(organizationData);
+  }, [organizationId]);
 
   const handleChangeNavbarItem = useCallback((value: string) => {
     setSelectedItem(value);
   }, []);
 
   useDidMount(async () => {
-    await fetchUserId();
+    await fetchData();
   });
 
   return (
     <Stack flex={1}>
       <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+        <Stack justify="center" px="$size.x5" py="$size.x1">
+          <Text fontSize="$9" fontWeight="800">
+            {organization?.organizationName}
+          </Text>
+        </Stack>
         {renderSubScreen}
       </SafeAreaView>
       <Navbar itemValue={selectedItem} navbarItems={navbarItems} onChangeItemValue={handleChangeNavbarItem} />
