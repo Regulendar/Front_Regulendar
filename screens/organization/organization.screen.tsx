@@ -7,24 +7,24 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount } from 'rooks';
 import { Stack } from 'tamagui';
-import { OrganizationCalendarSubScreen } from './subScreens';
+import { OrganizationCalendarSubScreen, OrganizationMainSubScreen } from './subScreens';
 
 type IOrganizationScreenProps = {
   organizationId: string;
 };
 
 enum EOrganizationScreenItem {
-  Home = 'Home',
+  Main = 'Main',
   Calendar = 'Calendar',
   Profile = 'Profile',
 }
 
 export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organizationId }) => {
   const [userId, setUserId] = useState<string>('');
-  const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Home);
+  const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Main);
   const navbarItems: INavbarItem[] = [
     { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
-    { value: EOrganizationScreenItem.Home, icon: faHome },
+    { value: EOrganizationScreenItem.Main, icon: faHome },
     { value: EOrganizationScreenItem.Profile, icon: faUser },
   ];
 
@@ -32,6 +32,8 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
     switch (selectedItem) {
       case EOrganizationScreenItem.Calendar:
         return <OrganizationCalendarSubScreen userId={userId} />;
+      case EOrganizationScreenItem.Main:
+        return <OrganizationMainSubScreen />;
     }
   }, [selectedItem, userId]);
 
