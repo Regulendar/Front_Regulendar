@@ -6,7 +6,7 @@ type ICardPlacement = 'header' | 'footer';
 
 type ICardProps = {
   children: ReactNode;
-  size: SizeTokens;
+  width: SizeTokens;
   cardPlacement?: ICardPlacement;
   backgroundImg?: string;
   backgroundColor?: OpaqueColorValue | GetThemeValueForKey<'backgroundColor'>;
@@ -14,7 +14,7 @@ type ICardProps = {
 };
 
 export const Card = memo<ICardProps>(
-  ({ children, size, cardPlacement, backgroundImg, backgroundColor, onPressCard }) => {
+  ({ children, width, cardPlacement, backgroundImg, backgroundColor, onPressCard }) => {
     const placement = useMemo<ICardPlacement>(() => {
       const hasNotPlacement = !cardPlacement;
       if (hasNotPlacement) {
@@ -25,7 +25,7 @@ export const Card = memo<ICardProps>(
 
     return (
       <TamaguiCard
-        width={size}
+        width={width}
         aspectRatio={1}
         onPress={onPressCard}
         bg={backgroundColor}
