@@ -6,9 +6,9 @@ import { ScrollView, Stack, Text } from 'tamagui';
 export const OrganizationMainSubScreen = memo(() => {
   const { windowWidth } = getScreenSize();
   return (
-    <Stack flex={1} width="$fluid" py="$size.x3">
+    <Stack flex={1} width="$fluid" py="$size.x2">
       <ScrollView width="$fluid" horizontal pagingEnabled showsHorizontalScrollIndicator={false} py="$size.x1_5">
-        <Stack width={windowWidth} px="$size.x7">
+        <Stack width={windowWidth} px="$size.x5">
           <Card width="$fluid" backgroundColor="$colors.componentGreen">
             <Stack width="$fluid">
               <Text>
@@ -17,7 +17,7 @@ export const OrganizationMainSubScreen = memo(() => {
             </Stack>
           </Card>
         </Stack>
-        <Stack width={windowWidth} px="$size.x7">
+        <Stack width={windowWidth} px="$size.x5">
           <Card width="$fluid" backgroundColor="$colors.componentGreen">
             <Stack width="$fluid">
               <Text>
@@ -26,7 +26,7 @@ export const OrganizationMainSubScreen = memo(() => {
             </Stack>
           </Card>
         </Stack>
-        <Stack width={windowWidth} px="$size.x7">
+        <Stack width={windowWidth} px="$size.x5">
           <Card width="$fluid" backgroundColor="$colors.componentGreen">
             <Stack width="$fluid">
               <Text>
@@ -35,7 +35,7 @@ export const OrganizationMainSubScreen = memo(() => {
             </Stack>
           </Card>
         </Stack>
-        <Stack width={windowWidth} px="$size.x7">
+        <Stack width={windowWidth} px="$size.x5">
           <Card width="$fluid" backgroundColor="$colors.componentGreen">
             <Stack width="$fluid">
               <Text>

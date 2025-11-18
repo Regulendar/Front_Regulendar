@@ -57,7 +57,7 @@ export const SignInScreen = memo(() => {
         setIsSignInFailed(true);
         return;
       }
-      route.replace('/home/home');
+      route.replace('/participation/participation');
 
       return;
     }
