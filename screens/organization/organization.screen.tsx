@@ -26,8 +26,8 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
   const [organization, setOrganization] = useState<IOrganizationType>();
   const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Main);
   const navbarItems: INavbarItem[] = [
-    { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
     { value: EOrganizationScreenItem.Main, icon: faHome },
+    { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
     { value: EOrganizationScreenItem.Profile, icon: faUser },
   ];
 
