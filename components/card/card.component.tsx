@@ -2,7 +2,7 @@ import { memo, ReactNode } from 'react';
 import { OpaqueColorValue } from 'react-native';
 import { GetThemeValueForKey, Image, SizeTokens, Card as TamaguiCard } from 'tamagui';
 
-type ICardType = 'creditCard' | 'square';
+type ICardType = 'custom' | 'square';
 
 type ICardProps = {
   children: ReactNode;
