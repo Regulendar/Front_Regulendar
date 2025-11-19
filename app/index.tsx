@@ -1,5 +1,5 @@
-import { Redirect } from 'expo-router';
+import { SplashScreen } from '@/screens';
 
 export default function () {
-  return <Redirect href="/greeting/greeting" />;
+  return <SplashScreen />;
 }

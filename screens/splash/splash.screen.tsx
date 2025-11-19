@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount } from 'rooks';
 import { Stack, Text } from 'tamagui';
 
-export const GreetingScreen = memo(() => {
+export const SplashScreen = memo(() => {
   const route = useRouter();
 
   useDidMount(async () => {
