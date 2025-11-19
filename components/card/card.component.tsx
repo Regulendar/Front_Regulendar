@@ -23,7 +23,7 @@ export const Card = memo<ICardProps>(
         bg={backgroundColor}
         borderRadius="$size.x3"
         overflow="hidden"
-        pressStyle={{ opacity: 0.6 }}>
+        pressStyle={{ opacity: 0.8 }}>
         {children}
         {backgroundImg && (
           <TamaguiCard.Background>
