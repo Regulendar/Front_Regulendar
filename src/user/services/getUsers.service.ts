@@ -16,96 +16,47 @@ export class GetUsersService {
     userIds,
   }: GetUsersInputDto): Promise<GetUsersOutputDto> {
     try {
-      const hasUserIdsProps = Array.isArray(userIds) && userIds.length > 0;
-      switch (true) {
-        case !!eventId: {
-          const hasEvent = await this.validatorUtil.validateEvent(eventId);
-          if (!hasEvent) {
-            throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
-          }
-
-          const eventParticipations =
-            await this.prismaService.eventParticipation.findMany({
-              where: { eventId },
-              include: {
-                user: {
-                  include: {
-                    organizationMembers: true,
-                    eventParticipations: {
-                      select: {
-                        eventId: true,
-                        userId: true,
-                        role: true,
-                      },
-                    },
-                  },
-                },
-              },
-            });
-          const hasEventParticipations = eventParticipations.length > 0;
-          if (!hasEventParticipations) {
-            return { users: [] };
-          }
-          const users = eventParticipations.map(({ user }) => user);
-          return {
-            users,
-          };
-        }
-
-        case !!organizationId: {
-          const hasOrganization =
-            await this.validatorUtil.validateOrganization(organizationId);
-          if (!hasOrganization) {
-            throw new HttpException(
-              'Organization not found',
-              HttpStatus.NOT_FOUND,
-            );
-          }
-          const organizationMembers =
-            await this.prismaService.organizationMember.findMany({
-              where: { organizationId },
-              include: {
-                user: {
-                  include: {
-                    organizationMembers: true,
-                    eventParticipations: true,
-                  },
-                },
-              },
-            });
-          const hasOrganizationMembers = organizationMembers.length > 0;
-          if (!hasOrganizationMembers) {
-            return { users: [] };
-          }
-          const users = organizationMembers.map(({ user }) => user);
-
-          return { users };
-        }
-
-        case hasUserIdsProps: {
-          const users = await this.prismaService.user.findMany({
-            where: {
-              id: { in: userIds },
-            },
-            include: {
-              organizationMembers: true,
-              eventParticipations: true,
-            },
-          });
-          const hasUsers = users.length > 0;
-          if (!hasUsers) {
-            return { users: [] };
-          }
-          return { users };
-        }
-
-        default: {
-          throw new HttpException(
-            'At least one filter (organizationId, eventId, userIds) must be provided',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
+      const hasOrganization =
+        await this.validatorUtil.validateOrganization(organizationId);
+      if (organizationId && !hasOrganization) {
+        throw new HttpException('Organization not found', HttpStatus.NOT_FOUND);
       }
+
+      const hasEvent = await this.validatorUtil.validateEvent(eventId);
+      if (eventId && !hasEvent) {
+        throw new HttpException('Event not found', HttpStatus.NOT_FOUND);
+      }
+
+      const users = await this.prismaService.user.findMany({
+        where: {
+          ...(userIds && {
+            id: { in: userIds },
+          }),
+          ...(eventId && {
+            eventParticipations: {
+              some: {
+                eventId,
+              },
+            },
+          }),
+          ...(organizationId && {
+            organizationMembers: {
+              some: {
+                organizationId,
+              },
+            },
+          }),
+        },
+        include: {
+          organizationMembers: true,
+          eventParticipations: true,
+        },
+      });
+      const hasUsers = users.length > 0;
+      if (!hasUsers) {
+        return { users: [] };
+      }
+      return { users };
     } catch (error) {
       throw new HttpException(
         `Failed to get users: ${error.message}`,
