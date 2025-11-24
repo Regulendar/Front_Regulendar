@@ -5,10 +5,15 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { memo } from 'react';
 import DashedLine from 'react-native-dashed-line';
+import { useDidMount } from 'rooks';
 import { ScrollView, Stack, Text } from 'tamagui';
 
 export const OrganizationMainSubScreen = memo(() => {
   const { windowWidth } = getScreenSize();
+
+  useDidMount(() => {
+    // fetch month events data
+  });
   return (
     <Stack flex={1} width="$fluid" py="$size.x2">
       <ScrollView width="$fluid" horizontal pagingEnabled showsHorizontalScrollIndicator={false} py="$size.x1_5">

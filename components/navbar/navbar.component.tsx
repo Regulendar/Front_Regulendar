@@ -70,6 +70,7 @@ export const Navbar = memo<INavbarProps>(({ itemValue, navbarItems, onChangeItem
           <Popover.Trigger
             width="$fit"
             p="$size.x3"
+            bg="$colors.backgroundWhite"
             boxShadow="0 4px 12px rgba(0,0,0,0.4)"
             style={{
               borderRadius: 48,
