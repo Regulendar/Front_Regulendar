@@ -70,7 +70,7 @@ export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organization
   return (
     <Stack flex={1}>
       <SafeAreaView edges={['top']} style={{ flex: 1 }}>
-        <Stack justify="center" px="$size.x5" pt="$size.x5">
+        <Stack justify="center" px="$size.x5">
           <Text fontSize="$9" fontWeight="800">
             {organization?.organizationName}
           </Text>
