@@ -5,17 +5,19 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { memo } from 'react';
 import DashedLine from 'react-native-dashed-line';
-import { useDidMount } from 'rooks';
 import { ScrollView, Stack, Text } from 'tamagui';
+import { useCountUp } from 'use-count-up';
 
 export const OrganizationMainSubScreen = memo(() => {
   const { windowWidth } = getScreenSize();
 
-  useDidMount(() => {
-    // fetch month events data
+  const { value } = useCountUp({
+    isCounting: true,
+    end: 80,
   });
+
   return (
-    <Stack flex={1} width="$fluid" py="$size.x2">
+    <Stack flex={1} width="$fluid" py="$size.x2" gap="$size.x5">
       <Stack gap="$size.x2">
         <Stack px="$size.x5" flexDirection="row" gap="$size.x2" items="flex-end">
           <Text fontSize="$6" fontWeight="900">
@@ -73,6 +75,49 @@ export const OrganizationMainSubScreen = memo(() => {
             </Stack>
           </Stack>
         </ScrollView>
+      </Stack>
+      <Stack gap="$size.x2">
+        <Stack px="$size.x5">
+          <Text fontSize="$6" fontWeight="900">
+            활동
+          </Text>
+        </Stack>
+        <Stack width="$fluid" flexDirection="row" justify="space-between" px="$size.x3" gap="$size.x2">
+          <Stack
+            flex={1}
+            aspectRatio={1}
+            justify="center"
+            items="center"
+            py="$size.x3"
+            bg="$colors.componentGreen"
+            gap="$size.x0_5"
+            style={{ borderRadius: 12 }}>
+            <Text fontSize="$13" fontWeight="900" color="$colors.backgroundWhite">
+              {value}%
+            </Text>
+            <Text fontSize="$6" fontWeight="900" color="$colors.backgroundWhite">
+              이번 달 참여율
+            </Text>
+          </Stack>
+          <Stack
+            flex={1}
+            aspectRatio={1}
+            justify="center"
+            items="center"
+            py="$size.x3"
+            bg="$colors.backgroundWhite"
+            gap="$size.x0_5"
+            borderWidth={1}
+            borderColor="$colors.componentGreen"
+            style={{ borderRadius: 12 }}>
+            <Text fontSize="$13" fontWeight="900" color="$colors.componentGreen">
+              {value}%
+            </Text>
+            <Text fontSize="$6" fontWeight="900" color="$colors.componentGreen">
+              이번 달 참여율
+            </Text>
+          </Stack>
+        </Stack>
       </Stack>
     </Stack>
   );

@@ -47,6 +47,7 @@
     "react-native-webview": "13.13.5",
     "rooks": "^9.3.0",
     "tamagui": "^1.132.21",
+    "use-count-up": "^3.0.1",
     "validator": "^13.15.15"
   },
   "devDependencies": {
