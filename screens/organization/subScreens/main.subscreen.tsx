@@ -3,6 +3,7 @@ import { getScreenSize } from '@/utils';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { Image } from 'expo-image';
 import { memo } from 'react';
 import DashedLine from 'react-native-dashed-line';
 import { ScrollView, Stack, Text } from 'tamagui';
@@ -106,15 +107,18 @@ export const OrganizationMainSubScreen = memo(() => {
             items="center"
             py="$size.x3"
             bg="$colors.backgroundWhite"
-            gap="$size.x0_5"
+            gap="$size.x1"
             borderWidth={1}
             borderColor="$colors.componentGreen"
             style={{ borderRadius: 12 }}>
-            <Text fontSize="$13" fontWeight="900" color="$colors.componentGreen">
-              {value}%
-            </Text>
-            <Text fontSize="$6" fontWeight="900" color="$colors.componentGreen">
-              이번 달 참여율
+            <Image
+              source="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Thinking%20Face.png"
+              alt="Thinking Face"
+              contentFit="contain"
+              style={{ width: 100, aspectRatio: 1 }}
+            />
+            <Text fontSize="$5" fontWeight="900" color="$colors.componentGreen">
+              아직 게시물이 없어요!
             </Text>
           </Stack>
         </Stack>
