@@ -11,7 +11,7 @@ import { useDidMount } from 'rooks';
 import { Stack, Text } from 'tamagui';
 import { OrganizationCalendarSubScreen, OrganizationMainSubScreen } from './subScreens';
 
-type IOrganizationScreenProps = {
+type IOrganizationScreen = {
   organizationId: string;
 };
 
@@ -21,7 +21,7 @@ enum EOrganizationScreenItem {
   Profile = 'Profile',
 }
 
-export const OrganizationScreen = memo<IOrganizationScreenProps>(({ organizationId }) => {
+export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId }) => {
   const [userId, setUserId] = useState<string>('');
   const [organization, setOrganization] = useState<IOrganizationType>();
   const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Main);

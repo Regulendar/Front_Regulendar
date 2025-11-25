@@ -1,4 +1,4 @@
-import { Calendar, IRenderActionsProps, Swipeable } from '@/components';
+import { Calendar, IRenderActions, Swipeable } from '@/components';
 import { IEventType } from '@/types';
 import { formatDate, getToday } from '@/utils';
 import { memo, useCallback, useMemo, useState } from 'react';
@@ -99,9 +99,9 @@ type IOrganizationHomeSubScreen = {
   userId: string;
 };
 
-type IEventSwipeableComponentProps = {
+type IEventSwipeableComponent = {
   event: IEventType;
-} & IRenderActionsProps;
+} & IRenderActions;
 
 export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({ userId }) => {
   const { today } = getToday();
@@ -161,7 +161,7 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
     fetchEventsByDate();
   }, [selectedDate]);
 
-  const RightEventSwipeableComponent = memo<IEventSwipeableComponentProps>(({ drag, onClose, event }) => {
+  const RightEventSwipeableComponent = memo<IEventSwipeableComponent>(({ drag, onClose, event }) => {
     const swipeLength = swipeableContentWidth + swipeableContentMarginX;
     const styledAnimation = useAnimatedStyle(() => ({
       transform: [{ translateX: drag.value + swipeLength }],

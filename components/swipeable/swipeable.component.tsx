@@ -3,23 +3,23 @@ import { StyleProp, ViewStyle } from 'react-native';
 import RNGHSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { SharedValue } from 'react-native-reanimated';
 
-export type IRenderActionsProps = {
+export type IRenderActions = {
   drag: SharedValue<number>;
   onClose?: () => void;
 };
 
-type ISwipeableProps = {
+type ISwipeable = {
   swipeDirections: 'left' | 'right' | 'both';
   hasOvershoot: boolean;
-  renderLeftActions?: ({ drag, onClose }: IRenderActionsProps) => ReactNode;
-  renderRightActions?: ({ drag, onClose }: IRenderActionsProps) => ReactNode;
+  renderLeftActions?: ({ drag, onClose }: IRenderActions) => ReactNode;
+  renderRightActions?: ({ drag, onClose }: IRenderActions) => ReactNode;
   leftActionsWidth?: number;
   rightActionsWidth?: number;
   containerStyle?: StyleProp<ViewStyle>;
   children: ReactNode;
 };
 
-export const Swipeable = memo<ISwipeableProps>(
+export const Swipeable = memo<ISwipeable>(
   ({
     swipeDirections,
     hasOvershoot = false,

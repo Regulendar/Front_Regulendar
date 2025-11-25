@@ -10,13 +10,13 @@ export type INavbarItem = {
   icon: IconDefinition;
 };
 
-type INavbarProps = {
+type INavbar = {
   itemValue: string;
   navbarItems: INavbarItem[];
   onChangeItemValue: (value: string) => void;
 };
 
-export const Navbar = memo<INavbarProps>(({ itemValue, navbarItems, onChangeItemValue }) => {
+export const Navbar = memo<INavbar>(({ itemValue, navbarItems, onChangeItemValue }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useDidMount(() => {
     // TODO(@Milgam06): get isAdmin from user role

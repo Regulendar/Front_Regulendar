@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
 import { Image, ScrollView, Stack, Text } from 'tamagui';
 
-type IOrganizationCardComponentProps = {
+type IOrganizationCardComponent = {
   organizationId: string;
   organizationName: string;
   organizationDescription: string;
@@ -17,7 +17,7 @@ type IOrganizationCardComponentProps = {
 };
 
 export const ParticipationScreen = memo(() => {
-  const OrganizationCardComponent = memo<IOrganizationCardComponentProps>(
+  const OrganizationCardComponent = memo<IOrganizationCardComponent>(
     ({
       organizationId,
       organizationName,

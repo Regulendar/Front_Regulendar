@@ -10,7 +10,7 @@ import {
   Input as TamaguiInput,
 } from 'tamagui';
 
-type IInputProps = {
+type IInput = {
   w?: SizeTokens;
   labelContent?: string;
   labelFontSize?: FontSizeTokens;
@@ -19,7 +19,7 @@ type IInputProps = {
   labelFontColor?: ColorTokens | OpaqueColorValue;
 } & ComponentProps<typeof TamaguiInput>;
 
-export const Input = memo<IInputProps>(
+export const Input = memo<IInput>(
   ({ w, labelContent, labelFontSize, labelFontWeight, labelPosition, labelFontColor, ...rest }) => {
     const width = useMemo<SizeTokens>(() => {
       if (!w) {

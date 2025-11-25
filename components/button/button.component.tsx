@@ -4,7 +4,7 @@ import { GetThemeValueForKey, Button as TamaguiButton } from 'tamagui';
 
 type IJustify = 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
 
-type IButtonProps = {
+type IButton = {
   isFullWidth?: boolean;
   backgroundColor?: OpaqueColorValue | GetThemeValueForKey<'backgroundColor'>;
   justify?: IJustify;
@@ -16,7 +16,7 @@ type IButtonProps = {
   onPressButton?: () => void;
 };
 
-export const Button = memo<IButtonProps>(
+export const Button = memo<IButton>(
   ({
     isFullWidth = true,
     backgroundColor = '$colors.componentGreen',

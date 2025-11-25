@@ -4,7 +4,7 @@ import { GetThemeValueForKey, Image, SizeTokens, Card as TamaguiCard } from 'tam
 
 type ICardType = 'custom' | 'square';
 
-type ICardProps = {
+type ICard = {
   children: ReactNode;
   width: SizeTokens;
   type?: ICardType;
@@ -13,24 +13,22 @@ type ICardProps = {
   onPressCard?: () => void;
 };
 
-export const Card = memo<ICardProps>(
-  ({ children, width, type = 'square', backgroundImg, backgroundColor, onPressCard }) => {
-    return (
-      <TamaguiCard
-        width={width}
-        {...(type === 'square' && { aspectRatio: 1 })}
-        onPress={onPressCard}
-        bg={backgroundColor}
-        borderRadius="$size.x3"
-        overflow="hidden"
-        pressStyle={{ opacity: 0.8 }}>
-        {children}
-        {backgroundImg && (
-          <TamaguiCard.Background>
-            <Image flex={1} source={{ uri: backgroundImg }} width="$fluid" height="$fluid" objectFit="cover" />
-          </TamaguiCard.Background>
-        )}
-      </TamaguiCard>
-    );
-  }
-);
+export const Card = memo<ICard>(({ children, width, type = 'square', backgroundImg, backgroundColor, onPressCard }) => {
+  return (
+    <TamaguiCard
+      width={width}
+      {...(type === 'square' && { aspectRatio: 1 })}
+      onPress={onPressCard}
+      bg={backgroundColor}
+      borderRadius="$size.x3"
+      overflow="hidden"
+      pressStyle={{ opacity: 0.8 }}>
+      {children}
+      {backgroundImg && (
+        <TamaguiCard.Background>
+          <Image flex={1} source={{ uri: backgroundImg }} width="$fluid" height="$fluid" objectFit="cover" />
+        </TamaguiCard.Background>
+      )}
+    </TamaguiCard>
+  );
+});

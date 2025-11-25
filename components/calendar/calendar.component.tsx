@@ -14,22 +14,22 @@ LocaleConfig.locales['kr'] = {
 };
 LocaleConfig.defaultLocale = 'kr';
 
-type IDayComponentProps = {
+type IDayComponent = {
   date: DateData;
 };
 
-type ICalendarProps = {
+type ICalendar = {
   value: string;
   onDayChange: (date: string) => void;
 };
 
-export const Calendar = memo<ICalendarProps>(({ value, onDayChange }) => {
+export const Calendar = memo<ICalendar>(({ value, onDayChange }) => {
   const { today, month } = getToday();
   const [monthEvents, setMonthEvents] = useState<IEventType[]>(DUMMY_EVENTS);
   const [selectedDate, setSelectedDate] = useState<string>(value);
   //TODO(@Milgam06): 월별 이벤트 불러오기
 
-  const DayComponent = memo<IDayComponentProps>(({ date: { dateString, day } }) => {
+  const DayComponent = memo<IDayComponent>(({ date: { dateString, day } }) => {
     const isSelected = selectedDate === dateString;
     const isToday = today === dateString;
     const hasEvent = monthEvents.some((event) => {
