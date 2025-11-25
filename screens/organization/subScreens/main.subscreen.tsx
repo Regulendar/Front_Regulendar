@@ -18,6 +18,16 @@ type IParticipatedEventCardComponent = {
   eventDateDay: number;
 };
 
+type IRecommendedEventCardComponent = {
+  eventId: string;
+  eventTitle: string;
+  eventDuration: number;
+  eventDateYear: number;
+  eventDateMonth: number;
+  eventDateDay: number;
+  // TODO(@Milgam06): add Participations
+};
+
 export const OrganizationMainSubScreen = memo(() => {
   const { windowWidth } = getScreenSize();
 
@@ -82,6 +92,52 @@ export const OrganizationMainSubScreen = memo(() => {
                 </Text>
               </Button>
             </Stack>
+          </Stack>
+        </Stack>
+      );
+    }
+  );
+
+  const RecommendedEventCardComponent = memo<IRecommendedEventCardComponent>(
+    ({ eventId, eventTitle, eventDuration, eventDateYear, eventDateMonth, eventDateDay }) => {
+      const handlePressRecommendedEventCard = useCallback(() => {
+        // TODO(@Milgam06) Navigate to recommended event details screen
+        console.log('Recommended Event Card pressed for event:', eventId);
+      }, [eventId]);
+      return (
+        <Stack
+          key={eventId}
+          width="$fluid"
+          p="$size.x2"
+          flexDirection="row"
+          borderWidth="$size.x0_5"
+          borderColor="$colors.darkGreen"
+          bg="$colors.backgroundWhite"
+          gap="$size.x2"
+          pressStyle={{ opacity: 0.8 }}
+          onPress={handlePressRecommendedEventCard}
+          style={{ borderRadius: 8 }}>
+          <Stack
+            px="$size.x2"
+            py="$size.x1"
+            bg="$colors.componentGreen"
+            justify="center"
+            items="center"
+            style={{ borderRadius: 4 }}>
+            <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+              {eventDateDay}
+            </Text>
+            <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+              Wed
+            </Text>
+          </Stack>
+          <Stack>
+            <Text fontSize="$8" fontWeight="900" color="$colors.backgroundBlack">
+              {eventTitle}
+            </Text>
+            <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
+              소요시간: {eventDuration}
+            </Text>
           </Stack>
         </Stack>
       );
@@ -165,134 +221,14 @@ export const OrganizationMainSubScreen = memo(() => {
           </Stack>
 
           <Stack px="$size.x3" gap="$size.x2">
-            <Stack
-              width="$fluid"
-              p="$size.x2"
-              flexDirection="row"
-              borderWidth="$size.x0_5"
-              borderColor="$colors.darkGreen"
-              bg="$colors.backgroundWhite"
-              gap="$size.x2"
-              style={{ borderRadius: 8 }}>
-              <Stack
-                px="$size.x2"
-                py="$size.x1"
-                bg="$colors.componentGreen"
-                justify="center"
-                items="center"
-                style={{ borderRadius: 4 }}>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  12
-                </Text>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  23
-                </Text>
-              </Stack>
-              <Stack>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundBlack">
-                  eventTitle
-                </Text>
-                <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
-                  소요시간: 60
-                </Text>
-              </Stack>
-            </Stack>
-            <Stack
-              width="$fluid"
-              p="$size.x2"
-              flexDirection="row"
-              borderWidth="$size.x0_5"
-              borderColor="$colors.darkGreen"
-              bg="$colors.backgroundWhite"
-              gap="$size.x2"
-              style={{ borderRadius: 8 }}>
-              <Stack
-                px="$size.x2"
-                py="$size.x1"
-                bg="$colors.componentGreen"
-                justify="center"
-                items="center"
-                style={{ borderRadius: 4 }}>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  12
-                </Text>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  23
-                </Text>
-              </Stack>
-              <Stack>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundBlack">
-                  eventTitle
-                </Text>
-                <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
-                  소요시간: 60
-                </Text>
-              </Stack>
-            </Stack>
-            <Stack
-              width="$fluid"
-              p="$size.x2"
-              flexDirection="row"
-              borderWidth="$size.x0_5"
-              borderColor="$colors.darkGreen"
-              bg="$colors.backgroundWhite"
-              gap="$size.x2"
-              style={{ borderRadius: 8 }}>
-              <Stack
-                px="$size.x2"
-                py="$size.x1"
-                bg="$colors.componentGreen"
-                justify="center"
-                items="center"
-                style={{ borderRadius: 4 }}>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  12
-                </Text>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  23
-                </Text>
-              </Stack>
-              <Stack>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundBlack">
-                  eventTitle
-                </Text>
-                <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
-                  소요시간: 60
-                </Text>
-              </Stack>
-            </Stack>
-            <Stack
-              width="$fluid"
-              p="$size.x2"
-              flexDirection="row"
-              borderWidth="$size.x0_5"
-              borderColor="$colors.darkGreen"
-              bg="$colors.backgroundWhite"
-              gap="$size.x2"
-              style={{ borderRadius: 8 }}>
-              <Stack
-                px="$size.x2"
-                py="$size.x1"
-                bg="$colors.componentGreen"
-                justify="center"
-                items="center"
-                style={{ borderRadius: 4 }}>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  12
-                </Text>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
-                  23
-                </Text>
-              </Stack>
-              <Stack>
-                <Text fontSize="$8" fontWeight="900" color="$colors.backgroundBlack">
-                  eventTitle
-                </Text>
-                <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
-                  소요시간: 60
-                </Text>
-              </Stack>
-            </Stack>
+            <RecommendedEventCardComponent
+              eventDateDay={25}
+              eventDateMonth={9}
+              eventDateYear={2025}
+              eventDuration={45}
+              eventTitle="환경 보호 캠페인"
+              eventId="101"
+            />
           </Stack>
         </Stack>
       </Stack>
