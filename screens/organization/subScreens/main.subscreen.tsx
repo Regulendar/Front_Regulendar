@@ -7,7 +7,6 @@ import { Image } from 'expo-image';
 import { memo, useCallback } from 'react';
 import DashedLine from 'react-native-dashed-line';
 import { ScrollView, Stack, Text } from 'tamagui';
-import { useCountUp } from 'use-count-up';
 
 type IParticipatedEventCardComponent = {
   eventId: string;
@@ -30,11 +29,6 @@ type IRecommendedEventCardComponent = {
 
 export const OrganizationMainSubScreen = memo(() => {
   const { windowWidth } = getScreenSize();
-
-  const { value } = useCountUp({
-    isCounting: true,
-    end: 80,
-  });
 
   const ParticipatedEventCardComponent = memo<IParticipatedEventCardComponent>(
     ({ eventId, eventTitle, eventDuration, eventDateYear, eventDateMonth, eventDateDay }) => {
@@ -184,7 +178,7 @@ export const OrganizationMainSubScreen = memo(() => {
               gap="$size.x0_5"
               style={{ borderRadius: 12 }}>
               <Text fontSize="$13" fontWeight="900" color="$colors.backgroundWhite">
-                {value}%
+                80%
               </Text>
               <Text fontSize="$6" fontWeight="900" color="$colors.backgroundWhite">
                 이번 달 참여율
