@@ -267,15 +267,15 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
                       justify="center"
                       items="center"
                       style={{ borderRadius: 4 }}>
-                      <Text fontSize="$8" fontWeight="900" color="$colors.componentGreen">
+                      <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
                         {eventStartHour}
                       </Text>
-                      <Text fontSize="$8" fontWeight="900" color="$colors.componentGreen">
+                      <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
                         {eventStartMinute}
                       </Text>
                     </Stack>
                     <Stack>
-                      <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+                      <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
                         {event.eventTitle}
                       </Text>
                       <Text fontSize="$4" fontWeight="600" color="$colors.backgroundWhite">
@@ -325,15 +325,15 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
                         justify="center"
                         items="center"
                         style={{ borderRadius: 4 }}>
-                        <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
                           {eventStartHour}
                         </Text>
-                        <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
                           {eventStartMinute}
                         </Text>
                       </Stack>
                       <Stack>
-                        <Text fontSize="$8" fontWeight="900" color="$colors.backgroundBlack">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundBlack">
                           {event.eventTitle}
                         </Text>
                         <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
