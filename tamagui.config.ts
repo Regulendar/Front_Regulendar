@@ -1,5 +1,5 @@
 import { defaultConfig } from '@tamagui/config/v4';
-import { createTamagui, createTokens } from 'tamagui';
+import { createFont, createTamagui, createTokens } from 'tamagui';
 
 const tokens = createTokens({
   colors: {
@@ -68,9 +68,38 @@ const tokens = createTokens({
   },
 });
 
+const notoSansFont = createFont({
+  family: 'NotoSans_400Regular',
+  size: defaultConfig.fonts.body.size,
+  lineHeight: defaultConfig.fonts.body.lineHeight,
+  weight: {
+    100: '100',
+    200: '200',
+    300: '300',
+    400: '400',
+    500: '500',
+    600: '600',
+    700: '700',
+    800: '800',
+    900: '900',
+  },
+  face: {
+    100: { normal: 'NotoSans_100Thin' },
+    200: { normal: 'NotoSans_200ExtraLight' },
+    300: { normal: 'NotoSans_300Light' },
+    400: { normal: 'NotoSans_400Regular' },
+    500: { normal: 'NotoSans_500Medium' },
+    600: { normal: 'NotoSans_600SemiBold' },
+    700: { normal: 'NotoSans_700Bold' },
+    800: { normal: 'NotoSans_800ExtraBold' },
+    900: { normal: 'NotoSans_900Black' },
+  },
+});
+
 export const config = createTamagui({
   ...defaultConfig,
   tokens: { ...defaultConfig.tokens, ...tokens },
+  fonts: { ...defaultConfig.fonts, body: notoSansFont, heading: notoSansFont },
   media: {
     ...defaultConfig.media,
     xs: { maxWidth: 660 },
