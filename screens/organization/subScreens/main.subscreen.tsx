@@ -52,7 +52,7 @@ export const OrganizationMainSubScreen = memo(() => {
                 </Text>
                 <Stack flexDirection="row" gap="$size.x1_5" items="center">
                   <FontAwesomeIcon icon={faClock} color="#f5f5f5" />
-                  <Text fontSize="$6" fontWeight="900" color="$colors.backgroundWhite">
+                  <Text fontSize="$6" fontWeight="700" color="$colors.backgroundWhite">
                     {eventDuration}
                   </Text>
                 </Stack>
@@ -64,10 +64,10 @@ export const OrganizationMainSubScreen = memo(() => {
                 justify="center"
                 items="center"
                 style={{ borderRadius: 8 }}>
-                <Text fontSize="$8" fontWeight="900" color="$colors.componentGreen">
+                <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
                   {eventDateDay}
                 </Text>
-                <Text fontSize="$8" fontWeight="900" color="$colors.componentGreen">
+                <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
                   Wed
                 </Text>
               </Stack>
@@ -81,7 +81,7 @@ export const OrganizationMainSubScreen = memo(() => {
                 backgroundColor="$colors.backgroundWhite"
                 onPressButton={handlePressDetails}>
                 <FontAwesomeIcon size={20} icon={faInfoCircle} color="#3ABF67" />
-                <Text fontSize="$6" fontWeight="700" color="$colors.componentGreen">
+                <Text fontSize="$6" fontWeight="800" color="$colors.componentGreen">
                   Details
                 </Text>
               </Button>
@@ -118,10 +118,10 @@ export const OrganizationMainSubScreen = memo(() => {
             justify="center"
             items="center"
             style={{ borderRadius: 4 }}>
-            <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+            <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
               {eventDateDay}
             </Text>
-            <Text fontSize="$8" fontWeight="900" color="$colors.backgroundWhite">
+            <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
               Wed
             </Text>
           </Stack>
@@ -177,7 +177,7 @@ export const OrganizationMainSubScreen = memo(() => {
               bg="$colors.componentGreen"
               gap="$size.x0_5"
               style={{ borderRadius: 12 }}>
-              <Text fontSize="$13" fontWeight="900" color="$colors.backgroundWhite">
+              <Text fontSize="$13" fontWeight="700" color="$colors.backgroundWhite">
                 80%
               </Text>
               <Text fontSize="$6" fontWeight="900" color="$colors.backgroundWhite">
