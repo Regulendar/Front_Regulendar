@@ -4,12 +4,12 @@ import { supabaseAuth } from '@/libs';
 import { IOrganizationType } from '@/types';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
-import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
+import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount } from 'rooks';
 import { Stack, Text } from 'tamagui';
-import { OrganizationCalendarSubScreen, OrganizationMainSubScreen } from './subScreens';
+import { OrganizationCalendarSubScreen, OrganizationChatSubScreen, OrganizationMainSubScreen } from './subScreens';
 
 type IOrganizationScreen = {
   organizationId: string;
@@ -18,7 +18,7 @@ type IOrganizationScreen = {
 enum EOrganizationScreenItem {
   Main = 'Main',
   Calendar = 'Calendar',
-  Profile = 'Profile',
+  Chat = 'Chat',
 }
 
 export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId }) => {
@@ -28,7 +28,7 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
   const navbarItems: INavbarItem[] = [
     { value: EOrganizationScreenItem.Main, icon: faHome },
     { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
-    { value: EOrganizationScreenItem.Profile, icon: faUser },
+    { value: EOrganizationScreenItem.Chat, icon: faMessage },
   ];
 
   const renderSubScreen = useMemo(() => {
@@ -37,6 +37,8 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
         return <OrganizationCalendarSubScreen userId={userId} />;
       case EOrganizationScreenItem.Main:
         return <OrganizationMainSubScreen />;
+      case EOrganizationScreenItem.Chat:
+        return <OrganizationChatSubScreen />;
     }
   }, [selectedItem, userId]);
 
