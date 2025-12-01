@@ -221,82 +221,25 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
   });
   return (
     <ScrollView flex={1} width="$fluid">
-      <Calendar value={selectedDate} onDayChange={setSelectedDate} />
-      {!hasTodayEvents && (
-        <Stack flex={1} width="$fluid" justify="center" items="center">
-          <Text fontSize="$7" fontWeight="500" color="$colors.mediumGray">
-            일정이 없습니다.
-          </Text>
-        </Stack>
-      )}
-
-      <Stack flex={1} width="$fluid" gap="$size.x4">
-        {hasParticipatedEvents && (
-          <Stack width="$fluid" gap="$size.x2">
-            <Stack width="$fluid" px="$size.x3">
-              <Text fontSize="$5" fontWeight="900" color="$colors.componentGreen">
-                내가 참여한 일정 {participatedEvents.length}개
-              </Text>
-            </Stack>
-            {participatedEvents.map((event) => {
-              const eventStartHour = event.eventStartAt.split('T')[1].split(':')[0];
-              const eventStartMinute = event.eventStartAt.split('T')[1].split(':')[1];
-              return (
-                <Swipeable
-                  key={event.id}
-                  hasOvershoot={false}
-                  swipeDirections="right"
-                  rightActionsWidth={swipeableContentWidth}
-                  renderRightActions={({ drag, onClose }) => (
-                    <RightEventSwipeableComponent drag={drag} onClose={onClose} event={event} />
-                  )}
-                  containerStyle={{ paddingHorizontal: swipeableContentMarginX }}>
-                  <Stack
-                    width="$fluid"
-                    p="$size.x2"
-                    flexDirection="row"
-                    borderWidth="$size.x0_5"
-                    borderColor="$colors.componentGreen"
-                    bg="$colors.componentGreen"
-                    gap="$size.x2"
-                    style={{ borderRadius: 8 }}>
-                    <Stack
-                      px="$size.x2"
-                      py="$size.x1"
-                      bg="$colors.backgroundWhite"
-                      justify="center"
-                      items="center"
-                      style={{ borderRadius: 4 }}>
-                      <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
-                        {eventStartHour}
-                      </Text>
-                      <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
-                        {eventStartMinute}
-                      </Text>
-                    </Stack>
-                    <Stack>
-                      <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
-                        {event.eventTitle}
-                      </Text>
-                      <Text fontSize="$4" fontWeight="600" color="$colors.backgroundWhite">
-                        소요시간: {event.eventDuration}
-                      </Text>
-                    </Stack>
-                  </Stack>
-                </Swipeable>
-              );
-            })}
+      <Stack gap="$size.x1">
+        <Calendar value={selectedDate} onDayChange={setSelectedDate} />
+        {!hasTodayEvents && (
+          <Stack flex={1} width="$fluid" justify="center" items="center">
+            <Text fontSize="$7" fontWeight="500" color="$colors.mediumGray">
+              일정이 없습니다.
+            </Text>
           </Stack>
         )}
-        {hasNotParticipatedEvents && (
-          <Stack width="$fluid" gap="$size.x2">
-            <Stack width="$fluid" px="$size.x3">
-              <Text fontSize="$5" fontWeight="900" color="$colors.darkGray">
-                참여하지 않은 일정 {notParticipatedEvents.length}개
-              </Text>
-            </Stack>
-            <Stack width="$fluid" gap="$size.x1_5">
-              {notParticipatedEvents.map((event) => {
+
+        <Stack flex={1} width="$fluid" gap="$size.x4">
+          {hasParticipatedEvents && (
+            <Stack width="$fluid" gap="$size.x2">
+              <Stack width="$fluid" px="$size.x3">
+                <Text fontSize="$5" fontWeight="900" color="$colors.componentGreen">
+                  내가 참여한 일정 {participatedEvents.length}개
+                </Text>
+              </Stack>
+              {participatedEvents.map((event) => {
                 const eventStartHour = event.eventStartAt.split('T')[1].split(':')[0];
                 const eventStartMinute = event.eventStartAt.split('T')[1].split(':')[1];
                 return (
@@ -314,29 +257,29 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
                       p="$size.x2"
                       flexDirection="row"
                       borderWidth="$size.x0_5"
-                      borderColor="$colors.darkGreen"
-                      bg="$colors.backgroundWhite"
+                      borderColor="$colors.componentGreen"
+                      bg="$colors.componentGreen"
                       gap="$size.x2"
                       style={{ borderRadius: 8 }}>
                       <Stack
                         px="$size.x2"
                         py="$size.x1"
-                        bg="$colors.mediumGray"
+                        bg="$colors.backgroundWhite"
                         justify="center"
                         items="center"
                         style={{ borderRadius: 4 }}>
-                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
                           {eventStartHour}
                         </Text>
-                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
                           {eventStartMinute}
                         </Text>
                       </Stack>
                       <Stack>
-                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundBlack">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
                           {event.eventTitle}
                         </Text>
-                        <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
+                        <Text fontSize="$4" fontWeight="600" color="$colors.backgroundWhite">
                           소요시간: {event.eventDuration}
                         </Text>
                       </Stack>
@@ -345,8 +288,67 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
                 );
               })}
             </Stack>
-          </Stack>
-        )}
+          )}
+          {hasNotParticipatedEvents && (
+            <Stack width="$fluid" gap="$size.x2">
+              <Stack width="$fluid" px="$size.x3">
+                <Text fontSize="$5" fontWeight="900" color="$colors.darkGray">
+                  참여하지 않은 일정 {notParticipatedEvents.length}개
+                </Text>
+              </Stack>
+              <Stack width="$fluid" gap="$size.x1_5">
+                {notParticipatedEvents.map((event) => {
+                  const eventStartHour = event.eventStartAt.split('T')[1].split(':')[0];
+                  const eventStartMinute = event.eventStartAt.split('T')[1].split(':')[1];
+                  return (
+                    <Swipeable
+                      key={event.id}
+                      hasOvershoot={false}
+                      swipeDirections="right"
+                      rightActionsWidth={swipeableContentWidth}
+                      renderRightActions={({ drag, onClose }) => (
+                        <RightEventSwipeableComponent drag={drag} onClose={onClose} event={event} />
+                      )}
+                      containerStyle={{ paddingHorizontal: swipeableContentMarginX }}>
+                      <Stack
+                        width="$fluid"
+                        p="$size.x2"
+                        flexDirection="row"
+                        borderWidth="$size.x0_5"
+                        borderColor="$colors.darkGreen"
+                        bg="$colors.backgroundWhite"
+                        gap="$size.x2"
+                        style={{ borderRadius: 8 }}>
+                        <Stack
+                          px="$size.x2"
+                          py="$size.x1"
+                          bg="$colors.mediumGray"
+                          justify="center"
+                          items="center"
+                          style={{ borderRadius: 4 }}>
+                          <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
+                            {eventStartHour}
+                          </Text>
+                          <Text fontSize="$8" fontWeight="700" color="$colors.backgroundWhite">
+                            {eventStartMinute}
+                          </Text>
+                        </Stack>
+                        <Stack>
+                          <Text fontSize="$8" fontWeight="700" color="$colors.backgroundBlack">
+                            {event.eventTitle}
+                          </Text>
+                          <Text fontSize="$4" fontWeight="600" color="$colors.backgroundBlack">
+                            소요시간: {event.eventDuration}
+                          </Text>
+                        </Stack>
+                      </Stack>
+                    </Swipeable>
+                  );
+                })}
+              </Stack>
+            </Stack>
+          )}
+        </Stack>
       </Stack>
     </ScrollView>
   );
