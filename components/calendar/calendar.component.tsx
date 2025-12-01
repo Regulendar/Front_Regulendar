@@ -43,7 +43,7 @@ export const Calendar = memo<ICalendar>(({ value, onDayChange }) => {
     const todayTextColor = isToday ? '$colors.componentGreen' : '$colors.black';
     const dayTextColor = isSelected ? '$colors.white' : todayTextColor;
     const backgroundColor = isSelected ? '$colors.componentGreen' : 'transparent';
-    const dayTextFontWeight = isSelected ? 700 : 500;
+    const dayTextFontWeight = isSelected ? 800 : 500;
 
     const onDayPress = useCallback(() => {
       onDayChange(dateString);
@@ -61,7 +61,7 @@ export const Calendar = memo<ICalendar>(({ value, onDayChange }) => {
           borderRadius: 6,
         }}
         onPress={onDayPress}>
-        <Text fontSize="$6" fontWeight={dayTextFontWeight} color={dayTextColor}>
+        <Text fontSize="$5" fontWeight={dayTextFontWeight} color={dayTextColor}>
           {day}
         </Text>
         {hasEvent && <Circle size="$x1_5" bg={isSelected ? '$colors.white' : '$colors.componentGreen'} />}
