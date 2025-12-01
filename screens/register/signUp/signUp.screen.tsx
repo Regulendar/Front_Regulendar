@@ -132,7 +132,7 @@ export const SignUpScreen = memo(() => {
                   px="$size.x3"
                   borderColor="$colors.lightGray"
                   fontWeight="500"
-                  focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
+                  focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: '$size.x0_5' }}
                 />
               ) : (
                 <Input
@@ -146,7 +146,7 @@ export const SignUpScreen = memo(() => {
                   px="$size.x3"
                   borderColor="$colors.lightGray"
                   fontWeight="500"
-                  focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
+                  focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: '$size.x0_5' }}
                 />
               )}
               <Stack width="$fluid" flexDirection="row" justify="space-between" items="center" gap="$size.x2">
@@ -197,7 +197,7 @@ export const SignUpScreen = memo(() => {
               px="$size.x3"
               borderColor="$colors.lightGray"
               fontWeight="500"
-              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
+              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: '$size.x0_5' }}
             />
             <Input
               value={confirmPassword}
@@ -210,7 +210,7 @@ export const SignUpScreen = memo(() => {
               px="$size.x3"
               borderColor="$colors.lightGray"
               fontWeight="500"
-              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: 2 }}
+              focusStyle={{ borderColor: '$colors.darkGreen', borderWidth: '$size.x0_5' }}
             />
           </Stack>
         </Stack>

@@ -9,7 +9,6 @@ export type IEventType = {
   eventDateMonth: number;
   eventDateDay: number;
   eventDuration: number;
-  participation: IUserType[];
+  participationId: IUserType['id'][];
   hostOrganization: IOrganizationType;
-  hostOrganizationId: IOrganizationType['id'];
 };

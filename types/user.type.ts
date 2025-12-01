@@ -7,5 +7,5 @@ export type IUserType = {
   phone?: string;
   password: string;
   event: IEventType[];
-  organization: IOrganizationType[];
+  organizations: IOrganizationType['id'][];
 };

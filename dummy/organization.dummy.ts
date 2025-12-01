@@ -3,7 +3,7 @@ import { IOrganizationType } from '@/types';
 export const DUMMY_ORGANIZATIONS: IOrganizationType[] = [
   {
     id: 'org-1',
-    organizationName: 'Organization One',
+    organizationName: '스타벅스',
     organizationDescription: 'Description for Organization One',
     members: [],
     events: [],

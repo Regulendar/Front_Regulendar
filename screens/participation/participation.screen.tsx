@@ -1,12 +1,13 @@
 import { Input } from '@/components';
 import { DUMMY_ORGANIZATIONS } from '@/dummy';
 import { IOrganizationType } from '@/types';
+import { useRouter } from 'expo-router';
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
 import { Image, ScrollView, Stack, Text } from 'tamagui';
 
-type IOrganizationCardComponentProps = {
+type IOrganizationCardComponent = {
   organizationId: string;
   organizationName: string;
   organizationDescription: string;
@@ -16,7 +17,7 @@ type IOrganizationCardComponentProps = {
 };
 
 export const ParticipationScreen = memo(() => {
-  const OrganizationCardComponent = memo<IOrganizationCardComponentProps>(
+  const OrganizationCardComponent = memo<IOrganizationCardComponent>(
     ({
       organizationId,
       organizationName,
@@ -33,7 +34,7 @@ export const ParticipationScreen = memo(() => {
           flexDirection="row"
           justify="space-between"
           items="center"
-          borderWidth={1}
+          borderWidth="$size.x0_25"
           borderColor="$colors.lightGray"
           px="$size.x4"
           pressStyle={{ opacity: 0.6 }}
@@ -60,6 +61,8 @@ export const ParticipationScreen = memo(() => {
     }
   );
 
+  const route = useRouter();
+
   const [organizations, setOrganizations] = useState<IOrganizationType[]>([]);
   const [filteredOrganizations, setFilteredOrganizations] = useState<IOrganizationType[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
@@ -70,9 +73,10 @@ export const ParticipationScreen = memo(() => {
 
   const handlePressOrganizationCard = useCallback(
     (organizationId: string) => () => {
-      //TODO(@Milgam06): organization 페이지로 이동. mmkv로 organizationId 저장
+      route.navigate(`/organization/${organizationId}`);
+      //TODO(@Milgam06): mmkv로 organizationId 저장
     },
-    []
+    [route]
   );
 
   useDidMount(() => {
