@@ -192,8 +192,8 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
         setNotParticipatedEvents((previousNotParticipatedEvents) => {
           return [...previousNotParticipatedEvents, updatedEvent];
         });
-
-        return onClose;
+        onClose;
+        return;
       }
       setParticipatedEvents((previousParticipatedEvents) => {
         return [...previousParticipatedEvents, updatedEvent];
@@ -204,7 +204,8 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
         });
         return updatedNotParticipatedEvents;
       });
-      return onClose;
+      onClose;
+      return;
     }, [event, isParticipated, onClose]);
 
     return (

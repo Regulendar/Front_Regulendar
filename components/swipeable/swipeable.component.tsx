@@ -55,14 +55,14 @@ export const Swipeable = memo<ISwipeable>(
         leftThreshold={hasLeftSwipe ? leftActionsWidth : 0}
         rightThreshold={hasRightSwipe ? rightActionsWidth : 0}
         renderLeftActions={(_, drag) => {
-          const hasLeftRender = !renderLeftActions;
-          const hasLeftActions = hasLeftSwipe && !hasLeftRender;
+          const hasLeftRender = !!renderLeftActions;
+          const hasLeftActions = hasLeftSwipe && hasLeftRender;
           if (!hasLeftActions) return;
           return renderLeftActions({ drag, onClose: handleCloseSwipeable });
         }}
         renderRightActions={(_, drag) => {
-          const hasRightRender = !renderRightActions;
-          const hasRightActions = hasRightSwipe && !hasRightRender;
+          const hasRightRender = !!renderRightActions;
+          const hasRightActions = hasRightSwipe && hasRightRender;
           if (!hasRightActions) return;
           return renderRightActions({ drag, onClose: handleCloseSwipeable });
         }}>

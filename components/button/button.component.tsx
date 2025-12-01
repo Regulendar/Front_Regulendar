@@ -11,7 +11,7 @@ type IButton = {
   items?: FlexAlignType;
   px?: GetThemeValueForKey<'paddingHorizontal'>;
   py?: GetThemeValueForKey<'paddingVertical'>;
-  unableShadow?: boolean;
+  disableShadow?: boolean;
   children: ReactNode;
   onPressButton?: () => void;
 };
@@ -24,7 +24,7 @@ export const Button = memo<IButton>(
     items = 'center',
     px = '$size.x6',
     py = '$size.x3',
-    unableShadow = false,
+    disableShadow = false,
     children,
     onPressButton,
   }) => {
@@ -37,7 +37,7 @@ export const Button = memo<IButton>(
         px={px}
         py={py}
         bg={backgroundColor}
-        boxShadow={unableShadow ? '' : '0 2px 20px rgba(0, 0, 0, 0.2)'}
+        boxShadow={disableShadow ? '' : '0 2px 20px rgba(0, 0, 0, 0.2)'}
         pressStyle={{ opacity: 0.8 }}
         onPress={onPressButton}>
         {children}
