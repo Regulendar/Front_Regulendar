@@ -40,20 +40,24 @@ export const ParticipationScreen = memo(() => {
           pressStyle={{ opacity: 0.6 }}
           style={{ borderRadius: 16 }}
           onPress={onPressOrganizationCard}>
-          <Stack flex={1} height="$fluid" justify="space-between" py="$size.x4" style={{ paddingRight: 8 }}>
-            <Stack gap="$size.x1">
-              <Text fontSize="$7" fontWeight="700" numberOfLines={1} ellipsizeMode="tail">
+          <Stack
+            flex={1}
+            height="$fluid"
+            justify="space-between"
+            py="$size.x4"
+            gap="$size.x1_5"
+            style={{ paddingRight: 8 }}>
+            <Stack>
+              <Text fontSize="$7" fontWeight="$800" numberOfLines={1} ellipsizeMode="tail">
                 {organizationName}
               </Text>
-              <Text fontSize="$5" color="$colors.mediumGray">
+              <Text fontSize="$5" fontWeight="$500" color="$colors.mediumGray" numberOfLines={1} ellipsizeMode="tail">
                 {organizationDescription}
               </Text>
             </Stack>
-            <Stack>
-              <Text fontSize="$4" color="$colors.darkGray">
-                인원: {organizationMemberCount}
-              </Text>
-            </Stack>
+            <Text fontSize="$4" color="$colors.darkGray">
+              인원: {organizationMemberCount}
+            </Text>
           </Stack>
           <Image src={organizationImageUrl} width={80} aspectRatio={1} borderRadius="$size.x2" />
         </Stack>
