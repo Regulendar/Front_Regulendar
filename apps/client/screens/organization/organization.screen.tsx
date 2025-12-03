@@ -1,4 +1,4 @@
-import { INavbarItem, Navbar } from '@/components';
+import { INavbarItem, Navbar } from '@/apps/components';
 import { DUMMY_ORGANIZATIONS } from '@/dummy';
 import { supabaseAuth } from '@/libs';
 import { IOrganizationType } from '@/types';

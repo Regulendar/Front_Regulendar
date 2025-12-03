@@ -1,4 +1,4 @@
-import { Button } from '@/components';
+import { Button } from '@/apps/components';
 import { getScreenSize } from '@/utils';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';

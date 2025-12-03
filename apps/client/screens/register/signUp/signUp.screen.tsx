@@ -5,7 +5,7 @@ import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Stack, Text } from 'tamagui';
 
-import { Input } from '@/components';
+import { Input } from '@/apps/components';
 import { supabaseAuth } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { useRouter } from 'expo-router';

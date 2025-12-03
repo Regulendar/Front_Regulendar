@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Stack, Text } from 'tamagui';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
-import { Input } from '@/components';
+import { Input } from '@/apps/components';
 import { supabaseAuth } from '@/libs';
 import { useRouter } from 'expo-router';
 
