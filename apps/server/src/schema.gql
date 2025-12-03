@@ -1,0 +1,254 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AddUserOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetUserOutputDto {
+  user: UserDto!
+}
+
+type UserDto {
+  id: String!
+  name: String!
+  profileImage: String
+  eventParticipations: [EventParticipationDto!]!
+  organizationMembers: [OrganizationMemberDto!]!
+}
+
+type EventParticipationDto {
+  eventId: String!
+  userId: String!
+  role: EventRole!
+}
+
+enum EventRole {
+  HOST
+  PARTICIPANT
+}
+
+type OrganizationMemberDto {
+  userId: String!
+  organizationId: String!
+  role: OrganizationRole!
+}
+
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+type DeleteUserOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetUsersOutputDto {
+  users: [UserDto!]!
+}
+
+type CreateEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetEventOutputDto {
+  event: EventDto!
+}
+
+type EventDto {
+  eventId: String!
+  eventTitle: String!
+  eventStartAt: DateTime!
+  eventDateYear: Float!
+  eventDateMonth: Float!
+  eventDateDay: Float!
+  eventDuration: Float!
+  eventParticipations: [EventParticipationDto!]!
+  hostOrganizationId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DeleteEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type JoinEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type UnJoinEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetEventsOutputDto {
+  events: [EventDto!]!
+}
+
+type UpdateEventOutputDto {
+  message: String!
+  status: Float!
+}
+
+type DeleteOrganizationOutputDto {
+  message: String!
+  status: Float!
+}
+
+type CreateOrganizationOutputDto {
+  message: String!
+  status: Float!
+}
+
+type JoinOrganizationOutputDto {
+  message: String!
+  status: Float!
+}
+
+type UnJoinOrganizationOutputDto {
+  message: String!
+  status: Float!
+}
+
+type GetOrganizationOutputDto {
+  organization: OrganizationDto!
+}
+
+type OrganizationDto {
+  organizationId: String!
+  organizationName: String!
+  organizationDescription: String
+  events: [EventDto!]!
+  organizationMembers: [OrganizationMemberDto!]!
+}
+
+type GetOrganizationsOutputDto {
+  organizations: [OrganizationDto!]!
+}
+
+type Query {
+  getOrganization(input: GetOrganizationInputDto!): GetOrganizationOutputDto!
+  getOrganizations(input: GetOrganizationsInputDto!): GetOrganizationsOutputDto!
+  getUser(input: GetUserInputDto!): GetUserOutputDto!
+  getUsers(input: GetUsersInputDto!): GetUsersOutputDto!
+  getEvent(input: GetEventInputDto!): GetEventOutputDto!
+  getEvents(input: GetEventsInputDto!): GetEventsOutputDto!
+}
+
+input GetOrganizationInputDto {
+  organizationId: String!
+}
+
+input GetOrganizationsInputDto {
+  userId: String!
+  skip: Int
+  take: Int
+}
+
+input GetUserInputDto {
+  id: String!
+}
+
+input GetUsersInputDto {
+  organizationId: String
+  userIds: [String!]
+  eventId: String
+}
+
+input GetEventInputDto {
+  eventId: String!
+}
+
+input GetEventsInputDto {
+  userId: String
+  organizationId: String
+  eventDateYear: Float
+  eventDateMonth: Float
+  eventDateDay: Float
+}
+
+type Mutation {
+  createOrganization(input: CreateOrganizationInputDto!): CreateOrganizationOutputDto!
+  deleteOrganization(input: DeleteOrganizationInputDto!): DeleteOrganizationOutputDto!
+  joinOrganization(input: JoinOrganizationInputDto!): JoinOrganizationOutputDto!
+  unJoinOrganization(input: UnJoinOrganizationInputDto!): UnJoinOrganizationOutputDto!
+  addUser(input: AddUserInputDto!): AddUserOutputDto!
+  deleteUser(input: DeleteUserInputDto!): DeleteUserOutputDto!
+  createEvent(input: CreateEventInputDto!): CreateEventOutputDto!
+  deleteEvent(input: DeleteEventInputDto!): DeleteEventOutputDto!
+  joinEvent(input: JoinEventInputDto!): JoinEventOutputDto!
+  unJoinEvent(input: UnJoinEventInputDto!): UnJoinEventOutputDto!
+  updateEvent(input: UpdateEventInputDto!): UpdateEventOutputDto!
+}
+
+input CreateOrganizationInputDto {
+  ownerUserId: String!
+  organizationName: String!
+  organizationDescription: String
+}
+
+input DeleteOrganizationInputDto {
+  organizationId: String!
+  userId: String!
+  nameConfirmation: String!
+}
+
+input JoinOrganizationInputDto {
+  organizationId: String!
+  userId: String!
+}
+
+input UnJoinOrganizationInputDto {
+  organizationId: String!
+  userId: String!
+}
+
+input AddUserInputDto {
+  name: String!
+  profileImage: String
+}
+
+input DeleteUserInputDto {
+  id: String!
+}
+
+input CreateEventInputDto {
+  eventTitle: String!
+  eventStartAt: DateTime!
+  eventDuration: Float!
+  hostOrganizationId: String!
+  hostUserId: String!
+}
+
+input DeleteEventInputDto {
+  eventId: String!
+  userId: String!
+}
+
+input JoinEventInputDto {
+  eventId: String!
+  userId: String!
+}
+
+input UnJoinEventInputDto {
+  eventId: String!
+  userId: String!
+}
+
+input UpdateEventInputDto {
+  eventId: String!
+  eventTitle: String
+  eventStartAt: DateTime
+  eventDuration: Float
+}
