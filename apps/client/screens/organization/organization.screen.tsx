@@ -1,4 +1,3 @@
-import { INavbarItem, Navbar } from '@/apps/components';
 import { DUMMY_ORGANIZATIONS } from '@/dummy';
 import { supabaseAuth } from '@/libs';
 import { IOrganizationType } from '@/types';
@@ -10,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount } from 'rooks';
 import { Stack, Text } from 'tamagui';
 import { OrganizationCalendarSubScreen, OrganizationChatSubScreen, OrganizationMainSubScreen } from './subScreens';
+import { INavbarItem, Navbar } from '@/components';
 
 type IOrganizationScreen = {
   organizationId: string;

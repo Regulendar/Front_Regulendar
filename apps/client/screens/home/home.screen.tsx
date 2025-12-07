@@ -1,4 +1,4 @@
-import { Calendar } from '@/apps/components';
+import { Calendar } from '@/components';
 import { DUMMY_EVENTS } from '@/dummy';
 import { IEventType } from '@/types';
 import { formatDate, getToday } from '@/utils';

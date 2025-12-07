@@ -1,4 +1,4 @@
-import { Calendar, IRenderActions, Swipeable } from '@/apps/components';
+import { Calendar, IRenderActions, Swipeable } from '@/components';
 import { IEventType } from '@/types';
 import { formatDate, getToday } from '@/utils';
 import { memo, useCallback, useMemo, useState } from 'react';

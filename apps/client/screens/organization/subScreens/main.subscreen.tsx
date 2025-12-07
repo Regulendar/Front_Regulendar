@@ -1,4 +1,4 @@
-import { Button } from '@/apps/components';
+import { Button } from '@/components';
 import { getScreenSize } from '@/utils';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
@@ -151,6 +151,14 @@ export const OrganizationMainSubScreen = memo(() => {
             </Text>
           </Stack>
           <ScrollView width="$fluid" horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+            <ParticipatedEventCardComponent
+              eventDateDay={18}
+              eventDateMonth={9}
+              eventDateYear={2025}
+              eventDuration={30}
+              eventId="1"
+              eventTitle="프로젝트 마감"
+            />
             <ParticipatedEventCardComponent
               eventDateDay={18}
               eventDateMonth={9}

@@ -1,4 +1,4 @@
-import { Input } from '@/apps/components';
+import { Input } from '@/components';
 import { DUMMY_ORGANIZATIONS } from '@/dummy';
 import { IOrganizationType } from '@/types';
 import { useRouter } from 'expo-router';
