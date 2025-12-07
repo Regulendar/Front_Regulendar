@@ -1,0 +1,20 @@
+{
+  "name": "regulendar",
+  "version": "1.0.0",
+  "repository": "https://github.com/Regulendar/Front_Regulendar.git",
+  "author": "MILGAM <93873127+Milgam06@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/server",
+    "apps/client"
+  ],
+  "scripts": {
+    "dev:client": "yarn workspace @regulendar/client run start",
+    "dev:server": "yarn workspace @regulendar/server run start:dev",
+    "build": "yarn workspaces run build",
+    "build:client": "yarn workspace @regulendar/client run build",
+    "build:server": "yarn workspace @regulendar/server run build",
+    "lint": "yarn workspaces run lint"
+  }
+}
