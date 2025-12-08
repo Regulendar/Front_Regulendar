@@ -6,12 +6,16 @@ import { PrismaModule } from './prisma';
 import { EventModule } from './event';
 import { UtilModule } from './utils';
 import { OrganizationModule } from './organization';
+import { join } from 'node:path';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: 'src/schema.gql',
+      autoSchemaFile: join(
+        process.cwd(),
+        '../../packages/shared/graphql/schema.gql',
+      ),
       graphiql: true,
     }),
     PrismaModule,
