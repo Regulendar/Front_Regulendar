@@ -10,6 +10,9 @@
     "apps/client",
     "packages/shared"
   ],
+  "dependencies": {
+    "graphql": "^16.11.0"
+  },
   "devDependencies": {
     "typescript": "~5.9.2"
   },

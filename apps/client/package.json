@@ -12,6 +12,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@apollo/client": "^4.0.9",
     "@expo-google-fonts/noto-sans": "^0.4.2",
     "@expo/vector-icons": "^15.0.2",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
@@ -54,6 +55,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@graphql-codegen/cli": "^6.1.0",
+    "@graphql-codegen/typescript": "^5.0.6",
+    "@graphql-codegen/typescript-operations": "^5.0.6",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@supabase/supabase-js": "^2.56.1",
     "@tamagui/babel-plugin": "^1.135.2",
