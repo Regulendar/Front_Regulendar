@@ -7,7 +7,8 @@
   "private": true,
   "workspaces": [
     "apps/server",
-    "apps/client"
+    "apps/client",
+    "packages/shared"
   ],
   "devDependencies": {
     "typescript": "~5.9.2"
