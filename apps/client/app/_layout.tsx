@@ -15,8 +15,10 @@ import { Stack } from 'expo-router';
 import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ApolloProvider } from '@apollo/client/react';
 import { useDidUpdate } from 'rooks';
 import { TamaguiProvider } from 'tamagui';
+import { apolloClient } from '@/libs';
 
 preventAutoHideAsync();
 
@@ -46,12 +48,14 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView>
-        <TamaguiProvider config={config}>
-          <Stack screenOptions={{ headerShown: false }} />
-        </TamaguiProvider>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <ApolloProvider client={apolloClient}>
+      <SafeAreaProvider>
+        <GestureHandlerRootView>
+          <TamaguiProvider config={config}>
+            <Stack screenOptions={{ headerShown: false }} />
+          </TamaguiProvider>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </ApolloProvider>
   );
 }
