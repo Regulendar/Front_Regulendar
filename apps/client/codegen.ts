@@ -1,14 +1,16 @@
 import { resolve } from 'path';
 import { CodegenConfig } from '@graphql-codegen/cli';
 
-const schemaPath = resolve(__dirname, '/packages/shared/graphql/schema.gql');
+const schemaPath = resolve(__dirname, '../../packages/shared/graphql/schema.gql');
+
+console.log('Schema Path:', schemaPath);
 
 const config: CodegenConfig = {
   schema: schemaPath,
-  documents: ['src/**/*.graphql'],
+  documents: ['screens/**/*.graphql'],
 
   generates: {
-    'src/graphql/generated.tsx': {
+    'libs/graphql/generated.tsx': {
       plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
         withHooks: true,

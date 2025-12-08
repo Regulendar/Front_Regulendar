@@ -184,10 +184,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "defaultProps": {
               "tag": "span",
@@ -397,10 +397,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             }
           }
         },
@@ -601,6 +601,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -799,10 +805,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             }
           }
         }
@@ -991,10 +997,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "AlertDialogAction",
             "isReactNative": false,
@@ -1184,10 +1190,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "AlertDialogCancel",
             "isReactNative": false,
@@ -1377,10 +1383,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "AlertDialogDescription",
             "isReactNative": false,
@@ -1573,10 +1579,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -1889,10 +1895,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "AlertDialogTitle",
             "isReactNative": false,
@@ -2082,10 +2088,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "AlertDialogTrigger",
             "isReactNative": false,
@@ -2305,6 +2311,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -2511,10 +2523,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Article",
             "isReactNative": false,
@@ -2705,10 +2717,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Aside",
             "isReactNative": false,
@@ -2901,10 +2913,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -3115,10 +3127,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -3328,10 +3340,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -3637,10 +3649,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -3995,10 +4007,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -4378,6 +4390,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -4587,10 +4605,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -4902,10 +4920,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -5214,10 +5232,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -5530,10 +5548,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -5845,10 +5863,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -6161,10 +6179,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -6512,10 +6530,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -6861,10 +6879,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -7171,10 +7189,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -7475,10 +7493,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "DialogClose",
             "isReactNative": false,
@@ -7672,10 +7690,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -8021,6 +8039,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -8227,10 +8251,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -8546,10 +8570,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -8865,10 +8889,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -9128,6 +9152,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -9331,10 +9361,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "DialogTrigger",
             "isReactNative": false,
@@ -9548,6 +9578,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -9753,10 +9789,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -9969,10 +10005,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Footer",
             "isReactNative": false,
@@ -10162,10 +10198,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Form",
             "isReactNative": false,
@@ -10357,10 +10393,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Form",
             "isReactNative": false,
@@ -10548,10 +10584,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "FormTrigger",
             "isReactNative": false,
@@ -10744,10 +10780,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -10968,10 +11004,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -11279,10 +11315,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -11620,6 +11656,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -11859,6 +11901,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -12098,6 +12146,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -12337,6 +12391,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -12576,6 +12636,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -12815,6 +12881,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -13022,10 +13094,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -13260,10 +13332,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Header",
             "isReactNative": false,
@@ -13486,6 +13558,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -13844,6 +13922,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -14089,6 +14173,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -14297,10 +14387,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -14634,10 +14724,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -15001,6 +15091,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -15237,6 +15333,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -15473,6 +15575,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -15677,10 +15785,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Main",
             "isReactNative": false,
@@ -15871,10 +15979,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Nav",
             "isReactNative": false,
@@ -16065,10 +16173,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -16415,6 +16523,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -16619,10 +16733,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -16841,10 +16955,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -17153,10 +17267,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -17364,10 +17478,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -17584,10 +17698,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -17898,10 +18012,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -18213,10 +18327,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -18526,10 +18640,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -18838,10 +18952,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -19147,10 +19261,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -19458,10 +19572,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -19768,10 +19882,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -20081,10 +20195,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -20461,10 +20575,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "componentName": "Section",
             "isReactNative": false,
@@ -20655,10 +20769,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -20866,10 +20980,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -21083,10 +21197,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "vertical": {
@@ -21297,10 +21411,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "vertical": {
@@ -21505,10 +21619,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -21742,10 +21856,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -22061,10 +22175,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -22343,6 +22457,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -22550,10 +22670,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -22764,10 +22884,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -23084,10 +23204,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -23403,10 +23523,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -23619,10 +23739,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -23845,10 +23965,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "defaultProps": {
               "tag": "span",
@@ -24060,10 +24180,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -24272,10 +24392,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -24574,10 +24694,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             }
           }
         },
@@ -24766,10 +24886,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -25003,10 +25123,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -25236,10 +25356,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -25552,10 +25672,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -25831,6 +25951,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -26148,10 +26274,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -26447,10 +26573,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -26764,10 +26890,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             }
           }
         },
@@ -26995,6 +27121,12 @@
               "shadowOpacity": true,
               "boxShadow": true,
               "filter": true,
+              "boxSizing": true,
+              "mixBlendMode": true,
+              "outlineColor": true,
+              "outlineSpread": true,
+              "outlineStyle": true,
+              "outlineWidth": true,
               "fontFamily": true,
               "fontSize": true,
               "fontStyle": true,
@@ -27198,10 +27330,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -27508,10 +27640,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -27717,10 +27849,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -28027,10 +28159,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {
@@ -28236,10 +28368,10 @@
               "filter": true,
               "boxSizing": true,
               "mixBlendMode": true,
-              "outlineWidth": true,
-              "outlineStyle": true,
+              "outlineColor": true,
               "outlineSpread": true,
-              "outlineColor": true
+              "outlineStyle": true,
+              "outlineWidth": true
             },
             "variants": {
               "fullscreen": {

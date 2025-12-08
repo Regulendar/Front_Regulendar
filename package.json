@@ -19,6 +19,7 @@
   "scripts": {
     "dev:client": "yarn workspace @regulendar/client run start",
     "dev:server": "yarn workspace @regulendar/server run start:dev",
+    "codegen": "yarn workspace @regulendar/client run codegen",
     "build": "yarn workspaces run build",
     "build:client": "yarn workspace @regulendar/client run build",
     "build:server": "yarn workspace @regulendar/server run build",
