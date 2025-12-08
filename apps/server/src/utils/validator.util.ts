@@ -1,5 +1,5 @@
+import { EventRole, OrganizationRole } from '@generated-prisma/enums';
 import { Injectable } from '@nestjs/common';
-import { EventRole, OrganizationRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma';
 
 @Injectable()

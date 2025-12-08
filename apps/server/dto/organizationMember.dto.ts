@@ -1,3 +1,4 @@
+import { OrganizationRole } from '@generated-prisma/enums';
 import {
   Field,
   InputType,
@@ -5,7 +6,6 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { IsEnum, IsUUID } from 'class-validator';
-import { OrganizationRole } from '@prisma/client';
 
 registerEnumType(OrganizationRole, {
   name: 'OrganizationRole',

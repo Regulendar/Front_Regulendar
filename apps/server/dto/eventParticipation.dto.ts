@@ -1,3 +1,4 @@
+import { EventRole } from '@generated-prisma/enums';
 import {
   Field,
   InputType,
@@ -5,7 +6,6 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { IsEnum, IsString } from 'class-validator';
-import { EventRole } from '@prisma/client';
 
 registerEnumType(EventRole, {
   name: 'EventRole',

@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { EventRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma';
 import { CreateEventInputDto, CreateEventOutputDto } from '../dto';
 import { DateConverterUtil } from 'src/utils';
+import { EventRole } from '@generated-prisma/enums';
 
 @Injectable()
 export class CreateEventService {

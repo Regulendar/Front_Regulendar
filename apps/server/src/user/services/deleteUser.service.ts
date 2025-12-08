@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { EventRole, OrganizationRole } from '@prisma/client';
 import { DeleteUserInputDto, DeleteUserOutputDto } from '../dto';
 import { PrismaService } from 'src/prisma';
 import { ValidatorUtil } from 'src/utils';
+import { EventRole, OrganizationRole } from '@generated-prisma/enums';
 
 @Injectable()
 export class DeleteUserService {
@@ -83,7 +83,7 @@ export class DeleteUserService {
       };
     } catch (error) {
       throw new HttpException(
-        `Failed to delete user: ${error.message}`,
+        `Failed to delete user: ${error}`,
         HttpStatus.BAD_REQUEST,
       );
     }
