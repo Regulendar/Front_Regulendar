@@ -9,6 +9,9 @@
     "apps/server",
     "apps/client"
   ],
+  "devDependencies": {
+    "typescript": "~5.9.2"
+  },
   "scripts": {
     "dev:client": "yarn workspace @regulendar/client run start",
     "dev:server": "yarn workspace @regulendar/server run start:dev",
