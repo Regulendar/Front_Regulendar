@@ -13,7 +13,7 @@
     "codegen": "graphql-codegen"
   },
   "dependencies": {
-    "@apollo/client": "^4.0.9",
+    "@apollo/client": "^3.11.0",
     "@expo-google-fonts/noto-sans": "^0.4.2",
     "@expo/vector-icons": "^15.0.2",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",

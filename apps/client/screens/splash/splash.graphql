@@ -1,0 +1,9 @@
+query getUser($input: GetUserInputDto!) {
+  getUser(input: $input) {
+    user {
+      id
+      name
+      profileImage
+    }
+  }
+}
