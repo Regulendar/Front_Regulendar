@@ -14,7 +14,7 @@ export class PrismaService
 
     super({
       adapter,
-      log: ['info', 'warn', 'error'], // 옵션
+      log: ['info', 'warn', 'error'],
     });
   }
 
