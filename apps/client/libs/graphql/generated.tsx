@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -7,16 +6,15 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: { input: any; output: any };
+  DateTime: { input: any; output: any; }
 };
 
 export type AddUserInputDto = {
@@ -96,7 +94,7 @@ export type EventDto = {
   eventDateYear: Scalars['Float']['output'];
   eventDuration: Scalars['Float']['output'];
   eventId: Scalars['String']['output'];
-  eventParticipations: EventParticipationDto[];
+  eventParticipations: Array<EventParticipationDto>;
   eventStartAt: Scalars['DateTime']['output'];
   eventTitle: Scalars['String']['output'];
   hostOrganizationId: Scalars['String']['output'];
@@ -111,7 +109,7 @@ export type EventParticipationDto = {
 
 export enum EventRole {
   Host = 'HOST',
-  Participant = 'PARTICIPANT',
+  Participant = 'PARTICIPANT'
 }
 
 export type GetEventInputDto = {
@@ -133,7 +131,7 @@ export type GetEventsInputDto = {
 
 export type GetEventsOutputDto = {
   __typename?: 'GetEventsOutputDto';
-  events: EventDto[];
+  events: Array<EventDto>;
 };
 
 export type GetOrganizationInputDto = {
@@ -153,7 +151,7 @@ export type GetOrganizationsInputDto = {
 
 export type GetOrganizationsOutputDto = {
   __typename?: 'GetOrganizationsOutputDto';
-  organizations: OrganizationDto[];
+  organizations: Array<OrganizationDto>;
 };
 
 export type GetUserInputDto = {
@@ -168,12 +166,12 @@ export type GetUserOutputDto = {
 export type GetUsersInputDto = {
   eventId?: InputMaybe<Scalars['String']['input']>;
   organizationId?: InputMaybe<Scalars['String']['input']>;
-  userIds?: InputMaybe<Scalars['String']['input'][]>;
+  userIds?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type GetUsersOutputDto = {
   __typename?: 'GetUsersOutputDto';
-  users: UserDto[];
+  users: Array<UserDto>;
 };
 
 export type JoinEventInputDto = {
@@ -213,45 +211,56 @@ export type Mutation = {
   updateEvent: UpdateEventOutputDto;
 };
 
+
 export type MutationAddUserArgs = {
   input: AddUserInputDto;
 };
+
 
 export type MutationCreateEventArgs = {
   input: CreateEventInputDto;
 };
 
+
 export type MutationCreateOrganizationArgs = {
   input: CreateOrganizationInputDto;
 };
+
 
 export type MutationDeleteEventArgs = {
   input: DeleteEventInputDto;
 };
 
+
 export type MutationDeleteOrganizationArgs = {
   input: DeleteOrganizationInputDto;
 };
+
 
 export type MutationDeleteUserArgs = {
   input: DeleteUserInputDto;
 };
 
+
 export type MutationJoinEventArgs = {
   input: JoinEventInputDto;
 };
+
 
 export type MutationJoinOrganizationArgs = {
   input: JoinOrganizationInputDto;
 };
 
+
 export type MutationUnJoinEventArgs = {
   input: UnJoinEventInputDto;
 };
 
+
 export type MutationUnJoinOrganizationArgs = {
   input: UnJoinOrganizationInputDto;
 };
+
 
 export type MutationUpdateEventArgs = {
   input: UpdateEventInputDto;
@@ -259,10 +268,10 @@ export type MutationUpdateEventArgs = {
 
 export type OrganizationDto = {
   __typename?: 'OrganizationDto';
-  events: EventDto[];
+  events: Array<EventDto>;
   organizationDescription?: Maybe<Scalars['String']['output']>;
   organizationId: Scalars['String']['output'];
-  organizationMembers: OrganizationMemberDto[];
+  organizationMembers: Array<OrganizationMemberDto>;
   organizationName: Scalars['String']['output'];
 };
 
@@ -276,7 +285,7 @@ export type OrganizationMemberDto = {
 export enum OrganizationRole {
   Admin = 'ADMIN',
   Member = 'MEMBER',
-  Owner = 'OWNER',
+  Owner = 'OWNER'
 }
 
 export type Query = {
@@ -289,25 +298,31 @@ export type Query = {
   getUsers: GetUsersOutputDto;
 };
 
+
 export type QueryGetEventArgs = {
   input: GetEventInputDto;
 };
+
 
 export type QueryGetEventsArgs = {
   input: GetEventsInputDto;
 };
 
+
 export type QueryGetOrganizationArgs = {
   input: GetOrganizationInputDto;
 };
+
 
 export type QueryGetOrganizationsArgs = {
   input: GetOrganizationsInputDto;
 };
 
+
 export type QueryGetUserArgs = {
   input: GetUserInputDto;
 };
+
 
 export type QueryGetUsersArgs = {
   input: GetUsersInputDto;
@@ -350,71 +365,9 @@ export type UpdateEventOutputDto = {
 
 export type UserDto = {
   __typename?: 'UserDto';
-  eventParticipations: EventParticipationDto[];
+  eventParticipations: Array<EventParticipationDto>;
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  organizationMembers: OrganizationMemberDto[];
+  organizationMembers: Array<OrganizationMemberDto>;
   profileImage?: Maybe<Scalars['String']['output']>;
 };
-
-export type GetUserQueryVariables = Exact<{
-  input: GetUserInputDto;
-}>;
-
-export type GetUserQuery = {
-  __typename?: 'Query';
-  getUser: {
-    __typename?: 'GetUserOutputDto';
-    user: { __typename?: 'UserDto'; id: string; name: string; profileImage?: string | null };
-  };
-};
-
-export const GetUserDocument = gql`
-  query getUser($input: GetUserInputDto!) {
-    getUser(input: $input) {
-      user {
-        id
-        name
-        profileImage
-      }
-    }
-  }
-`;
-
-/**
- * __useGetUserQuery__
- *
- * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetUserQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetUserQuery(
-  baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables> &
-    ({ variables: GetUserQueryVariables; skip?: boolean } | { skip: boolean })
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-}
-export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-}
-export function useGetUserSuspenseQuery(
-  baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserQuery, GetUserQueryVariables>
-) {
-  const options = baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-}
-export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
-export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
-export type GetUserSuspenseQueryHookResult = ReturnType<typeof useGetUserSuspenseQuery>;
-export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;

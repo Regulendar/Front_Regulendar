@@ -12,7 +12,6 @@ export const SplashScreen = memo(() => {
     const { data } = await supabaseAuth.getUser();
     const isUserLoggedIn = !!data?.user;
     if (isUserLoggedIn) {
-      // route.replace('/home/home');
       route.replace('/participation/participation');
       return;
     }
