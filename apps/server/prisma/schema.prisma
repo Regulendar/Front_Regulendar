@@ -27,7 +27,7 @@ enum EventRole {
 
 
 model User {
-  id       String @id @default(uuid())
+  id       String @id @db.Uuid
   name     String
   profileImage String?
   eventParticipations EventParticipation[]
