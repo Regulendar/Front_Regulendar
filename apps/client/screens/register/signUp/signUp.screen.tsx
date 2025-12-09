@@ -90,7 +90,7 @@ export const SignUpScreen = memo(() => {
       setIsSignUpFailed(true);
       return;
     }
-    route.replace('/home/home');
+    route.replace('/participation/participation');
   }, [confirmPassword, email, loginType, password, phone, route]);
 
   useDidUpdate(() => {
