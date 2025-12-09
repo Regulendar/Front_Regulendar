@@ -95,12 +95,12 @@ export const SignUpScreen = memo(() => {
       return;
     }
 
-    const registerPayload: SignUpWithPasswordCredentials | SignInWithPasswordCredentials = {
+    const authPayload: SignUpWithPasswordCredentials | SignInWithPasswordCredentials = {
       ...(loginType === 'EMAIL' ? { email } : { phone }),
       password,
     };
-    await createNewUser({ signUpPayload: registerPayload });
-    const { error: signInError } = await supabaseAuth.signInWithPassword(registerPayload);
+    await createNewUser({ signUpPayload: authPayload });
+    const { error: signInError } = await supabaseAuth.signInWithPassword(authPayload);
     if (signInError) {
       setIsSignUpFailed(true);
       return;
