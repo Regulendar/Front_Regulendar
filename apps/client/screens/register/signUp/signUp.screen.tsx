@@ -53,11 +53,11 @@ export const SignUpScreen = memo(() => {
   const createNewUser = useCallback(
     async ({ signUpPayload }: { signUpPayload: SignUpWithPasswordCredentials }) => {
       const {
-        error: SignUpError,
+        error: signUpError,
         data: { user },
       } = await supabaseAuth.signUp(signUpPayload);
       const isUserSignedUp = !!user;
-      if (SignUpError || !isUserSignedUp) {
+      if (signUpError || !isUserSignedUp) {
         setIsSignUpFailed(true);
         return;
       }
@@ -65,7 +65,7 @@ export const SignUpScreen = memo(() => {
         variables: {
           input: {
             id: user.id,
-            name: 'Asdf', // TODO(@Milgam06): 추후에 이름 입력받는 로직 추가 필요
+            name: 'Dummy User Name', // TODO(@Milgam06): 추후에 이름 입력받는 로직 추가 필요
             profileImage: null, // TODO(@Milgam06): 추후에 프로필 이미지 입력받는 로직 추가 필요
           },
         },
@@ -100,8 +100,8 @@ export const SignUpScreen = memo(() => {
       password,
     };
     await createNewUser({ signUpPayload: registerPayload });
-    const { error: SignInError } = await supabaseAuth.signInWithPassword(registerPayload);
-    if (SignInError) {
+    const { error: signInError } = await supabaseAuth.signInWithPassword(registerPayload);
+    if (signInError) {
       setIsSignUpFailed(true);
       return;
     }
