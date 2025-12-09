@@ -50,7 +50,7 @@ export const SignUpScreen = memo(() => {
     setConfirmPassword(text);
   }, []);
 
-  const addNewUser = useCallback(
+  const createNewUser = useCallback(
     async ({ signUpPayload }: { signUpPayload: SignUpWithPasswordCredentials }) => {
       const {
         error: SignUpError,
@@ -81,7 +81,6 @@ export const SignUpScreen = memo(() => {
   const handlePressSignUp = useCallback(async () => {
     const isInputValid = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
     const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1, minNumbers: 0, minSymbols: 0 });
-
     if (!isInputValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
       return;
@@ -95,19 +94,19 @@ export const SignUpScreen = memo(() => {
       console.log('비밀번호가 일치하지 않습니다.');
       return;
     }
+
     const registerPayload: SignUpWithPasswordCredentials | SignInWithPasswordCredentials = {
       ...(loginType === 'EMAIL' ? { email } : { phone }),
       password,
     };
-
-    await addNewUser({ signUpPayload: registerPayload });
+    await createNewUser({ signUpPayload: registerPayload });
     const { error: SignInError } = await supabaseAuth.signInWithPassword(registerPayload);
     if (SignInError) {
       setIsSignUpFailed(true);
       return;
     }
     route.replace('/participation/participation');
-  }, [addNewUser, confirmPassword, email, loginType, password, phone, route]);
+  }, [createNewUser, confirmPassword, email, loginType, password, phone, route]);
 
   useDidUpdate(() => {
     const isLoginTypeEmail = loginType === 'EMAIL';
