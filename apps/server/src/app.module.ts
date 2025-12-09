@@ -21,7 +21,7 @@ import { ConfigModule } from '@nestjs/config';
         '../../packages/shared/graphql/schema.gql',
       ),
       introspection: false,
-      graphiql: true,
+      graphiql: false,
     }),
     PrismaModule,
     UtilModule,
