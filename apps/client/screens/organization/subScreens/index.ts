@@ -1,3 +1,3 @@
-export * from './calendar.subscreen';
-export * from './chat.subscreen';
-export * from './main.subscreen';
+export * from './calendar';
+export * from './chat';
+export * from './main';
