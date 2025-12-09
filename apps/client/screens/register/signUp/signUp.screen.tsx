@@ -11,6 +11,7 @@ import { useRouter } from 'expo-router';
 import { useDidUpdate } from 'rooks';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 import { Input } from '@/components';
+import { useSignUpUserMutation } from '@/libs/graphql';
 
 type ILoginType = 'EMAIL' | 'PHONE';
 
@@ -23,6 +24,7 @@ export const SignUpScreen = memo(() => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [isSignUpFailed, setIsSignUpFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
   const [loginType, setLoginType] = useState<ILoginType>('EMAIL');
+  const [signUpUser] = useSignUpUserMutation();
 
   const handlePressEmailLoginType = useCallback(() => {
     setLoginType('EMAIL');
@@ -48,16 +50,44 @@ export const SignUpScreen = memo(() => {
     setConfirmPassword(text);
   }, []);
 
+  const addNewUser = useCallback(
+    async ({ signUpPayload }: { signUpPayload: SignUpWithPasswordCredentials }) => {
+      const {
+        error: SignUpError,
+        data: { user },
+      } = await supabaseAuth.signUp(signUpPayload);
+      const isUserSignedUp = !!user;
+      if (SignUpError || !isUserSignedUp) {
+        setIsSignUpFailed(true);
+        return;
+      }
+      const { errors } = await signUpUser({
+        variables: {
+          input: {
+            id: user.id,
+            name: 'Asdf', // TODO(@Milgam06): 추후에 이름 입력받는 로직 추가 필요
+            profileImage: null, // TODO(@Milgam06): 추후에 프로필 이미지 입력받는 로직 추가 필요
+          },
+        },
+      });
+      if (errors) {
+        setIsSignUpFailed(true);
+        return;
+      }
+    },
+    [signUpUser]
+  );
+
   const handlePressSignUp = useCallback(async () => {
     const isInputValid = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
     const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1, minNumbers: 0, minSymbols: 0 });
 
-    if (!isPasswordValid) {
-      console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
-      return;
-    }
     if (!isInputValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
+      return;
+    }
+    if (!isPasswordValid) {
+      console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
       return;
     }
     const isSamePassword = password === confirmPassword;
@@ -65,41 +95,27 @@ export const SignUpScreen = memo(() => {
       console.log('비밀번호가 일치하지 않습니다.');
       return;
     }
-    const signUpPayload: SignUpWithPasswordCredentials = {
+    const registerPayload: SignUpWithPasswordCredentials | SignInWithPasswordCredentials = {
       ...(loginType === 'EMAIL' ? { email } : { phone }),
       password,
     };
 
-    const { error: SignUpError } = await supabaseAuth.signUp(signUpPayload);
-    if (SignUpError) {
-      setIsSignUpFailed(true);
-      return;
-    }
-
-    const emailSignInPayload: SignInWithPasswordCredentials = {
-      email,
-      password,
-    };
-    const phoneSignInPayload: SignInWithPasswordCredentials = {
-      phone,
-      password,
-    };
-    const signInPayload = loginType === 'EMAIL' ? emailSignInPayload : phoneSignInPayload;
-    const { error: SignInError } = await supabaseAuth.signInWithPassword(signInPayload);
+    await addNewUser({ signUpPayload: registerPayload });
+    const { error: SignInError } = await supabaseAuth.signInWithPassword(registerPayload);
     if (SignInError) {
       setIsSignUpFailed(true);
       return;
     }
     route.replace('/participation/participation');
-  }, [confirmPassword, email, loginType, password, phone, route]);
+  }, [addNewUser, confirmPassword, email, loginType, password, phone, route]);
 
   useDidUpdate(() => {
     const isLoginTypeEmail = loginType === 'EMAIL';
     if (isLoginTypeEmail) {
       setPhone('');
-    } else {
-      setEmail('');
+      return;
     }
+    setEmail('');
   }, [loginType]);
 
   return (
