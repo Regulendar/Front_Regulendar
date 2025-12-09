@@ -215,6 +215,7 @@ input UnJoinOrganizationInputDto {
 }
 
 input AddUserInputDto {
+  id: String!
   name: String!
   profileImage: String
 }
