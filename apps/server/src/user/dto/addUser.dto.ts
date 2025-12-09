@@ -1,9 +1,13 @@
 import { HttpStatus } from '@nestjs/common';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsString } from 'class-validator';
+import { IsString, IsUUID } from 'class-validator';
 
 @InputType()
 export class AddUserInputDto {
+  @Field(() => String)
+  @IsUUID()
+  id: string;
+
   @Field(() => String)
   @IsString()
   name: string;

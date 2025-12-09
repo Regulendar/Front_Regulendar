@@ -7,12 +7,14 @@ export class AddUserService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute({
+    id,
     name,
     profileImage,
   }: AddUserInputDto): Promise<AddUserOutputDto> {
     try {
       await this.prismaService.user.create({
         data: {
+          id,
           name,
           profileImage,
         },
