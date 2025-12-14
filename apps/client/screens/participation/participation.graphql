@@ -1,0 +1,12 @@
+query getJoinedOrganizations($input: GetOrganizationsInputDto!) {
+  getOrganizations(input: $input) {
+    organizations {
+      organizationId
+      organizationName
+      organizationDescription
+      organizationMembers {
+        userId
+      }
+    }
+  }
+}

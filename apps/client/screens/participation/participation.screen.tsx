@@ -1,6 +1,6 @@
 import { Input } from '@/components';
-import { DUMMY_ORGANIZATIONS } from '@/dummy';
-import { IOrganizationType } from '@/types';
+import { supabaseAuth } from '@/libs';
+import { useGetJoinedOrganizationsLazyQuery } from '@/libs/graphql';
 import { useRouter } from 'expo-router';
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,10 +10,19 @@ import { Image, ScrollView, Stack, Text } from 'tamagui';
 type IOrganizationCardComponent = {
   organizationId: string;
   organizationName: string;
-  organizationDescription: string;
+  organizationDescription?: string | null;
   organizationMemberCount: number;
   organizationImageUrl: string;
   onPressOrganizationCard: () => void;
+};
+
+type IJoinedOrganization = {
+  organizationId: string;
+  organizationName: string;
+  organizationDescription?: string | null;
+  organizationMembers: {
+    userId: string;
+  }[];
 };
 
 export const ParticipationScreen = memo(() => {
@@ -51,9 +60,11 @@ export const ParticipationScreen = memo(() => {
               <Text fontSize="$7" fontWeight="$800" numberOfLines={1} ellipsizeMode="tail">
                 {organizationName}
               </Text>
-              <Text fontSize="$5" fontWeight="$500" color="$colors.mediumGray" numberOfLines={1} ellipsizeMode="tail">
-                {organizationDescription}
-              </Text>
+              {organizationDescription && (
+                <Text fontSize="$5" fontWeight="$500" color="$colors.mediumGray" numberOfLines={1} ellipsizeMode="tail">
+                  {organizationDescription}
+                </Text>
+              )}
             </Stack>
             <Text fontSize="$4" color="$colors.darkGray">
               인원: {organizationMemberCount}
@@ -67,9 +78,10 @@ export const ParticipationScreen = memo(() => {
 
   const route = useRouter();
 
-  const [organizations, setOrganizations] = useState<IOrganizationType[]>([]);
-  const [filteredOrganizations, setFilteredOrganizations] = useState<IOrganizationType[]>([]);
+  const [organizations, setOrganizations] = useState<IJoinedOrganization[]>([]);
+  const [filteredOrganizations, setFilteredOrganizations] = useState<IJoinedOrganization[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
+  const [getJoinedOrganizationsQuery] = useGetJoinedOrganizationsLazyQuery();
 
   const handleChangeSearchOrganization = useCallback((text: string) => {
     setSearchedOrganization(text);
@@ -82,11 +94,33 @@ export const ParticipationScreen = memo(() => {
     },
     [route]
   );
+  const getJoinedOrganizations = useCallback(async () => {
+    const {
+      data: { user },
+    } = await supabaseAuth.getUser();
+    if (!user) {
+      return;
+    }
+    const { data } = await getJoinedOrganizationsQuery({
+      variables: {
+        input: {
+          userId: user.id,
+        },
+      },
+    });
+    if (!data) {
+      console.error('No data returned from getJoinedOrganizationsQuery');
+      return;
+      // TODO(@Milgam06): 데이터 부재 처리
+    }
+    console.log('Fetched joined organizations:', data?.getOrganizations.organizations);
+    const fetchedOrganizations = data.getOrganizations.organizations;
+    setOrganizations(fetchedOrganizations);
+    setFilteredOrganizations(fetchedOrganizations);
+  }, [getJoinedOrganizationsQuery]);
 
-  useDidMount(() => {
-    //TODO(@Milgam06): 조직 리스트 패칭
-    setOrganizations(DUMMY_ORGANIZATIONS);
-    setFilteredOrganizations(DUMMY_ORGANIZATIONS);
+  useDidMount(async () => {
+    await getJoinedOrganizations();
   });
 
   useDidUpdate(() => {
@@ -124,20 +158,22 @@ export const ParticipationScreen = memo(() => {
           />
           <ScrollView flex={1} width="$fluid">
             <Stack flex={1} width="$fluid" gap="$size.x2">
-              {filteredOrganizations.map(({ id, organizationName, organizationDescription, members }) => {
-                const memberCount = members.length;
-                return (
-                  <OrganizationCardComponent
-                    key={id}
-                    organizationId={id}
-                    organizationName={organizationName}
-                    organizationDescription={organizationDescription}
-                    organizationMemberCount={memberCount}
-                    organizationImageUrl="https://picsum.photos/200/300"
-                    onPressOrganizationCard={handlePressOrganizationCard(id)}
-                  />
-                );
-              })}
+              {filteredOrganizations.map(
+                ({ organizationId, organizationName, organizationDescription, organizationMembers }) => {
+                  const memberCount = organizationMembers.length;
+                  return (
+                    <OrganizationCardComponent
+                      key={organizationId}
+                      organizationId={organizationId}
+                      organizationName={organizationName}
+                      organizationDescription={organizationDescription}
+                      organizationMemberCount={memberCount}
+                      organizationImageUrl="https://picsum.photos/200/300"
+                      onPressOrganizationCard={handlePressOrganizationCard(organizationId)}
+                    />
+                  );
+                }
+              )}
             </Stack>
           </ScrollView>
         </Stack>
