@@ -1,8 +1,10 @@
 import { Input } from '@/components';
 import { supabaseAuth } from '@/libs';
 import { useGetJoinedOrganizationsLazyQuery } from '@/libs/graphql';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { memo, useCallback, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
 import { Image, ScrollView, Stack, Text } from 'tamagui';
@@ -81,16 +83,16 @@ export const ParticipationScreen = memo(() => {
   const [organizations, setOrganizations] = useState<IJoinedOrganization[]>([]);
   const [filteredOrganizations, setFilteredOrganizations] = useState<IJoinedOrganization[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
-  const [getJoinedOrganizationsQuery] = useGetJoinedOrganizationsLazyQuery();
+  const [getJoinedOrganizationsQuery, { loading }] = useGetJoinedOrganizationsLazyQuery();
 
   const handleChangeSearchOrganization = useCallback((text: string) => {
     setSearchedOrganization(text);
   }, []);
 
   const handlePressOrganizationCard = useCallback(
-    (organizationId: string) => () => {
+    (organizationId: string) => async () => {
       route.navigate(`/organization/${organizationId}`);
-      //TODO(@Milgam06): mmkv로 organizationId 저장
+      await AsyncStorage.setItem('lastOrganizationId', organizationId);
     },
     [route]
   );
@@ -156,26 +158,35 @@ export const ParticipationScreen = memo(() => {
             fontWeight="500"
             focusStyle={{ borderColor: '$colors.componentGreen' }}
           />
-          <ScrollView flex={1} width="$fluid">
-            <Stack flex={1} width="$fluid" gap="$size.x2">
-              {filteredOrganizations.map(
-                ({ organizationId, organizationName, organizationDescription, organizationMembers }) => {
-                  const memberCount = organizationMembers.length;
-                  return (
-                    <OrganizationCardComponent
-                      key={organizationId}
-                      organizationId={organizationId}
-                      organizationName={organizationName}
-                      organizationDescription={organizationDescription}
-                      organizationMemberCount={memberCount}
-                      organizationImageUrl="https://picsum.photos/200/300"
-                      onPressOrganizationCard={handlePressOrganizationCard(organizationId)}
-                    />
-                  );
-                }
-              )}
+          {loading ? (
+            <Stack flex={1} width="$fluid" justify="center" items="center" gap="$size.x3">
+              <ActivityIndicator size="large" color="#3ABF67" />
+              <Text fontSize="$6" fontWeight="$800">
+                로딩 중...
+              </Text>
             </Stack>
-          </ScrollView>
+          ) : (
+            <ScrollView flex={1} width="$fluid">
+              <Stack flex={1} width="$fluid" gap="$size.x2">
+                {filteredOrganizations.map(
+                  ({ organizationId, organizationName, organizationDescription, organizationMembers }) => {
+                    const memberCount = organizationMembers.length;
+                    return (
+                      <OrganizationCardComponent
+                        key={organizationId}
+                        organizationId={organizationId}
+                        organizationName={organizationName}
+                        organizationDescription={organizationDescription}
+                        organizationMemberCount={memberCount}
+                        organizationImageUrl="https://picsum.photos/200/300"
+                        onPressOrganizationCard={handlePressOrganizationCard(organizationId)}
+                      />
+                    );
+                  }
+                )}
+              </Stack>
+            </ScrollView>
+          )}
         </Stack>
       </Stack>
     </SafeAreaView>
