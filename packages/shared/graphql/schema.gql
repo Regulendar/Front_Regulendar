@@ -152,6 +152,7 @@ input GetOrganizationInputDto {
 
 input GetOrganizationsInputDto {
   userId: String!
+  isUserJoined: Boolean!
   skip: Int
   take: Int
 }

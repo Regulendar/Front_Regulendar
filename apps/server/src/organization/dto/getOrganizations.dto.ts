@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType, InputType } from '@nestjs/graphql';
-import { IsNumber, IsUUID } from 'class-validator';
+import { IsBoolean, IsNumber, IsUUID } from 'class-validator';
 import { OrganizationDto } from 'dto';
 
 @InputType()
@@ -7,6 +7,10 @@ export class GetOrganizationsInputDto {
   @Field(() => String)
   @IsUUID()
   userId: string;
+
+  @Field(() => Boolean)
+  @IsBoolean()
+  isUserJoined: boolean;
 
   @Field(() => Int, { nullable: true })
   @IsNumber()

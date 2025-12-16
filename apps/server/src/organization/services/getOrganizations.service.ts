@@ -12,6 +12,7 @@ export class GetOrganizationsService {
 
   async execute({
     userId,
+    isUserJoined,
     skip,
     take,
   }: GetOrganizationsInputDto): Promise<GetOrganizationsOutputDto> {
@@ -20,12 +21,18 @@ export class GetOrganizationsService {
       if (!hasUser) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
+
+      const isUserJoining = isUserJoined === true;
       const organizations = await this.prisma.organization.findMany({
         where: {
           organizationMembers: {
-            none: {
-              userId,
-            },
+            ...(isUserJoining
+              ? {
+                  some: { userId },
+                }
+              : {
+                  none: { userId },
+                }),
           },
         },
         skip,
