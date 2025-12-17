@@ -199,7 +199,7 @@ export const OrganizationMainSubScreen = memo(() => {
               items="center"
               py="$size.x3"
               bg="$colors.backgroundWhite"
-              gap="$size.x1"
+              gap="$size.x3"
               borderWidth={1}
               borderColor="$colors.componentGreen"
               style={{ borderRadius: 12 }}>
