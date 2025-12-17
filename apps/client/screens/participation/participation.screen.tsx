@@ -1,16 +1,18 @@
 import { Button, Input } from '@/components';
 import { supabaseAuth } from '@/libs';
 import { useGetOrganizationsLazyQuery } from '@/libs/graphql';
+
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faList } from '@fortawesome/free-solid-svg-icons/faList';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
+import { Image } from 'expo-image';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
-import { Image, ScrollView, Stack, Text } from 'tamagui';
+import { Image as TamaguiImage, ScrollView, Stack, Text } from 'tamagui';
 
 type IOrganizationCardComponent = {
   organizationId: string;
@@ -20,7 +22,6 @@ type IOrganizationCardComponent = {
   organizationImageUrl: string;
   onPressOrganizationCard: () => void;
 };
-
 type IOrganization = {
   organizationId: string;
   organizationName: string;
@@ -77,7 +78,7 @@ export const ParticipationScreen = memo(() => {
               인원: {organizationMemberCount}
             </Text>
           </Stack>
-          <Image src={organizationImageUrl} width={80} aspectRatio={1} borderRadius="$size.x2" />
+          <TamaguiImage src={organizationImageUrl} width={80} aspectRatio={1} borderRadius="$size.x2" />
         </Stack>
       );
     }
@@ -233,7 +234,7 @@ export const ParticipationScreen = memo(() => {
           </Stack>
         </Stack>
         {loading ? (
-          <Stack flex={1} width="$fluid" justify="center" items="center" gap="$size.x3">
+          <Stack flex={1} justify="center" items="center" gap="$size.x3">
             <ActivityIndicator size="large" color="#3ABF67" />
             <Text fontSize="$6" fontWeight="$800">
               로딩 중...
@@ -245,26 +246,40 @@ export const ParticipationScreen = memo(() => {
               {organizationListTitle}
             </Text>
 
-            <ScrollView flex={1} width="$fluid">
-              <Stack flex={1} width="$fluid" gap="$size.x2">
-                {filteredOrganizations.map(
-                  ({ organizationId, organizationName, organizationDescription, organizationMembers }) => {
-                    const memberCount = organizationMembers.length;
-                    return (
-                      <OrganizationCardComponent
-                        key={organizationId}
-                        organizationId={organizationId}
-                        organizationName={organizationName}
-                        organizationDescription={organizationDescription}
-                        organizationMemberCount={memberCount}
-                        organizationImageUrl="https://picsum.photos/200/300"
-                        onPressOrganizationCard={handlePressOrganizationCard(organizationId)}
-                      />
-                    );
-                  }
-                )}
+            {filteredOrganizations.length === 0 ? (
+              <Stack flex={1} justify="center" items="center" gap="$size.x3">
+                <Image
+                  source="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Thinking%20Face.png"
+                  alt="Thinking Face"
+                  contentFit="contain"
+                  style={{ width: 100, aspectRatio: 1 }}
+                />
+                <Text fontSize="$8" fontWeight="900">
+                  검색된 조직이 없어요!
+                </Text>
               </Stack>
-            </ScrollView>
+            ) : (
+              <ScrollView flex={1} width="$fluid">
+                <Stack flex={1} width="$fluid" gap="$size.x2">
+                  {filteredOrganizations.map(
+                    ({ organizationId, organizationName, organizationDescription, organizationMembers }) => {
+                      const memberCount = organizationMembers.length;
+                      return (
+                        <OrganizationCardComponent
+                          key={organizationId}
+                          organizationId={organizationId}
+                          organizationName={organizationName}
+                          organizationDescription={organizationDescription}
+                          organizationMemberCount={memberCount}
+                          organizationImageUrl="https://picsum.photos/200/300"
+                          onPressOrganizationCard={handlePressOrganizationCard(organizationId)}
+                        />
+                      );
+                    }
+                  )}
+                </Stack>
+              </ScrollView>
+            )}
           </Stack>
         )}
       </Stack>
