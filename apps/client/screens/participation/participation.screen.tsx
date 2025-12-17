@@ -1,9 +1,12 @@
-import { Input } from '@/components';
+import { Button, Input } from '@/components';
 import { supabaseAuth } from '@/libs';
-import { useGetJoinedOrganizationsLazyQuery } from '@/libs/graphql';
+import { useGetOrganizationsLazyQuery } from '@/libs/graphql';
+import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
+import { faList } from '@fortawesome/free-solid-svg-icons/faList';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
@@ -18,7 +21,7 @@ type IOrganizationCardComponent = {
   onPressOrganizationCard: () => void;
 };
 
-type IJoinedOrganization = {
+type IOrganization = {
   organizationId: string;
   organizationName: string;
   organizationDescription?: string | null;
@@ -26,6 +29,8 @@ type IJoinedOrganization = {
     userId: string;
   }[];
 };
+
+type ISearchType = 'EXPLORE_ORGANIZATION' | 'MY_ORGANIZATION';
 
 export const ParticipationScreen = memo(() => {
   const OrganizationCardComponent = memo<IOrganizationCardComponent>(
@@ -79,11 +84,32 @@ export const ParticipationScreen = memo(() => {
   );
 
   const route = useRouter();
-
-  const [organizations, setOrganizations] = useState<IJoinedOrganization[]>([]);
-  const [filteredOrganizations, setFilteredOrganizations] = useState<IJoinedOrganization[]>([]);
+  const [searchType, setSearchType] = useState<ISearchType>('MY_ORGANIZATION');
+  const [exploreOrganizations, setExploreOrganizations] = useState<IOrganization[]>([]);
+  const [myOrganizations, setMyOrganizations] = useState<IOrganization[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
-  const [getJoinedOrganizationsQuery, { loading }] = useGetJoinedOrganizationsLazyQuery();
+  const [getOrganizationsQuery, { loading }] = useGetOrganizationsLazyQuery();
+
+  const organizationListTitle = useMemo(() => {
+    const isSearchTypeMyOrganization = searchType === 'MY_ORGANIZATION';
+    if (isSearchTypeMyOrganization) {
+      return '내 조직';
+    }
+    return '조직 탐색';
+  }, [searchType]);
+
+  const filteredOrganizations = useMemo(() => {
+    const sourceOrganizations = searchType === 'MY_ORGANIZATION' ? myOrganizations : exploreOrganizations;
+    const trimmedSearch = searchedOrganization.trim().toLowerCase();
+    const isSearchEmpty = trimmedSearch === '';
+    if (isSearchEmpty) {
+      return sourceOrganizations;
+    }
+    const filteredSourceOrganizations = sourceOrganizations.filter(({ organizationName }) =>
+      organizationName.toLowerCase().includes(trimmedSearch)
+    );
+    return filteredSourceOrganizations;
+  }, [searchType, searchedOrganization, myOrganizations, exploreOrganizations]);
 
   const handleChangeSearchOrganization = useCallback((text: string) => {
     setSearchedOrganization(text);
@@ -96,56 +122,69 @@ export const ParticipationScreen = memo(() => {
     },
     [route]
   );
-  const getJoinedOrganizations = useCallback(async () => {
+
+  const handlePressExploreOrganizationSearch = useCallback(() => {
+    setSearchType('EXPLORE_ORGANIZATION');
+  }, []);
+
+  const handlePressMyOrganizationSearch = useCallback(() => {
+    setSearchType('MY_ORGANIZATION');
+  }, []);
+
+  const getOrganizations = useCallback(async () => {
     const {
       data: { user },
     } = await supabaseAuth.getUser();
     if (!user) {
       return;
     }
-    const { data } = await getJoinedOrganizationsQuery({
+    const { data: myOrganizationsData } = await getOrganizationsQuery({
       variables: {
         input: {
+          isUserJoined: true,
           userId: user.id,
         },
       },
     });
-    if (!data) {
-      console.error('No data returned from getJoinedOrganizationsQuery');
+    const { data: exploreOrganizationsData } = await getOrganizationsQuery({
+      variables: {
+        input: {
+          isUserJoined: false,
+          userId: user.id,
+        },
+      },
+    });
+
+    const hasOrganizationsData = myOrganizationsData && exploreOrganizationsData;
+    if (!hasOrganizationsData) {
+      console.log('No organization data found for the user.');
       return;
-      // TODO(@Milgam06): 데이터 부재 처리
     }
-    console.log('Fetched joined organizations:', data?.getOrganizations.organizations);
-    const fetchedOrganizations = data.getOrganizations.organizations;
-    setOrganizations(fetchedOrganizations);
-    setFilteredOrganizations(fetchedOrganizations);
-  }, [getJoinedOrganizationsQuery]);
+    const fetchedMyOrganizations = myOrganizationsData.getOrganizations.organizations;
+    const fetchedExploreOrganizations = exploreOrganizationsData.getOrganizations.organizations;
+    setExploreOrganizations(fetchedExploreOrganizations);
+    setMyOrganizations(fetchedMyOrganizations);
+  }, [getOrganizationsQuery]);
 
   useDidMount(async () => {
-    await getJoinedOrganizations();
+    await getOrganizations();
   });
 
   useDidUpdate(() => {
-    //TODO(@Milgam06): 검색 시, 업데이트된 searchedOrganization 값으로, 패칭한 리스트 내에서 필터링
-    const isSearchEmpty = searchedOrganization.trim() === '';
-    if (isSearchEmpty) {
-      setFilteredOrganizations(organizations);
-      return;
-    }
-    const filteredOrganizations = organizations.filter(({ organizationName }) => {
-      const isOrganizationNameMatch = organizationName.includes(searchedOrganization);
-      return isOrganizationNameMatch;
-    });
-    setFilteredOrganizations(filteredOrganizations);
-  }, [searchedOrganization]);
+    setSearchedOrganization('');
+  }, [searchType]);
+
+  useDidUpdate(() => {
+    console.log({ filteredOrganizations, searchType, myOrganizations, exploreOrganizations });
+  }, [searchType, filteredOrganizations, myOrganizations, exploreOrganizations]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Stack flex={1} px="$size.x5" py="$size.x5" gap="$size.x6">
+      <Stack flex={1} px="$size.x5" py="$size.x5" gap="$size.x4">
         <Text fontSize="$9" fontWeight="800">
           내 조직
         </Text>
-        <Stack flex={1} width="$fluid" gap="$size.x3">
+        <Stack width="$fluid" gap="$size.x2">
           <Input
             value={searchedOrganization}
             onChangeText={handleChangeSearchOrganization}
@@ -158,14 +197,54 @@ export const ParticipationScreen = memo(() => {
             fontWeight="500"
             focusStyle={{ borderColor: '$colors.componentGreen' }}
           />
-          {loading ? (
-            <Stack flex={1} width="$fluid" justify="center" items="center" gap="$size.x3">
-              <ActivityIndicator size="large" color="#3ABF67" />
-              <Text fontSize="$6" fontWeight="$800">
-                로딩 중...
-              </Text>
-            </Stack>
-          ) : (
+          <Stack width="$fluid" flexDirection="row" justify="space-between" items="center" gap="$size.x2">
+            <Button
+              px="$size.x6"
+              py="$size.x3"
+              bg={searchType === 'MY_ORGANIZATION' ? '$colors.componentGreen' : '$colors.lightGray'}
+              onPressButton={handlePressMyOrganizationSearch}
+              style={{ flex: 1 }}>
+              <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
+                <FontAwesomeIcon color={searchType === 'MY_ORGANIZATION' ? '#fff' : '#424242'} icon={faList} />
+                <Text
+                  fontSize="$5"
+                  fontWeight="900"
+                  color={searchType === 'MY_ORGANIZATION' ? '$colors.white' : '$colors.darkGray'}>
+                  내 조직
+                </Text>
+              </Stack>
+            </Button>
+            <Button
+              px="$size.x6"
+              py="$size.x3"
+              bg={searchType === 'EXPLORE_ORGANIZATION' ? '$colors.componentGreen' : '$colors.lightGray'}
+              onPressButton={handlePressExploreOrganizationSearch}
+              style={{ flex: 1 }}>
+              <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
+                <FontAwesomeIcon color={searchType === 'EXPLORE_ORGANIZATION' ? '#fff' : '#424242'} icon={faSearch} />
+                <Text
+                  fontSize="$5"
+                  fontWeight="900"
+                  color={searchType === 'EXPLORE_ORGANIZATION' ? '$colors.white' : '$colors.darkGray'}>
+                  탐색
+                </Text>
+              </Stack>
+            </Button>
+          </Stack>
+        </Stack>
+        {loading ? (
+          <Stack flex={1} width="$fluid" justify="center" items="center" gap="$size.x3">
+            <ActivityIndicator size="large" color="#3ABF67" />
+            <Text fontSize="$6" fontWeight="$800">
+              로딩 중...
+            </Text>
+          </Stack>
+        ) : (
+          <Stack flex={1} width="$fluid" gap="$size.x1">
+            <Text fontSize="$5" fontWeight="$600" color="$colors.mediumGray" px="$size.x2">
+              {organizationListTitle}
+            </Text>
+
             <ScrollView flex={1} width="$fluid">
               <Stack flex={1} width="$fluid" gap="$size.x2">
                 {filteredOrganizations.map(
@@ -186,8 +265,8 @@ export const ParticipationScreen = memo(() => {
                 )}
               </Stack>
             </ScrollView>
-          )}
-        </Stack>
+          </Stack>
+        )}
       </Stack>
     </SafeAreaView>
   );
