@@ -78,7 +78,7 @@ export const OrganizationMainSubScreen = memo(() => {
                 isFullWidth={false}
                 px="$size.x3"
                 py="$size.x1_5"
-                backgroundColor="$colors.backgroundWhite"
+                bg="$colors.backgroundWhite"
                 onPressButton={handlePressDetails}>
                 <FontAwesomeIcon size={20} icon={faInfoCircle} color="#3ABF67" />
                 <Text fontSize="$6" fontWeight="800" color="$colors.componentGreen">
