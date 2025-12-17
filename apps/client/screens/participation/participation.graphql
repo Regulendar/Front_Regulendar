@@ -1,4 +1,4 @@
-query getJoinedOrganizations($input: GetOrganizationsInputDto!) {
+query getOrganizations($input: GetOrganizationsInputDto!) {
   getOrganizations(input: $input) {
     organizations {
       organizationId

@@ -147,6 +147,7 @@ export type GetOrganizationOutputDto = {
 };
 
 export type GetOrganizationsInputDto = {
+  isUserJoined: Scalars['Boolean']['input'];
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   userId: Scalars['String']['input'];
@@ -375,12 +376,12 @@ export type UserDto = {
   profileImage?: Maybe<Scalars['String']['output']>;
 };
 
-export type GetJoinedOrganizationsQueryVariables = Exact<{
+export type GetOrganizationsQueryVariables = Exact<{
   input: GetOrganizationsInputDto;
 }>;
 
 
-export type GetJoinedOrganizationsQuery = { __typename?: 'Query', getOrganizations: { __typename?: 'GetOrganizationsOutputDto', organizations: Array<{ __typename?: 'OrganizationDto', organizationId: string, organizationName: string, organizationDescription?: string | null, organizationMembers: Array<{ __typename?: 'OrganizationMemberDto', userId: string }> }> } };
+export type GetOrganizationsQuery = { __typename?: 'Query', getOrganizations: { __typename?: 'GetOrganizationsOutputDto', organizations: Array<{ __typename?: 'OrganizationDto', organizationId: string, organizationName: string, organizationDescription?: string | null, organizationMembers: Array<{ __typename?: 'OrganizationMemberDto', userId: string }> }> } };
 
 export type SignUpUserMutationVariables = Exact<{
   input: AddUserInputDto;
@@ -390,8 +391,8 @@ export type SignUpUserMutationVariables = Exact<{
 export type SignUpUserMutation = { __typename?: 'Mutation', addUser: { __typename?: 'AddUserOutputDto', status: number, message: string } };
 
 
-export const GetJoinedOrganizationsDocument = gql`
-    query getJoinedOrganizations($input: GetOrganizationsInputDto!) {
+export const GetOrganizationsDocument = gql`
+    query getOrganizations($input: GetOrganizationsInputDto!) {
   getOrganizations(input: $input) {
     organizations {
       organizationId
@@ -406,37 +407,37 @@ export const GetJoinedOrganizationsDocument = gql`
     `;
 
 /**
- * __useGetJoinedOrganizationsQuery__
+ * __useGetOrganizationsQuery__
  *
- * To run a query within a React component, call `useGetJoinedOrganizationsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetJoinedOrganizationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetOrganizationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrganizationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetJoinedOrganizationsQuery({
+ * const { data, loading, error } = useGetOrganizationsQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetJoinedOrganizationsQuery(baseOptions: Apollo.QueryHookOptions<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables> & ({ variables: GetJoinedOrganizationsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+export function useGetOrganizationsQuery(baseOptions: Apollo.QueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables> & ({ variables: GetOrganizationsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables>(GetJoinedOrganizationsDocument, options);
+        return Apollo.useQuery<GetOrganizationsQuery, GetOrganizationsQueryVariables>(GetOrganizationsDocument, options);
       }
-export function useGetJoinedOrganizationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables>) {
+export function useGetOrganizationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables>(GetJoinedOrganizationsDocument, options);
+          return Apollo.useLazyQuery<GetOrganizationsQuery, GetOrganizationsQueryVariables>(GetOrganizationsDocument, options);
         }
-export function useGetJoinedOrganizationsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables>) {
+export function useGetOrganizationsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables>) {
           const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables>(GetJoinedOrganizationsDocument, options);
+          return Apollo.useSuspenseQuery<GetOrganizationsQuery, GetOrganizationsQueryVariables>(GetOrganizationsDocument, options);
         }
-export type GetJoinedOrganizationsQueryHookResult = ReturnType<typeof useGetJoinedOrganizationsQuery>;
-export type GetJoinedOrganizationsLazyQueryHookResult = ReturnType<typeof useGetJoinedOrganizationsLazyQuery>;
-export type GetJoinedOrganizationsSuspenseQueryHookResult = ReturnType<typeof useGetJoinedOrganizationsSuspenseQuery>;
-export type GetJoinedOrganizationsQueryResult = Apollo.QueryResult<GetJoinedOrganizationsQuery, GetJoinedOrganizationsQueryVariables>;
+export type GetOrganizationsQueryHookResult = ReturnType<typeof useGetOrganizationsQuery>;
+export type GetOrganizationsLazyQueryHookResult = ReturnType<typeof useGetOrganizationsLazyQuery>;
+export type GetOrganizationsSuspenseQueryHookResult = ReturnType<typeof useGetOrganizationsSuspenseQuery>;
+export type GetOrganizationsQueryResult = Apollo.QueryResult<GetOrganizationsQuery, GetOrganizationsQueryVariables>;
 export const SignUpUserDocument = gql`
     mutation SignUpUser($input: AddUserInputDto!) {
   addUser(input: $input) {
