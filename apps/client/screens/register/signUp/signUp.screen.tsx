@@ -26,11 +26,11 @@ export const SignUpScreen = memo(() => {
   const [loginType, setLoginType] = useState<ILoginType>('EMAIL');
   const [signUpUser] = useSignUpUserMutation();
 
-  const handlePressEmailLoginType = useCallback(() => {
+  const handlePressEmailLogin = useCallback(() => {
     setLoginType('EMAIL');
   }, []);
 
-  const handlePressPhoneLoginType = useCallback(() => {
+  const handlePressPhoneLogin = useCallback(() => {
     setLoginType('PHONE');
   }, []);
 
@@ -171,7 +171,7 @@ export const SignUpScreen = memo(() => {
                   px="$size.x6"
                   py="$size.x3"
                   bg={loginType === 'EMAIL' ? '$colors.componentGreen' : '$colors.lightGray'}
-                  onPress={handlePressEmailLoginType}>
+                  onPress={handlePressEmailLogin}>
                   <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                     <FontAwesomeIcon color={loginType === 'EMAIL' ? '#fff' : '#424242'} icon={faEnvelope} />
                     <Text
@@ -188,7 +188,7 @@ export const SignUpScreen = memo(() => {
                   px="$size.x6"
                   py="$size.x3"
                   bg={loginType === 'PHONE' ? '$colors.componentGreen' : '$colors.lightGray'}
-                  onPress={handlePressPhoneLoginType}>
+                  onPress={handlePressPhoneLogin}>
                   <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                     <FontAwesomeIcon color={loginType === 'PHONE' ? '#fff' : '#424242'} icon={faPhone} />
                     <Text
