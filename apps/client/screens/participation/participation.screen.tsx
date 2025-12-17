@@ -249,8 +249,8 @@ export const ParticipationScreen = memo(() => {
             {filteredOrganizations.length === 0 ? (
               <Stack flex={1} justify="center" items="center" gap="$size.x3">
                 <Image
-                  source="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Thinking%20Face.png"
-                  alt="Thinking Face"
+                  source="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Unamused%20Face.png"
+                  alt="Unamused Face"
                   contentFit="contain"
                   style={{ width: 100, aspectRatio: 1 }}
                 />
