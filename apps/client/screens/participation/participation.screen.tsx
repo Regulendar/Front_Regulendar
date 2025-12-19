@@ -4,13 +4,14 @@ import { useGetOrganizationsLazyQuery } from '@/libs/graphql';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faList } from '@fortawesome/free-solid-svg-icons/faList';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { Image } from 'expo-image';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDidMount, useDidUpdate } from 'rooks';
 import { Image as TamaguiImage, ScrollView, Stack, Text } from 'tamagui';
 
@@ -84,6 +85,7 @@ export const ParticipationScreen = memo(() => {
     }
   );
 
+  const insets = useSafeAreaInsets();
   const route = useRouter();
   const [searchType, setSearchType] = useState<ISearchType>('MY_ORGANIZATION');
   const [exploreOrganizations, setExploreOrganizations] = useState<IOrganization[]>([]);
@@ -282,6 +284,18 @@ export const ParticipationScreen = memo(() => {
             )}
           </Stack>
         )}
+      </Stack>
+      <Stack position="absolute" b={insets.bottom} r={insets.right} px="$size.x5" py="$size.x3" z="$zIndex.x10">
+        <Stack
+          width="$fit"
+          p="$size.x3"
+          bg="$colors.backgroundWhite"
+          boxShadow="0 4px 12px rgba(0,0,0,0.2)"
+          style={{
+            borderRadius: 48,
+          }}>
+          <FontAwesomeIcon size={32} icon={faPlus} color="#00B906" />
+        </Stack>
       </Stack>
     </SafeAreaView>
   );
