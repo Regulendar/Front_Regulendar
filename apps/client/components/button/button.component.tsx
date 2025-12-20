@@ -1,22 +1,11 @@
-import { memo, ReactNode } from 'react';
-import { FlexAlignType, OpaqueColorValue, StyleProp, ViewStyle } from 'react-native';
-import { GetThemeValueForKey, Button as TamaguiButton } from 'tamagui';
-
-type IJustify = 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+import { ComponentProps, memo, ReactNode } from 'react';
+import { Button as TamaguiButton } from 'tamagui';
 
 type IButton = {
   isFullWidth?: boolean;
-  bg?: OpaqueColorValue | GetThemeValueForKey<'backgroundColor'>;
-  justify?: IJustify;
-  items?: FlexAlignType;
-  px?: GetThemeValueForKey<'paddingHorizontal'>;
-  py?: GetThemeValueForKey<'paddingVertical'>;
   disableShadow?: boolean;
-  style?: StyleProp<ViewStyle>;
   children: ReactNode;
-  onPressButton?: () => void;
-};
-
+} & ComponentProps<typeof TamaguiButton>;
 export const Button = memo<IButton>(
   ({
     isFullWidth = true,
@@ -26,9 +15,8 @@ export const Button = memo<IButton>(
     px = '$size.x6',
     py = '$size.x3',
     disableShadow = false,
-    style,
     children,
-    onPressButton,
+    ...rest
   }) => {
     return (
       <TamaguiButton
@@ -41,8 +29,7 @@ export const Button = memo<IButton>(
         bg={bg}
         boxShadow={disableShadow ? '' : '0 2px 20px rgba(0, 0, 0, 0.2)'}
         pressStyle={{ opacity: 0.8 }}
-        style={style}
-        onPress={onPressButton}>
+        {...rest}>
         {children}
       </TamaguiButton>
     );

@@ -79,7 +79,7 @@ export const OrganizationMainSubScreen = memo(() => {
                 px="$size.x3"
                 py="$size.x1_5"
                 bg="$colors.backgroundWhite"
-                onPressButton={handlePressDetails}>
+                onPress={handlePressDetails}>
                 <FontAwesomeIcon size={20} icon={faInfoCircle} color="#3ABF67" />
                 <Text fontSize="$6" fontWeight="800" color="$colors.componentGreen">
                   Details

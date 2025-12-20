@@ -1,11 +1,11 @@
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Stack, Text } from 'tamagui';
+import { Stack, Text } from 'tamagui';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 import { supabaseAuth } from '@/libs';
 import { useRouter } from 'expo-router';
-import { Input } from '@/components';
+import { Input, Button } from '@/components';
 
 export const SignInScreen = memo(() => {
   const route = useRouter();
@@ -67,7 +67,7 @@ export const SignInScreen = memo(() => {
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
       <Stack flex={1} width="$fluid" px="$size.x5" py="$size.x10" justify="space-between">
         <Stack items="center" gap="$size.x8">
-          <Stack width="$fluid" gap="$size.x2">
+          <Stack gap="$size.x2">
             <Text fontSize="$9" fontWeight="800" color="$colors.black">
               돌아오신 것을 환영해요!
             </Text>
@@ -105,12 +105,10 @@ export const SignInScreen = memo(() => {
           </Stack>
         </Stack>
         <Button
-          width="$fluid"
-          height="auto"
           px="$size.x6"
           py="$size.x3"
           bg="$colors.componentGreen"
-          pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
+          pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
           onPress={handlePressSignIn}>
           <Text fontSize="$8" fontWeight="700" color="$colors.white">
             로그인

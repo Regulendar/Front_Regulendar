@@ -3,14 +3,14 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Stack, Text } from 'tamagui';
+import { Stack, Text } from 'tamagui';
 
 import { supabaseAuth } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { useRouter } from 'expo-router';
 import { useDidUpdate } from 'rooks';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
-import { Input } from '@/components';
+import { Input, Button } from '@/components';
 import { useSignUpUserMutation } from '@/libs/graphql';
 
 type ILoginType = 'EMAIL' | 'PHONE';
@@ -121,14 +121,13 @@ export const SignUpScreen = memo(() => {
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
       <Stack flex={1} width="$fluid" px="$size.x5" py="$size.x10" justify="space-between">
         <Stack items="center" gap="$size.x7">
-          <Stack width="$fluid" gap="$size.x1">
+          <Stack gap="$size.x1">
             <Text fontSize="$9" fontWeight="800" color="$colors.darkGreen">
               똑똑한 일정 관리
             </Text>
             <Text fontSize="$9" fontWeight="800" color="$colors.black">
               시작해볼까요?
             </Text>
-
             <Text fontSize="$6" fontWeight="700" color="$colors.mediumGray">
               양식을 작성하여 회원가입을 완료해주세요.
             </Text>
@@ -230,12 +229,10 @@ export const SignUpScreen = memo(() => {
           </Stack>
         </Stack>
         <Button
-          width="$fluid"
-          height="auto"
           px="$size.x6"
           py="$size.x3"
           bg="$colors.componentGreen"
-          pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
+          pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
           onPress={handlePressSignUp}>
           <Text fontSize="$8" fontWeight="700" color="$colors.white">
             회원가입
