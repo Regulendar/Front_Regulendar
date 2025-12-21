@@ -118,6 +118,14 @@ export const ParticipationScreen = memo(() => {
     setSearchedOrganization(text);
   }, []);
 
+  const handlePressExploreOrganizationSearch = useCallback(() => {
+    setSearchType('EXPLORE_ORGANIZATION');
+  }, []);
+
+  const handlePressMyOrganizationSearch = useCallback(() => {
+    setSearchType('MY_ORGANIZATION');
+  }, []);
+
   const handlePressOrganizationCard = useCallback(
     (organizationId: string) => async () => {
       route.navigate(`/organization/${organizationId}`);
@@ -126,13 +134,9 @@ export const ParticipationScreen = memo(() => {
     [route]
   );
 
-  const handlePressExploreOrganizationSearch = useCallback(() => {
-    setSearchType('EXPLORE_ORGANIZATION');
-  }, []);
-
-  const handlePressMyOrganizationSearch = useCallback(() => {
-    setSearchType('MY_ORGANIZATION');
-  }, []);
+  const handlePressCreateOrganization = useCallback(() => {
+    route.navigate('/create/createOrganization/createOrganization');
+  }, [route]);
 
   const getOrganizations = useCallback(async () => {
     const {
@@ -205,7 +209,7 @@ export const ParticipationScreen = memo(() => {
               px="$size.x6"
               py="$size.x3"
               bg={searchType === 'MY_ORGANIZATION' ? '$colors.componentGreen' : '$colors.lightGray'}
-              onPressButton={handlePressMyOrganizationSearch}
+              onPress={handlePressMyOrganizationSearch}
               style={{ flex: 1 }}>
               <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                 <FontAwesomeIcon color={searchType === 'MY_ORGANIZATION' ? '#fff' : '#424242'} icon={faList} />
@@ -221,7 +225,7 @@ export const ParticipationScreen = memo(() => {
               px="$size.x6"
               py="$size.x3"
               bg={searchType === 'EXPLORE_ORGANIZATION' ? '$colors.componentGreen' : '$colors.lightGray'}
-              onPressButton={handlePressExploreOrganizationSearch}
+              onPress={handlePressExploreOrganizationSearch}
               style={{ flex: 1 }}>
               <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                 <FontAwesomeIcon color={searchType === 'EXPLORE_ORGANIZATION' ? '#fff' : '#424242'} icon={faSearch} />
@@ -291,6 +295,8 @@ export const ParticipationScreen = memo(() => {
           p="$size.x3"
           bg="$colors.backgroundWhite"
           boxShadow="0 4px 12px rgba(0,0,0,0.2)"
+          pressStyle={{ opacity: 0.8 }}
+          onPress={handlePressCreateOrganization}
           style={{
             borderRadius: 48,
           }}>
