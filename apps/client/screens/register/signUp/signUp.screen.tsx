@@ -22,9 +22,10 @@ export const SignUpScreen = memo(() => {
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isSignUpFailed, setIsSignUpFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
   const [loginType, setLoginType] = useState<ILoginType>('EMAIL');
-  const [signUpUser] = useSignUpUserMutation();
+  const [signUpUserMutation] = useSignUpUserMutation();
 
   const handlePressEmailLogin = useCallback(() => {
     setLoginType('EMAIL');
@@ -59,9 +60,10 @@ export const SignUpScreen = memo(() => {
       const isUserSignedUp = !!user;
       if (signUpError || !isUserSignedUp) {
         setIsSignUpFailed(true);
+
         return;
       }
-      const { errors } = await signUpUser({
+      const { errors } = await signUpUserMutation({
         variables: {
           input: {
             id: user.id,
@@ -75,23 +77,27 @@ export const SignUpScreen = memo(() => {
         return;
       }
     },
-    [signUpUser]
+    [signUpUserMutation]
   );
 
   const handlePressSignUp = useCallback(async () => {
+    setIsDisabled(true);
     const isInputValid = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
     const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1, minNumbers: 0, minSymbols: 0 });
     if (!isInputValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
+      setIsDisabled(false);
       return;
     }
     if (!isPasswordValid) {
       console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
+      setIsDisabled(false);
       return;
     }
     const isSamePassword = password === confirmPassword;
     if (!isSamePassword) {
       console.log('비밀번호가 일치하지 않습니다.');
+      setIsDisabled(false);
       return;
     }
 
@@ -103,6 +109,7 @@ export const SignUpScreen = memo(() => {
     const { error: signInError } = await supabaseAuth.signInWithPassword(authPayload);
     if (signInError) {
       setIsSignUpFailed(true);
+      setIsDisabled(false);
       return;
     }
     route.replace('/participation/participation');
