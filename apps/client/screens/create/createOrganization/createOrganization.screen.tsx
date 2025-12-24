@@ -1,6 +1,6 @@
 import { Button, Input } from '@/components';
-import { supabaseAuth } from '@/libs';
-import { useCreateOrganizationMutation } from '@/libs/graphql';
+import { supabaseAuth, useCreateOrganizationMutation } from '@/libs';
+
 import { useRouter } from 'expo-router';
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';

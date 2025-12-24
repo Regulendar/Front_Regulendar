@@ -6,9 +6,11 @@ import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 import { supabaseAuth } from '@/libs';
 import { useRouter } from 'expo-router';
 import { Input, Button } from '@/components';
+import { useUserStore } from '@/stores';
 
 export const SignInScreen = memo(() => {
   const route = useRouter();
+  const { setUserId } = useUserStore();
   const [emailOrNumber, setEmailOrNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isSignInFailed, setIsSignInFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
@@ -35,7 +37,6 @@ export const SignInScreen = memo(() => {
       console.log('비밀번호 형식이 올바르지 않습니다.');
       return;
     }
-
     if (!isEmailValid && !isPhoneNumberValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
       return;
@@ -52,16 +53,20 @@ export const SignInScreen = memo(() => {
     }
 
     if (isPhoneNumberValid) {
-      const { error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
-      if (error) {
+      const {
+        error,
+        data: { user },
+      } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
+      const hasUser = !!user;
+      if (error || !hasUser) {
         setIsSignInFailed(true);
         return;
       }
+      setUserId(user.id);
       route.replace('/participation/participation');
-
       return;
     }
-  }, [emailOrNumber, password, route]);
+  }, [emailOrNumber, password, route, setUserId]);
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>

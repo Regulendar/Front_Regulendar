@@ -1,4 +1,5 @@
 import { supabaseAuth } from '@/libs';
+import { useUserStore } from '@/stores';
 import { useRouter } from 'expo-router';
 import { memo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,11 +8,15 @@ import { Stack, Text } from 'tamagui';
 
 export const SplashScreen = memo(() => {
   const route = useRouter();
+  const { setUserId } = useUserStore();
 
   useDidMount(async () => {
-    const { data } = await supabaseAuth.getUser();
-    const isUserLoggedIn = !!data?.user;
+    const {
+      data: { user },
+    } = await supabaseAuth.getUser();
+    const isUserLoggedIn = !!user;
     if (isUserLoggedIn) {
+      setUserId(user.id);
       route.replace('/participation/participation');
       return;
     }

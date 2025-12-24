@@ -5,19 +5,19 @@ import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack, Text } from 'tamagui';
 
-import { supabaseAuth } from '@/libs';
+import { supabaseAuth, useSignUpUserMutation } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { useRouter } from 'expo-router';
 import { useDidUpdate } from 'rooks';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 import { Input, Button } from '@/components';
-import { useSignUpUserMutation } from '@/libs/graphql';
+import { useUserStore } from '@/stores';
 
 type ILoginType = 'EMAIL' | 'PHONE';
 
 export const SignUpScreen = memo(() => {
   const route = useRouter();
-
+  const { setUserId } = useUserStore();
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -60,7 +60,6 @@ export const SignUpScreen = memo(() => {
       const isUserSignedUp = !!user;
       if (signUpError || !isUserSignedUp) {
         setIsSignUpFailed(true);
-
         return;
       }
       const { errors } = await signUpUserMutation({
@@ -76,8 +75,9 @@ export const SignUpScreen = memo(() => {
         setIsSignUpFailed(true);
         return;
       }
+      setUserId(user.id);
     },
-    [signUpUserMutation]
+    [setUserId, signUpUserMutation]
   );
 
   const handlePressSignUp = useCallback(async () => {
@@ -240,7 +240,8 @@ export const SignUpScreen = memo(() => {
           py="$size.x3"
           bg="$colors.componentGreen"
           pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
-          onPress={handlePressSignUp}>
+          onPress={handlePressSignUp}
+          disabled={isDisabled}>
           <Text fontSize="$8" fontWeight="700" color="$colors.white">
             회원가입
           </Text>

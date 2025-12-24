@@ -10,3 +10,10 @@ query getOrganizations($input: GetOrganizationsInputDto!) {
     }
   }
 }
+
+mutation joinOrganization($input: JoinOrganizationInputDto!) {
+  joinOrganization(input: $input) {
+    message
+    status
+  }
+}

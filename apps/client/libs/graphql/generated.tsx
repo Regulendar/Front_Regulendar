@@ -390,6 +390,13 @@ export type GetOrganizationsQueryVariables = Exact<{
 
 export type GetOrganizationsQuery = { __typename?: 'Query', getOrganizations: { __typename?: 'GetOrganizationsOutputDto', organizations: Array<{ __typename?: 'OrganizationDto', organizationId: string, organizationName: string, organizationDescription?: string | null, organizationMembers: Array<{ __typename?: 'OrganizationMemberDto', userId: string }> }> } };
 
+export type JoinOrganizationMutationVariables = Exact<{
+  input: JoinOrganizationInputDto;
+}>;
+
+
+export type JoinOrganizationMutation = { __typename?: 'Mutation', joinOrganization: { __typename?: 'JoinOrganizationOutputDto', message: string, status: number } };
+
 export type SignUpUserMutationVariables = Exact<{
   input: AddUserInputDto;
 }>;
@@ -479,6 +486,40 @@ export type GetOrganizationsQueryHookResult = ReturnType<typeof useGetOrganizati
 export type GetOrganizationsLazyQueryHookResult = ReturnType<typeof useGetOrganizationsLazyQuery>;
 export type GetOrganizationsSuspenseQueryHookResult = ReturnType<typeof useGetOrganizationsSuspenseQuery>;
 export type GetOrganizationsQueryResult = Apollo.QueryResult<GetOrganizationsQuery, GetOrganizationsQueryVariables>;
+export const JoinOrganizationDocument = gql`
+    mutation joinOrganization($input: JoinOrganizationInputDto!) {
+  joinOrganization(input: $input) {
+    message
+    status
+  }
+}
+    `;
+export type JoinOrganizationMutationFn = Apollo.MutationFunction<JoinOrganizationMutation, JoinOrganizationMutationVariables>;
+
+/**
+ * __useJoinOrganizationMutation__
+ *
+ * To run a mutation, you first call `useJoinOrganizationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useJoinOrganizationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [joinOrganizationMutation, { data, loading, error }] = useJoinOrganizationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useJoinOrganizationMutation(baseOptions?: Apollo.MutationHookOptions<JoinOrganizationMutation, JoinOrganizationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<JoinOrganizationMutation, JoinOrganizationMutationVariables>(JoinOrganizationDocument, options);
+      }
+export type JoinOrganizationMutationHookResult = ReturnType<typeof useJoinOrganizationMutation>;
+export type JoinOrganizationMutationResult = Apollo.MutationResult<JoinOrganizationMutation>;
+export type JoinOrganizationMutationOptions = Apollo.BaseMutationOptions<JoinOrganizationMutation, JoinOrganizationMutationVariables>;
 export const SignUpUserDocument = gql`
     mutation SignUpUser($input: AddUserInputDto!) {
   addUser(input: $input) {

@@ -1,6 +1,6 @@
 import { Button, Input } from '@/components';
-import { supabaseAuth } from '@/libs';
-import { useGetOrganizationsLazyQuery } from '@/libs/graphql';
+import { useGetOrganizationsLazyQuery, useJoinOrganizationMutation } from '@/libs';
+import { useUserStore } from '@/stores';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faList } from '@fortawesome/free-solid-svg-icons/faList';
@@ -85,6 +85,7 @@ export const ParticipationScreen = memo(() => {
     }
   );
 
+  const { userId } = useUserStore();
   const insets = useSafeAreaInsets();
   const route = useRouter();
   const [searchType, setSearchType] = useState<ISearchType>('MY_ORGANIZATION');
@@ -92,6 +93,7 @@ export const ParticipationScreen = memo(() => {
   const [myOrganizations, setMyOrganizations] = useState<IOrganization[]>([]);
   const [searchedOrganization, setSearchedOrganization] = useState<string>('');
   const [getOrganizationsQuery, { loading }] = useGetOrganizationsLazyQuery();
+  const [joinOrganizationMutation] = useJoinOrganizationMutation();
 
   const organizationListTitle = useMemo(() => {
     const isSearchTypeMyOrganization = searchType === 'MY_ORGANIZATION';
@@ -114,6 +116,52 @@ export const ParticipationScreen = memo(() => {
     return filteredSourceOrganizations;
   }, [searchType, searchedOrganization, myOrganizations, exploreOrganizations]);
 
+  const getOrganizations = useCallback(async () => {
+    const { data: myOrganizationsData } = await getOrganizationsQuery({
+      variables: {
+        input: {
+          isUserJoined: true,
+          userId: userId,
+        },
+      },
+    });
+    const { data: exploreOrganizationsData } = await getOrganizationsQuery({
+      variables: {
+        input: {
+          isUserJoined: false,
+          userId: userId,
+        },
+      },
+    });
+    const hasOrganizationsData = myOrganizationsData && exploreOrganizationsData;
+    if (!hasOrganizationsData) {
+      console.log('No organization data found for the user.');
+      return;
+    }
+    const fetchedMyOrganizations = myOrganizationsData.getOrganizations.organizations;
+    const fetchedExploreOrganizations = exploreOrganizationsData.getOrganizations.organizations;
+    setExploreOrganizations(fetchedExploreOrganizations);
+    setMyOrganizations(fetchedMyOrganizations);
+  }, [getOrganizationsQuery, userId]);
+
+  const joinOrganization = useCallback(
+    async (organizationId: string) => {
+      const { errors: joinErrors } = await joinOrganizationMutation({
+        variables: {
+          input: {
+            organizationId: organizationId,
+            userId: userId,
+          },
+        },
+      });
+      if (joinErrors) {
+        console.log('조직 가입에 실패했습니다.', joinErrors);
+        return;
+      }
+    },
+    [joinOrganizationMutation, userId]
+  );
+
   const handleChangeSearchOrganization = useCallback((text: string) => {
     setSearchedOrganization(text);
   }, []);
@@ -128,50 +176,26 @@ export const ParticipationScreen = memo(() => {
 
   const handlePressOrganizationCard = useCallback(
     (organizationId: string) => async () => {
-      route.navigate(`/organization/${organizationId}`);
-      await AsyncStorage.setItem('lastOrganizationId', organizationId);
+      switch (searchType) {
+        case 'MY_ORGANIZATION': {
+          route.navigate(`/organization/${organizationId}`);
+          await AsyncStorage.setItem('lastOrganizationId', organizationId);
+          return;
+        }
+        case 'EXPLORE_ORGANIZATION': {
+          await joinOrganization(organizationId);
+          route.navigate(`/organization/${organizationId}`);
+          await AsyncStorage.setItem('lastOrganizationId', organizationId);
+          return;
+        }
+      }
     },
-    [route]
+    [joinOrganization, route, searchType]
   );
 
   const handlePressCreateOrganization = useCallback(() => {
     route.navigate('/create/createOrganization/createOrganization');
   }, [route]);
-
-  const getOrganizations = useCallback(async () => {
-    const {
-      data: { user },
-    } = await supabaseAuth.getUser();
-    if (!user) {
-      return;
-    }
-    const { data: myOrganizationsData } = await getOrganizationsQuery({
-      variables: {
-        input: {
-          isUserJoined: true,
-          userId: user.id,
-        },
-      },
-    });
-    const { data: exploreOrganizationsData } = await getOrganizationsQuery({
-      variables: {
-        input: {
-          isUserJoined: false,
-          userId: user.id,
-        },
-      },
-    });
-
-    const hasOrganizationsData = myOrganizationsData && exploreOrganizationsData;
-    if (!hasOrganizationsData) {
-      console.log('No organization data found for the user.');
-      return;
-    }
-    const fetchedMyOrganizations = myOrganizationsData.getOrganizations.organizations;
-    const fetchedExploreOrganizations = exploreOrganizationsData.getOrganizations.organizations;
-    setExploreOrganizations(fetchedExploreOrganizations);
-    setMyOrganizations(fetchedMyOrganizations);
-  }, [getOrganizationsQuery]);
 
   useDidMount(async () => {
     await getOrganizations();
