@@ -1,0 +1,8 @@
+query getOrganization($input: GetOrganizationInputDto!) {
+  getOrganization(input: $input) {
+    organization {
+      organizationId
+      organizationName
+    }
+  }
+}
