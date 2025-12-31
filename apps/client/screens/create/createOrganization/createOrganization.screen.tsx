@@ -60,7 +60,7 @@ export const CreateOrganizationScreen = memo(() => {
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
       {isCreateOrganizationFailed && (
-        <Alert isOpen={isCreateOrganizationFailed} onClose={handlePressCloseAlert} alertPadding="$size.x4">
+        <Alert isOpen={isCreateOrganizationFailed} onClose={handlePressCloseAlert} alertPadding="$size.x5">
           <Stack justify="center" items="center" gap="$size.x6" pt="$size.x3">
             <Stack justify="center" items="center" gap="$size.x2">
               <Image
@@ -68,7 +68,7 @@ export const CreateOrganizationScreen = memo(() => {
                 alt="Crying Face"
                 style={{ width: 140, aspectRatio: 1 }}
               />
-              <Text fontSize="$6" fontWeight="$900">
+              <Text fontSize="$5" fontWeight="$900">
                 조직 생성에 실패했습니다.
               </Text>
             </Stack>
