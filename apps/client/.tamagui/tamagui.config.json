@@ -69991,6 +69991,13 @@
           "val": "#3ABF67",
           "variable": ""
         },
+        "errorRed": {
+          "isVar": true,
+          "key": "$errorRed",
+          "name": "t-colors-errorRed",
+          "val": "#ff686a",
+          "variable": ""
+        },
         "lightGray": {
           "isVar": true,
           "key": "$lightGray",
@@ -70995,6 +71002,13 @@
         "key": "$componentGreen",
         "name": "t-colors-componentGreen",
         "val": "#3ABF67",
+        "variable": ""
+      },
+      "$colors.errorRed": {
+        "isVar": true,
+        "key": "$errorRed",
+        "name": "t-colors-errorRed",
+        "val": "#ff686a",
         "variable": ""
       },
       "$colors.lightGray": {
