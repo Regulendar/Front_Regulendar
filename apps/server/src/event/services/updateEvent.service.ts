@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateEventInputDto, UpdateEventOutputDto } from '../dto';
 import { PrismaService } from 'src/prisma';
 import { DateConverterUtil, ValidatorUtil } from 'src/utils';
+import { EventStatus } from '@generated-prisma/enums';
 
 @Injectable()
 export class UpdateEventService {
@@ -16,6 +17,7 @@ export class UpdateEventService {
     eventTitle,
     eventStartAt,
     eventDuration,
+    eventStatus,
   }: UpdateEventInputDto): Promise<UpdateEventOutputDto> {
     try {
       const hasEvent = await this.validatorUtil.validateEvent(eventId);
@@ -30,6 +32,7 @@ export class UpdateEventService {
         eventDateMonth?: number;
         eventDateDay?: number;
         eventDuration?: number;
+        eventStatus?: EventStatus;
       } = {};
 
       if (eventTitle) {
@@ -50,6 +53,10 @@ export class UpdateEventService {
 
       if (eventDuration) {
         updateData.eventDuration = eventDuration;
+      }
+
+      if (eventStatus) {
+        updateData.eventStatus = eventStatus;
       }
 
       await this.prisma.event.update({
