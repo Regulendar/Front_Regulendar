@@ -24,3 +24,13 @@ export const EventRole = {
 } as const
 
 export type EventRole = (typeof EventRole)[keyof typeof EventRole]
+
+
+export const EventStatus = {
+  CANCELLED: 'CANCELLED',
+  SCHEDULED: 'SCHEDULED',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]

@@ -25,9 +25,15 @@ enum EventRole {
   PARTICIPANT
 }
 
+enum EventStatus {
+  CANCELLED
+  SCHEDULED
+  PROCESSING
+  COMPLETED
+}
 
 model User {
-  id       String @id @db.Uuid @default(uuid())
+  id       String @id @default(uuid())
   name     String
   profileImage String?
   eventParticipations EventParticipation[]
@@ -43,6 +49,7 @@ model Event {
   eventDateDay Int
   eventDuration Int
   eventParticipations EventParticipation[]
+  eventStatus EventStatus @default(SCHEDULED)
   hostOrganization Organization @relation(fields: [hostOrganizationId], references: [organizationId], onDelete: Cascade)
   hostOrganizationId String
 }
