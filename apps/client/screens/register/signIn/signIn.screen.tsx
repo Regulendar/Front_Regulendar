@@ -1,14 +1,16 @@
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Stack, Text } from 'tamagui';
+import { Stack, Text } from 'tamagui';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
 
 import { supabaseAuth } from '@/libs';
 import { useRouter } from 'expo-router';
-import { Input } from '@/components';
+import { Input, Button } from '@/components';
+import { useUserStore } from '@/stores';
 
 export const SignInScreen = memo(() => {
   const route = useRouter();
+  const { setUserId } = useUserStore();
   const [emailOrNumber, setEmailOrNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isSignInFailed, setIsSignInFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
@@ -35,7 +37,6 @@ export const SignInScreen = memo(() => {
       console.log('비밀번호 형식이 올바르지 않습니다.');
       return;
     }
-
     if (!isEmailValid && !isPhoneNumberValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
       return;
@@ -52,22 +53,26 @@ export const SignInScreen = memo(() => {
     }
 
     if (isPhoneNumberValid) {
-      const { error } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
-      if (error) {
+      const {
+        error,
+        data: { user },
+      } = await supabaseAuth.signInWithPassword({ phone: emailOrNumber, password });
+      const hasUser = !!user;
+      if (error || !hasUser) {
         setIsSignInFailed(true);
         return;
       }
+      setUserId(user.id);
       route.replace('/participation/participation');
-
       return;
     }
-  }, [emailOrNumber, password, route]);
+  }, [emailOrNumber, password, route, setUserId]);
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
       <Stack flex={1} width="$fluid" px="$size.x5" py="$size.x10" justify="space-between">
         <Stack items="center" gap="$size.x8">
-          <Stack width="$fluid" gap="$size.x2">
+          <Stack gap="$size.x2">
             <Text fontSize="$9" fontWeight="800" color="$colors.black">
               돌아오신 것을 환영해요!
             </Text>
@@ -105,12 +110,10 @@ export const SignInScreen = memo(() => {
           </Stack>
         </Stack>
         <Button
-          width="$fluid"
-          height="auto"
           px="$size.x6"
           py="$size.x3"
           bg="$colors.componentGreen"
-          pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
+          pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
           onPress={handlePressSignIn}>
           <Text fontSize="$8" fontWeight="700" color="$colors.white">
             로그인

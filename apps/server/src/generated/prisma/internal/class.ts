@@ -17,10 +17,10 @@ import type * as Prisma from "./prismaNamespace"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.0.0",
-  "engineVersion": "0c19ccc313cf9911a90d99d2ac2eb0280c76c513",
+  "clientVersion": "7.1.0",
+  "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum OrganizationRole {\n  OWNER\n  ADMIN\n  MEMBER\n}\n\nenum EventRole {\n  HOST\n  PARTICIPANT\n}\n\nmodel User {\n  id                  String               @id @default(uuid())\n  name                String\n  profileImage        String?\n  eventParticipations EventParticipation[]\n  organizationMembers OrganizationMember[]\n}\n\nmodel Event {\n  eventId             String               @id @default(cuid())\n  eventTitle          String\n  eventStartAt        DateTime\n  eventDateYear       Int\n  eventDateMonth      Int\n  eventDateDay        Int\n  eventDuration       Int\n  eventParticipations EventParticipation[]\n  hostOrganization    Organization         @relation(fields: [hostOrganizationId], references: [organizationId], onDelete: Cascade)\n  hostOrganizationId  String\n}\n\nmodel Organization {\n  organizationId          String               @id @default(uuid())\n  organizationName        String\n  organizationDescription String?\n  events                  Event[]\n  organizationMembers     OrganizationMember[]\n}\n\nmodel OrganizationMember {\n  userId         String\n  user           User             @relation(fields: [userId], references: [id])\n  organizationId String\n  organization   Organization     @relation(fields: [organizationId], references: [organizationId], onDelete: Cascade)\n  role           OrganizationRole @default(MEMBER)\n\n  @@id([organizationId, userId])\n}\n\nmodel EventParticipation {\n  eventId String\n  event   Event     @relation(fields: [eventId], references: [eventId], onDelete: Cascade)\n  userId  String\n  user    User      @relation(fields: [userId], references: [id])\n  role    EventRole @default(PARTICIPANT)\n\n  @@id([eventId, userId])\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum OrganizationRole {\n  OWNER\n  ADMIN\n  MEMBER\n}\n\nenum EventRole {\n  HOST\n  PARTICIPANT\n}\n\nenum EventStatus {\n  CANCELLED\n  SCHEDULED\n  PROCESSING\n  COMPLETED\n}\n\nmodel User {\n  id                  String               @id @default(uuid())\n  name                String\n  profileImage        String?\n  eventParticipations EventParticipation[]\n  organizationMembers OrganizationMember[]\n}\n\nmodel Event {\n  eventId             String               @id @default(cuid())\n  eventTitle          String\n  eventStartAt        DateTime\n  eventDateYear       Int\n  eventDateMonth      Int\n  eventDateDay        Int\n  eventDuration       Int\n  eventParticipations EventParticipation[]\n  eventStatus         EventStatus          @default(SCHEDULED)\n  hostOrganization    Organization         @relation(fields: [hostOrganizationId], references: [organizationId], onDelete: Cascade)\n  hostOrganizationId  String\n}\n\nmodel Organization {\n  organizationId          String               @id @default(uuid())\n  organizationName        String\n  organizationDescription String?\n  events                  Event[]\n  organizationMembers     OrganizationMember[]\n}\n\nmodel OrganizationMember {\n  userId         String\n  user           User             @relation(fields: [userId], references: [id])\n  organizationId String\n  organization   Organization     @relation(fields: [organizationId], references: [organizationId], onDelete: Cascade)\n  role           OrganizationRole @default(MEMBER)\n\n  @@id([organizationId, userId])\n}\n\nmodel EventParticipation {\n  eventId String\n  event   Event     @relation(fields: [eventId], references: [eventId], onDelete: Cascade)\n  userId  String\n  user    User      @relation(fields: [userId], references: [id])\n  role    EventRole @default(PARTICIPANT)\n\n  @@id([eventId, userId])\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profileImage\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventParticipations\",\"kind\":\"object\",\"type\":\"EventParticipation\",\"relationName\":\"EventParticipationToUser\"},{\"name\":\"organizationMembers\",\"kind\":\"object\",\"type\":\"OrganizationMember\",\"relationName\":\"OrganizationMemberToUser\"}],\"dbName\":null},\"Event\":{\"fields\":[{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventTitle\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventStartAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"eventDateYear\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventDateMonth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventDateDay\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventDuration\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventParticipations\",\"kind\":\"object\",\"type\":\"EventParticipation\",\"relationName\":\"EventToEventParticipation\"},{\"name\":\"hostOrganization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"EventToOrganization\"},{\"name\":\"hostOrganizationId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Organization\":{\"fields\":[{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationDescription\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"events\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToOrganization\"},{\"name\":\"organizationMembers\",\"kind\":\"object\",\"type\":\"OrganizationMember\",\"relationName\":\"OrganizationToOrganizationMember\"}],\"dbName\":null},\"OrganizationMember\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrganizationMemberToUser\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToOrganizationMember\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"OrganizationRole\"}],\"dbName\":null},\"EventParticipation\":{\"fields\":[{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToEventParticipation\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"EventParticipationToUser\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"EventRole\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profileImage\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventParticipations\",\"kind\":\"object\",\"type\":\"EventParticipation\",\"relationName\":\"EventParticipationToUser\"},{\"name\":\"organizationMembers\",\"kind\":\"object\",\"type\":\"OrganizationMember\",\"relationName\":\"OrganizationMemberToUser\"}],\"dbName\":null},\"Event\":{\"fields\":[{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventTitle\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventStartAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"eventDateYear\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventDateMonth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventDateDay\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventDuration\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"eventParticipations\",\"kind\":\"object\",\"type\":\"EventParticipation\",\"relationName\":\"EventToEventParticipation\"},{\"name\":\"eventStatus\",\"kind\":\"enum\",\"type\":\"EventStatus\"},{\"name\":\"hostOrganization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"EventToOrganization\"},{\"name\":\"hostOrganizationId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Organization\":{\"fields\":[{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationDescription\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"events\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToOrganization\"},{\"name\":\"organizationMembers\",\"kind\":\"object\",\"type\":\"OrganizationMember\",\"relationName\":\"OrganizationToOrganizationMember\"}],\"dbName\":null},\"OrganizationMember\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrganizationMemberToUser\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToOrganizationMember\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"OrganizationRole\"}],\"dbName\":null},\"EventParticipation\":{\"fields\":[{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToEventParticipation\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"EventParticipationToUser\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"EventRole\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -62,7 +62,7 @@ export interface PrismaClientConstructor {
    * const users = await prisma.user.findMany()
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   * Read more in our [docs](https://pris.ly/d/client).
    */
 
   new <
@@ -84,7 +84,7 @@ export interface PrismaClientConstructor {
  * const users = await prisma.user.findMany()
  * ```
  * 
- * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ * Read more in our [docs](https://pris.ly/d/client).
  */
 
 export interface PrismaClient<
@@ -113,7 +113,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -125,7 +125,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -136,7 +136,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
@@ -148,7 +148,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 

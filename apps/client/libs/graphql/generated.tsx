@@ -147,6 +147,7 @@ export type GetOrganizationOutputDto = {
 };
 
 export type GetOrganizationsInputDto = {
+  isUserJoined: Scalars['Boolean']['input'];
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   userId: Scalars['String']['input'];
@@ -375,6 +376,34 @@ export type UserDto = {
   profileImage?: Maybe<Scalars['String']['output']>;
 };
 
+export type CreateOrganizationMutationVariables = Exact<{
+  input: CreateOrganizationInputDto;
+}>;
+
+
+export type CreateOrganizationMutation = { __typename?: 'Mutation', createOrganization: { __typename?: 'CreateOrganizationOutputDto', message: string, status: number } };
+
+export type GetOrganizationQueryVariables = Exact<{
+  input: GetOrganizationInputDto;
+}>;
+
+
+export type GetOrganizationQuery = { __typename?: 'Query', getOrganization: { __typename?: 'GetOrganizationOutputDto', organization: { __typename?: 'OrganizationDto', organizationId: string, organizationName: string } } };
+
+export type GetOrganizationsQueryVariables = Exact<{
+  input: GetOrganizationsInputDto;
+}>;
+
+
+export type GetOrganizationsQuery = { __typename?: 'Query', getOrganizations: { __typename?: 'GetOrganizationsOutputDto', organizations: Array<{ __typename?: 'OrganizationDto', organizationId: string, organizationName: string, organizationDescription?: string | null, organizationMembers: Array<{ __typename?: 'OrganizationMemberDto', userId: string }> }> } };
+
+export type JoinOrganizationMutationVariables = Exact<{
+  input: JoinOrganizationInputDto;
+}>;
+
+
+export type JoinOrganizationMutation = { __typename?: 'Mutation', joinOrganization: { __typename?: 'JoinOrganizationOutputDto', message: string, status: number } };
+
 export type SignUpUserMutationVariables = Exact<{
   input: AddUserInputDto;
 }>;
@@ -383,6 +412,170 @@ export type SignUpUserMutationVariables = Exact<{
 export type SignUpUserMutation = { __typename?: 'Mutation', addUser: { __typename?: 'AddUserOutputDto', status: number, message: string } };
 
 
+export const CreateOrganizationDocument = gql`
+    mutation createOrganization($input: CreateOrganizationInputDto!) {
+  createOrganization(input: $input) {
+    message
+    status
+  }
+}
+    `;
+export type CreateOrganizationMutationFn = Apollo.MutationFunction<CreateOrganizationMutation, CreateOrganizationMutationVariables>;
+
+/**
+ * __useCreateOrganizationMutation__
+ *
+ * To run a mutation, you first call `useCreateOrganizationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrganizationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrganizationMutation, { data, loading, error }] = useCreateOrganizationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateOrganizationMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrganizationMutation, CreateOrganizationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOrganizationMutation, CreateOrganizationMutationVariables>(CreateOrganizationDocument, options);
+      }
+export type CreateOrganizationMutationHookResult = ReturnType<typeof useCreateOrganizationMutation>;
+export type CreateOrganizationMutationResult = Apollo.MutationResult<CreateOrganizationMutation>;
+export type CreateOrganizationMutationOptions = Apollo.BaseMutationOptions<CreateOrganizationMutation, CreateOrganizationMutationVariables>;
+export const GetOrganizationDocument = gql`
+    query getOrganization($input: GetOrganizationInputDto!) {
+  getOrganization(input: $input) {
+    organization {
+      organizationId
+      organizationName
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOrganizationQuery__
+ *
+ * To run a query within a React component, call `useGetOrganizationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrganizationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOrganizationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetOrganizationQuery(baseOptions: Apollo.QueryHookOptions<GetOrganizationQuery, GetOrganizationQueryVariables> & ({ variables: GetOrganizationQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOrganizationQuery, GetOrganizationQueryVariables>(GetOrganizationDocument, options);
+      }
+export function useGetOrganizationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOrganizationQuery, GetOrganizationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOrganizationQuery, GetOrganizationQueryVariables>(GetOrganizationDocument, options);
+        }
+// @ts-ignore
+export function useGetOrganizationSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetOrganizationQuery, GetOrganizationQueryVariables>): Apollo.UseSuspenseQueryResult<GetOrganizationQuery, GetOrganizationQueryVariables>;
+export function useGetOrganizationSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOrganizationQuery, GetOrganizationQueryVariables>): Apollo.UseSuspenseQueryResult<GetOrganizationQuery | undefined, GetOrganizationQueryVariables>;
+export function useGetOrganizationSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOrganizationQuery, GetOrganizationQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOrganizationQuery, GetOrganizationQueryVariables>(GetOrganizationDocument, options);
+        }
+export type GetOrganizationQueryHookResult = ReturnType<typeof useGetOrganizationQuery>;
+export type GetOrganizationLazyQueryHookResult = ReturnType<typeof useGetOrganizationLazyQuery>;
+export type GetOrganizationSuspenseQueryHookResult = ReturnType<typeof useGetOrganizationSuspenseQuery>;
+export type GetOrganizationQueryResult = Apollo.QueryResult<GetOrganizationQuery, GetOrganizationQueryVariables>;
+export const GetOrganizationsDocument = gql`
+    query getOrganizations($input: GetOrganizationsInputDto!) {
+  getOrganizations(input: $input) {
+    organizations {
+      organizationId
+      organizationName
+      organizationDescription
+      organizationMembers {
+        userId
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOrganizationsQuery__
+ *
+ * To run a query within a React component, call `useGetOrganizationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrganizationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOrganizationsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetOrganizationsQuery(baseOptions: Apollo.QueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables> & ({ variables: GetOrganizationsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOrganizationsQuery, GetOrganizationsQueryVariables>(GetOrganizationsDocument, options);
+      }
+export function useGetOrganizationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOrganizationsQuery, GetOrganizationsQueryVariables>(GetOrganizationsDocument, options);
+        }
+// @ts-ignore
+export function useGetOrganizationsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables>): Apollo.UseSuspenseQueryResult<GetOrganizationsQuery, GetOrganizationsQueryVariables>;
+export function useGetOrganizationsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables>): Apollo.UseSuspenseQueryResult<GetOrganizationsQuery | undefined, GetOrganizationsQueryVariables>;
+export function useGetOrganizationsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOrganizationsQuery, GetOrganizationsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOrganizationsQuery, GetOrganizationsQueryVariables>(GetOrganizationsDocument, options);
+        }
+export type GetOrganizationsQueryHookResult = ReturnType<typeof useGetOrganizationsQuery>;
+export type GetOrganizationsLazyQueryHookResult = ReturnType<typeof useGetOrganizationsLazyQuery>;
+export type GetOrganizationsSuspenseQueryHookResult = ReturnType<typeof useGetOrganizationsSuspenseQuery>;
+export type GetOrganizationsQueryResult = Apollo.QueryResult<GetOrganizationsQuery, GetOrganizationsQueryVariables>;
+export const JoinOrganizationDocument = gql`
+    mutation joinOrganization($input: JoinOrganizationInputDto!) {
+  joinOrganization(input: $input) {
+    message
+    status
+  }
+}
+    `;
+export type JoinOrganizationMutationFn = Apollo.MutationFunction<JoinOrganizationMutation, JoinOrganizationMutationVariables>;
+
+/**
+ * __useJoinOrganizationMutation__
+ *
+ * To run a mutation, you first call `useJoinOrganizationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useJoinOrganizationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [joinOrganizationMutation, { data, loading, error }] = useJoinOrganizationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useJoinOrganizationMutation(baseOptions?: Apollo.MutationHookOptions<JoinOrganizationMutation, JoinOrganizationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<JoinOrganizationMutation, JoinOrganizationMutationVariables>(JoinOrganizationDocument, options);
+      }
+export type JoinOrganizationMutationHookResult = ReturnType<typeof useJoinOrganizationMutation>;
+export type JoinOrganizationMutationResult = Apollo.MutationResult<JoinOrganizationMutation>;
+export type JoinOrganizationMutationOptions = Apollo.BaseMutationOptions<JoinOrganizationMutation, JoinOrganizationMutationVariables>;
 export const SignUpUserDocument = gql`
     mutation SignUpUser($input: AddUserInputDto!) {
   addUser(input: $input) {

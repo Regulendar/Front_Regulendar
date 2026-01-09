@@ -48,6 +48,7 @@ export type EventMinAggregateOutputType = {
   eventDateMonth: number | null
   eventDateDay: number | null
   eventDuration: number | null
+  eventStatus: $Enums.EventStatus | null
   hostOrganizationId: string | null
 }
 
@@ -59,6 +60,7 @@ export type EventMaxAggregateOutputType = {
   eventDateMonth: number | null
   eventDateDay: number | null
   eventDuration: number | null
+  eventStatus: $Enums.EventStatus | null
   hostOrganizationId: string | null
 }
 
@@ -70,6 +72,7 @@ export type EventCountAggregateOutputType = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus: number
   hostOrganizationId: number
   _all: number
 }
@@ -97,6 +100,7 @@ export type EventMinAggregateInputType = {
   eventDateMonth?: true
   eventDateDay?: true
   eventDuration?: true
+  eventStatus?: true
   hostOrganizationId?: true
 }
 
@@ -108,6 +112,7 @@ export type EventMaxAggregateInputType = {
   eventDateMonth?: true
   eventDateDay?: true
   eventDuration?: true
+  eventStatus?: true
   hostOrganizationId?: true
 }
 
@@ -119,6 +124,7 @@ export type EventCountAggregateInputType = {
   eventDateMonth?: true
   eventDateDay?: true
   eventDuration?: true
+  eventStatus?: true
   hostOrganizationId?: true
   _all?: true
 }
@@ -217,6 +223,7 @@ export type EventGroupByOutputType = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus: $Enums.EventStatus
   hostOrganizationId: string
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
@@ -251,6 +258,7 @@ export type EventWhereInput = {
   eventDateMonth?: Prisma.IntFilter<"Event"> | number
   eventDateDay?: Prisma.IntFilter<"Event"> | number
   eventDuration?: Prisma.IntFilter<"Event"> | number
+  eventStatus?: Prisma.EnumEventStatusFilter<"Event"> | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringFilter<"Event"> | string
   eventParticipations?: Prisma.EventParticipationListRelationFilter
   hostOrganization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -264,6 +272,7 @@ export type EventOrderByWithRelationInput = {
   eventDateMonth?: Prisma.SortOrder
   eventDateDay?: Prisma.SortOrder
   eventDuration?: Prisma.SortOrder
+  eventStatus?: Prisma.SortOrder
   hostOrganizationId?: Prisma.SortOrder
   eventParticipations?: Prisma.EventParticipationOrderByRelationAggregateInput
   hostOrganization?: Prisma.OrganizationOrderByWithRelationInput
@@ -280,6 +289,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   eventDateMonth?: Prisma.IntFilter<"Event"> | number
   eventDateDay?: Prisma.IntFilter<"Event"> | number
   eventDuration?: Prisma.IntFilter<"Event"> | number
+  eventStatus?: Prisma.EnumEventStatusFilter<"Event"> | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringFilter<"Event"> | string
   eventParticipations?: Prisma.EventParticipationListRelationFilter
   hostOrganization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -293,6 +303,7 @@ export type EventOrderByWithAggregationInput = {
   eventDateMonth?: Prisma.SortOrder
   eventDateDay?: Prisma.SortOrder
   eventDuration?: Prisma.SortOrder
+  eventStatus?: Prisma.SortOrder
   hostOrganizationId?: Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
@@ -312,6 +323,7 @@ export type EventScalarWhereWithAggregatesInput = {
   eventDateMonth?: Prisma.IntWithAggregatesFilter<"Event"> | number
   eventDateDay?: Prisma.IntWithAggregatesFilter<"Event"> | number
   eventDuration?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  eventStatus?: Prisma.EnumEventStatusWithAggregatesFilter<"Event"> | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringWithAggregatesFilter<"Event"> | string
 }
 
@@ -323,6 +335,7 @@ export type EventCreateInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   eventParticipations?: Prisma.EventParticipationCreateNestedManyWithoutEventInput
   hostOrganization: Prisma.OrganizationCreateNestedOneWithoutEventsInput
 }
@@ -335,6 +348,7 @@ export type EventUncheckedCreateInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   hostOrganizationId: string
   eventParticipations?: Prisma.EventParticipationUncheckedCreateNestedManyWithoutEventInput
 }
@@ -347,6 +361,7 @@ export type EventUpdateInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   eventParticipations?: Prisma.EventParticipationUpdateManyWithoutEventNestedInput
   hostOrganization?: Prisma.OrganizationUpdateOneRequiredWithoutEventsNestedInput
 }
@@ -359,6 +374,7 @@ export type EventUncheckedUpdateInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringFieldUpdateOperationsInput | string
   eventParticipations?: Prisma.EventParticipationUncheckedUpdateManyWithoutEventNestedInput
 }
@@ -371,6 +387,7 @@ export type EventCreateManyInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   hostOrganizationId: string
 }
 
@@ -382,6 +399,7 @@ export type EventUpdateManyMutationInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
 }
 
 export type EventUncheckedUpdateManyInput = {
@@ -392,6 +410,7 @@ export type EventUncheckedUpdateManyInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -403,6 +422,7 @@ export type EventCountOrderByAggregateInput = {
   eventDateMonth?: Prisma.SortOrder
   eventDateDay?: Prisma.SortOrder
   eventDuration?: Prisma.SortOrder
+  eventStatus?: Prisma.SortOrder
   hostOrganizationId?: Prisma.SortOrder
 }
 
@@ -421,6 +441,7 @@ export type EventMaxOrderByAggregateInput = {
   eventDateMonth?: Prisma.SortOrder
   eventDateDay?: Prisma.SortOrder
   eventDuration?: Prisma.SortOrder
+  eventStatus?: Prisma.SortOrder
   hostOrganizationId?: Prisma.SortOrder
 }
 
@@ -432,6 +453,7 @@ export type EventMinOrderByAggregateInput = {
   eventDateMonth?: Prisma.SortOrder
   eventDateDay?: Prisma.SortOrder
   eventDuration?: Prisma.SortOrder
+  eventStatus?: Prisma.SortOrder
   hostOrganizationId?: Prisma.SortOrder
 }
 
@@ -467,6 +489,10 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type EnumEventStatusFieldUpdateOperationsInput = {
+  set?: $Enums.EventStatus
 }
 
 export type EventCreateNestedManyWithoutHostOrganizationInput = {
@@ -533,6 +559,7 @@ export type EventCreateWithoutHostOrganizationInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   eventParticipations?: Prisma.EventParticipationCreateNestedManyWithoutEventInput
 }
 
@@ -544,6 +571,7 @@ export type EventUncheckedCreateWithoutHostOrganizationInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   eventParticipations?: Prisma.EventParticipationUncheckedCreateNestedManyWithoutEventInput
 }
 
@@ -584,6 +612,7 @@ export type EventScalarWhereInput = {
   eventDateMonth?: Prisma.IntFilter<"Event"> | number
   eventDateDay?: Prisma.IntFilter<"Event"> | number
   eventDuration?: Prisma.IntFilter<"Event"> | number
+  eventStatus?: Prisma.EnumEventStatusFilter<"Event"> | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringFilter<"Event"> | string
 }
 
@@ -595,6 +624,7 @@ export type EventCreateWithoutEventParticipationsInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   hostOrganization: Prisma.OrganizationCreateNestedOneWithoutEventsInput
 }
 
@@ -606,6 +636,7 @@ export type EventUncheckedCreateWithoutEventParticipationsInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
   hostOrganizationId: string
 }
 
@@ -633,6 +664,7 @@ export type EventUpdateWithoutEventParticipationsInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   hostOrganization?: Prisma.OrganizationUpdateOneRequiredWithoutEventsNestedInput
 }
 
@@ -644,6 +676,7 @@ export type EventUncheckedUpdateWithoutEventParticipationsInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   hostOrganizationId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -655,6 +688,7 @@ export type EventCreateManyHostOrganizationInput = {
   eventDateMonth: number
   eventDateDay: number
   eventDuration: number
+  eventStatus?: $Enums.EventStatus
 }
 
 export type EventUpdateWithoutHostOrganizationInput = {
@@ -665,6 +699,7 @@ export type EventUpdateWithoutHostOrganizationInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   eventParticipations?: Prisma.EventParticipationUpdateManyWithoutEventNestedInput
 }
 
@@ -676,6 +711,7 @@ export type EventUncheckedUpdateWithoutHostOrganizationInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
   eventParticipations?: Prisma.EventParticipationUncheckedUpdateManyWithoutEventNestedInput
 }
 
@@ -687,6 +723,7 @@ export type EventUncheckedUpdateManyWithoutHostOrganizationInput = {
   eventDateMonth?: Prisma.IntFieldUpdateOperationsInput | number
   eventDateDay?: Prisma.IntFieldUpdateOperationsInput | number
   eventDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  eventStatus?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
 }
 
 
@@ -728,6 +765,7 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   eventDateMonth?: boolean
   eventDateDay?: boolean
   eventDuration?: boolean
+  eventStatus?: boolean
   hostOrganizationId?: boolean
   eventParticipations?: boolean | Prisma.Event$eventParticipationsArgs<ExtArgs>
   hostOrganization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -742,6 +780,7 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   eventDateMonth?: boolean
   eventDateDay?: boolean
   eventDuration?: boolean
+  eventStatus?: boolean
   hostOrganizationId?: boolean
   hostOrganization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -754,6 +793,7 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   eventDateMonth?: boolean
   eventDateDay?: boolean
   eventDuration?: boolean
+  eventStatus?: boolean
   hostOrganizationId?: boolean
   hostOrganization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -766,10 +806,11 @@ export type EventSelectScalar = {
   eventDateMonth?: boolean
   eventDateDay?: boolean
   eventDuration?: boolean
+  eventStatus?: boolean
   hostOrganizationId?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"eventId" | "eventTitle" | "eventStartAt" | "eventDateYear" | "eventDateMonth" | "eventDateDay" | "eventDuration" | "hostOrganizationId", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"eventId" | "eventTitle" | "eventStartAt" | "eventDateYear" | "eventDateMonth" | "eventDateDay" | "eventDuration" | "eventStatus" | "hostOrganizationId", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eventParticipations?: boolean | Prisma.Event$eventParticipationsArgs<ExtArgs>
   hostOrganization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -796,6 +837,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     eventDateMonth: number
     eventDateDay: number
     eventDuration: number
+    eventStatus: $Enums.EventStatus
     hostOrganizationId: string
   }, ExtArgs["result"]["event"]>
   composites: {}
@@ -1229,6 +1271,7 @@ export interface EventFieldRefs {
   readonly eventDateMonth: Prisma.FieldRef<"Event", 'Int'>
   readonly eventDateDay: Prisma.FieldRef<"Event", 'Int'>
   readonly eventDuration: Prisma.FieldRef<"Event", 'Int'>
+  readonly eventStatus: Prisma.FieldRef<"Event", 'EventStatus'>
   readonly hostOrganizationId: Prisma.FieldRef<"Event", 'String'>
 }
     

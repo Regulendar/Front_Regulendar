@@ -17,7 +17,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ApolloProvider } from '@apollo/client/react';
 import { useDidUpdate } from 'rooks';
-import { TamaguiProvider } from 'tamagui';
+import { TamaguiProvider, PortalProvider } from 'tamagui';
 import { apolloClient } from '@/libs';
 
 preventAutoHideAsync();
@@ -51,9 +51,11 @@ export default function RootLayout() {
     <ApolloProvider client={apolloClient}>
       <SafeAreaProvider>
         <GestureHandlerRootView>
-          <TamaguiProvider config={config}>
-            <Stack screenOptions={{ headerShown: false }} />
-          </TamaguiProvider>
+          <PortalProvider shouldAddRootHost>
+            <TamaguiProvider config={config} defaultTheme="light">
+              <Stack screenOptions={{ headerShown: false }} />
+            </TamaguiProvider>
+          </PortalProvider>
         </GestureHandlerRootView>
       </SafeAreaProvider>
     </ApolloProvider>

@@ -1,0 +1,19 @@
+query getOrganizations($input: GetOrganizationsInputDto!) {
+  getOrganizations(input: $input) {
+    organizations {
+      organizationId
+      organizationName
+      organizationDescription
+      organizationMembers {
+        userId
+      }
+    }
+  }
+}
+
+mutation joinOrganization($input: JoinOrganizationInputDto!) {
+  joinOrganization(input: $input) {
+    message
+    status
+  }
+}

@@ -78,8 +78,8 @@ export const OrganizationMainSubScreen = memo(() => {
                 isFullWidth={false}
                 px="$size.x3"
                 py="$size.x1_5"
-                backgroundColor="$colors.backgroundWhite"
-                onPressButton={handlePressDetails}>
+                bg="$colors.backgroundWhite"
+                onPress={handlePressDetails}>
                 <FontAwesomeIcon size={20} icon={faInfoCircle} color="#3ABF67" />
                 <Text fontSize="$6" fontWeight="800" color="$colors.componentGreen">
                   Details
@@ -199,7 +199,7 @@ export const OrganizationMainSubScreen = memo(() => {
               items="center"
               py="$size.x3"
               bg="$colors.backgroundWhite"
-              gap="$size.x1"
+              gap="$size.x3"
               borderWidth={1}
               borderColor="$colors.componentGreen"
               style={{ borderRadius: 12 }}>

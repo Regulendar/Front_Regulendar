@@ -3,34 +3,35 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { memo, useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Stack, Text } from 'tamagui';
+import { Stack, Text } from 'tamagui';
 
-import { supabaseAuth } from '@/libs';
+import { supabaseAuth, useSignUpUserMutation } from '@/libs';
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { useRouter } from 'expo-router';
 import { useDidUpdate } from 'rooks';
 import { isEmail, isMobilePhone, isStrongPassword } from 'validator';
-import { Input } from '@/components';
-import { useSignUpUserMutation } from '@/libs/graphql';
+import { Input, Button } from '@/components';
+import { useUserStore } from '@/stores';
 
 type ILoginType = 'EMAIL' | 'PHONE';
 
 export const SignUpScreen = memo(() => {
   const route = useRouter();
-
+  const { setUserId } = useUserStore();
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isSignUpFailed, setIsSignUpFailed] = useState<boolean>(false); // TODO(@Milgam06): 추후에 실패했을 때 UI 변경 필요
   const [loginType, setLoginType] = useState<ILoginType>('EMAIL');
-  const [signUpUser] = useSignUpUserMutation();
+  const [signUpUserMutation] = useSignUpUserMutation();
 
-  const handlePressEmailLoginType = useCallback(() => {
+  const handlePressEmailLogin = useCallback(() => {
     setLoginType('EMAIL');
   }, []);
 
-  const handlePressPhoneLoginType = useCallback(() => {
+  const handlePressPhoneLogin = useCallback(() => {
     setLoginType('PHONE');
   }, []);
 
@@ -61,7 +62,7 @@ export const SignUpScreen = memo(() => {
         setIsSignUpFailed(true);
         return;
       }
-      const { errors } = await signUpUser({
+      const { errors } = await signUpUserMutation({
         variables: {
           input: {
             id: user.id,
@@ -74,24 +75,29 @@ export const SignUpScreen = memo(() => {
         setIsSignUpFailed(true);
         return;
       }
+      setUserId(user.id);
     },
-    [signUpUser]
+    [setUserId, signUpUserMutation]
   );
 
   const handlePressSignUp = useCallback(async () => {
+    setIsDisabled(true);
     const isInputValid = loginType === 'EMAIL' ? isEmail(email) : isMobilePhone(phone, 'ko-KR');
     const isPasswordValid = isStrongPassword(password, { minLength: 6, minUppercase: 1, minNumbers: 0, minSymbols: 0 });
     if (!isInputValid) {
       console.log('이메일 또는 전화번호 형식이 올바르지 않습니다.');
+      setIsDisabled(false);
       return;
     }
     if (!isPasswordValid) {
       console.log('비밀번호는 최소 6자 이상, 대문자 1자 이상 포함해야 합니다.');
+      setIsDisabled(false);
       return;
     }
     const isSamePassword = password === confirmPassword;
     if (!isSamePassword) {
       console.log('비밀번호가 일치하지 않습니다.');
+      setIsDisabled(false);
       return;
     }
 
@@ -103,6 +109,7 @@ export const SignUpScreen = memo(() => {
     const { error: signInError } = await supabaseAuth.signInWithPassword(authPayload);
     if (signInError) {
       setIsSignUpFailed(true);
+      setIsDisabled(false);
       return;
     }
     route.replace('/participation/participation');
@@ -121,14 +128,13 @@ export const SignUpScreen = memo(() => {
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
       <Stack flex={1} width="$fluid" px="$size.x5" py="$size.x10" justify="space-between">
         <Stack items="center" gap="$size.x7">
-          <Stack width="$fluid" gap="$size.x1">
+          <Stack gap="$size.x1">
             <Text fontSize="$9" fontWeight="800" color="$colors.darkGreen">
               똑똑한 일정 관리
             </Text>
             <Text fontSize="$9" fontWeight="800" color="$colors.black">
               시작해볼까요?
             </Text>
-
             <Text fontSize="$6" fontWeight="700" color="$colors.mediumGray">
               양식을 작성하여 회원가입을 완료해주세요.
             </Text>
@@ -171,7 +177,7 @@ export const SignUpScreen = memo(() => {
                   px="$size.x6"
                   py="$size.x3"
                   bg={loginType === 'EMAIL' ? '$colors.componentGreen' : '$colors.lightGray'}
-                  onPress={handlePressEmailLoginType}>
+                  onPress={handlePressEmailLogin}>
                   <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                     <FontAwesomeIcon color={loginType === 'EMAIL' ? '#fff' : '#424242'} icon={faEnvelope} />
                     <Text
@@ -188,7 +194,7 @@ export const SignUpScreen = memo(() => {
                   px="$size.x6"
                   py="$size.x3"
                   bg={loginType === 'PHONE' ? '$colors.componentGreen' : '$colors.lightGray'}
-                  onPress={handlePressPhoneLoginType}>
+                  onPress={handlePressPhoneLogin}>
                   <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                     <FontAwesomeIcon color={loginType === 'PHONE' ? '#fff' : '#424242'} icon={faPhone} />
                     <Text
@@ -230,13 +236,12 @@ export const SignUpScreen = memo(() => {
           </Stack>
         </Stack>
         <Button
-          width="$fluid"
-          height="auto"
           px="$size.x6"
           py="$size.x3"
           bg="$colors.componentGreen"
-          pressStyle={{ bg: '$colors.darkGreen', scale: 0.99 }}
-          onPress={handlePressSignUp}>
+          pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
+          onPress={handlePressSignUp}
+          disabled={isDisabled}>
           <Text fontSize="$8" fontWeight="700" color="$colors.white">
             회원가입
           </Text>

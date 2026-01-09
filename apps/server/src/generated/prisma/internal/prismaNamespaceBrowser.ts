@@ -91,6 +91,7 @@ export const EventScalarFieldEnum = {
   eventDateMonth: 'eventDateMonth',
   eventDateDay: 'eventDateDay',
   eventDuration: 'eventDuration',
+  eventStatus: 'eventStatus',
   hostOrganizationId: 'hostOrganizationId'
 } as const
 

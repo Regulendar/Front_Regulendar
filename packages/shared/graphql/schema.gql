@@ -68,6 +68,7 @@ type EventDto {
   eventDateMonth: Float!
   eventDateDay: Float!
   eventDuration: Float!
+  eventStatus: EventStatus!
   eventParticipations: [EventParticipationDto!]!
   hostOrganizationId: String!
 }
@@ -76,6 +77,13 @@ type EventDto {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+enum EventStatus {
+  CANCELLED
+  SCHEDULED
+  PROCESSING
+  COMPLETED
+}
 
 type DeleteEventOutputDto {
   message: String!
@@ -152,6 +160,7 @@ input GetOrganizationInputDto {
 
 input GetOrganizationsInputDto {
   userId: String!
+  isUserJoined: Boolean!
   skip: Int
   take: Int
 }
@@ -252,4 +261,5 @@ input UpdateEventInputDto {
   eventTitle: String
   eventStartAt: DateTime
   eventDuration: Float
+  eventStatus: EventStatus
 }

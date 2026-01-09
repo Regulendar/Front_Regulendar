@@ -1,0 +1,6 @@
+mutation createOrganization($input: CreateOrganizationInputDto!) {
+  createOrganization(input: $input) {
+    message
+    status
+  }
+}

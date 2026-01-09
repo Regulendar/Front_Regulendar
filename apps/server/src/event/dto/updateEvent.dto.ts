@@ -1,3 +1,4 @@
+import { EventStatus } from '@generated-prisma/enums';
 import { HttpStatus } from '@nestjs/common';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsDate, IsString } from 'class-validator';
@@ -18,6 +19,9 @@ export class UpdateEventInputDto {
 
   @Field(() => Number, { nullable: true })
   eventDuration?: number;
+
+  @Field(() => EventStatus, { nullable: true })
+  eventStatus?: EventStatus;
 }
 
 @ObjectType()
