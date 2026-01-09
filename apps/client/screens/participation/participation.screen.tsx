@@ -205,10 +205,6 @@ export const ParticipationScreen = memo(() => {
     setSearchedOrganization('');
   }, [searchType]);
 
-  useDidUpdate(() => {
-    console.log({ filteredOrganizations, searchType, myOrganizations, exploreOrganizations });
-  }, [searchType, filteredOrganizations, myOrganizations, exploreOrganizations]);
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Stack flex={1} px="$size.x5" py="$size.x5" gap="$size.x4">

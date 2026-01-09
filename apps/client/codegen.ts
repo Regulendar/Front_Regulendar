@@ -3,8 +3,6 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 
 const schemaPath = resolve(__dirname, '../../packages/shared/graphql/schema.gql');
 
-console.log('Schema Path:', schemaPath);
-
 const config: CodegenConfig = {
   schema: schemaPath,
   documents: ['screens/**/*.graphql'],

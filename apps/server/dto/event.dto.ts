@@ -47,7 +47,6 @@ export class EventDto {
   @IsEnum(EventStatus)
   eventStatus: EventStatus;
 
-  @Field(() => String)
   @Field(() => [EventParticipationDto])
   eventParticipations: EventParticipationDto[];
 

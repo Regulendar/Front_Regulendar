@@ -22,11 +22,10 @@ export class GetOrganizationsService {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
 
-      const isUserJoining = isUserJoined === true;
       const organizations = await this.prisma.organization.findMany({
         where: {
           organizationMembers: {
-            ...(isUserJoining
+            ...(isUserJoined
               ? {
                   some: { userId },
                 }
