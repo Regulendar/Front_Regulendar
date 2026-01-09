@@ -52,7 +52,7 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <GestureHandlerRootView>
           <PortalProvider shouldAddRootHost>
-            <TamaguiProvider config={config}>
+            <TamaguiProvider config={config} defaultTheme="light">
               <Stack screenOptions={{ headerShown: false }} />
             </TamaguiProvider>
           </PortalProvider>
