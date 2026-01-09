@@ -18,7 +18,7 @@ export const Alert = memo<IAlert>(({ isOpen, onClose, alertPadding = '$size.x2',
       <AlertDialog.Portal>
         <AlertDialog.Overlay
           key="overlay"
-          animation="medium"
+          animation="200ms"
           enterStyle={{ opacity: 1 }}
           exitStyle={{ opacity: 0 }}
           bg="rgba(0,0,0,0.4)"
@@ -27,10 +27,8 @@ export const Alert = memo<IAlert>(({ isOpen, onClose, alertPadding = '$size.x2',
         <AlertDialog.Content
           radiused={false}
           p={alertPadding}
-          y={0}
           enterStyle={{
-            scale: 0.9,
-            y: 20,
+            scale: 0.98,
           }}
           animation="200ms">
           <Stack>{children}</Stack>
