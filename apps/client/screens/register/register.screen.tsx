@@ -19,10 +19,10 @@ export const RegisterScreen = memo(() => {
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
       <Stack flex={1} justify="space-between" py="$size.x10" items="center">
         <Stack flex={1} justify="center" items="center" gap="$size.x2">
-          <Text fontSize="$12" fontWeight="800" color="$colors.componentGreen">
+          <Text fontSize="$12" fontWeight="800" color="$colors.primaryGreen">
             Regulendar
           </Text>
-          <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
+          <Text fontSize="$8" fontWeight="700" color="$colors.primaryGreen">
             정기적인 모임 관리의 시작
           </Text>
         </Stack>
@@ -30,8 +30,8 @@ export const RegisterScreen = memo(() => {
           <Button
             px="$size.x6"
             py="$size.x3"
-            bg="$colors.componentGreen"
-            pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
+            bg="$colors.primaryGreen"
+            pressStyle={{ bg: '$colors.primaryGreen', scale: 0.99, opacity: 0.8 }}
             onPress={handlePressSignUp}>
             <Text fontSize="$8" fontWeight="700" color="$colors.white">
               회원 가입
@@ -40,8 +40,8 @@ export const RegisterScreen = memo(() => {
           <Button
             px="$size.x6"
             py="$size.x3"
-            bg="$colors.componentGreen"
-            pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
+            bg="$colors.primaryGreen"
+            pressStyle={{ bg: '$colors.primaryGreen', scale: 0.99, opacity: 0.8 }}
             onPress={handlePressSignIn}>
             <Text fontSize="$8" fontWeight="700" color="$colors.white">
               로그인

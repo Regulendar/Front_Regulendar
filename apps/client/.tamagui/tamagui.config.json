@@ -69984,10 +69984,10 @@
           "val": "#B9E937",
           "variable": ""
         },
-        "componentGreen": {
+        "primaryGreen": {
           "isVar": true,
-          "key": "$componentGreen",
-          "name": "t-colors-componentGreen",
+          "key": "$primaryGreen",
+          "name": "t-colors-primaryGreen",
           "val": "#3ABF67",
           "variable": ""
         },
@@ -70171,13 +70171,6 @@
         "val": "#000000",
         "variable": ""
       },
-      "$colors.componentGreen": {
-        "isVar": true,
-        "key": "$componentGreen",
-        "name": "t-colors-componentGreen",
-        "val": "#3ABF67",
-        "variable": ""
-      },
       "$colors.darkGray": {
         "isVar": true,
         "key": "$darkGray",
@@ -70218,6 +70211,13 @@
         "key": "$mediumGray",
         "name": "t-colors-mediumGray",
         "val": "#888888",
+        "variable": ""
+      },
+      "$colors.primaryGreen": {
+        "isVar": true,
+        "key": "$primaryGreen",
+        "name": "t-colors-primaryGreen",
+        "val": "#3ABF67",
         "variable": ""
       },
       "$colors.white": {

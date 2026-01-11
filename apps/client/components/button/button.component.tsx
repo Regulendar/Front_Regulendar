@@ -9,7 +9,7 @@ type IButton = {
 export const Button = memo<IButton>(
   ({
     isFullWidth = true,
-    bg = '$colors.componentGreen',
+    bg = '$colors.primaryGreen',
     justify = 'center',
     items = 'center',
     px = '$size.x6',

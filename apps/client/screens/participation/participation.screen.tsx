@@ -222,13 +222,13 @@ export const ParticipationScreen = memo(() => {
             borderColor="$colors.lightGray"
             fontSize="$5"
             fontWeight="500"
-            focusStyle={{ borderColor: '$colors.componentGreen' }}
+            focusStyle={{ borderColor: '$colors.primaryGreen' }}
           />
           <Stack width="$fluid" flexDirection="row" justify="space-between" items="center" gap="$size.x2">
             <Button
               px="$size.x6"
               py="$size.x3"
-              bg={searchType === 'MY_ORGANIZATION' ? '$colors.componentGreen' : '$colors.lightGray'}
+              bg={searchType === 'MY_ORGANIZATION' ? '$colors.primaryGreen' : '$colors.lightGray'}
               onPress={handlePressMyOrganizationSearch}
               style={{ flex: 1 }}>
               <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
@@ -244,7 +244,7 @@ export const ParticipationScreen = memo(() => {
             <Button
               px="$size.x6"
               py="$size.x3"
-              bg={searchType === 'EXPLORE_ORGANIZATION' ? '$colors.componentGreen' : '$colors.lightGray'}
+              bg={searchType === 'EXPLORE_ORGANIZATION' ? '$colors.primaryGreen' : '$colors.lightGray'}
               onPress={handlePressExploreOrganizationSearch}
               style={{ flex: 1 }}>
               <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">

@@ -176,7 +176,7 @@ export const SignUpScreen = memo(() => {
                   height="$fit"
                   px="$size.x6"
                   py="$size.x3"
-                  bg={loginType === 'EMAIL' ? '$colors.componentGreen' : '$colors.lightGray'}
+                  bg={loginType === 'EMAIL' ? '$colors.primaryGreen' : '$colors.lightGray'}
                   onPress={handlePressEmailLogin}>
                   <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                     <FontAwesomeIcon color={loginType === 'EMAIL' ? '#fff' : '#424242'} icon={faEnvelope} />
@@ -193,7 +193,7 @@ export const SignUpScreen = memo(() => {
                   height="$fit"
                   px="$size.x6"
                   py="$size.x3"
-                  bg={loginType === 'PHONE' ? '$colors.componentGreen' : '$colors.lightGray'}
+                  bg={loginType === 'PHONE' ? '$colors.primaryGreen' : '$colors.lightGray'}
                   onPress={handlePressPhoneLogin}>
                   <Stack width="$fluid" flexDirection="row" justify="center" items="center" gap="$size.x2">
                     <FontAwesomeIcon color={loginType === 'PHONE' ? '#fff' : '#424242'} icon={faPhone} />
@@ -238,8 +238,8 @@ export const SignUpScreen = memo(() => {
         <Button
           px="$size.x6"
           py="$size.x3"
-          bg="$colors.componentGreen"
-          pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
+          bg="$colors.primaryGreen"
+          pressStyle={{ bg: '$colors.primaryGreen', scale: 0.99, opacity: 0.8 }}
           onPress={handlePressSignUp}
           disabled={isDisabled}>
           <Text fontSize="$8" fontWeight="700" color="$colors.white">

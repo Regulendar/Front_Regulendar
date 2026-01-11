@@ -236,7 +236,7 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
           {hasParticipatedEvents && (
             <Stack width="$fluid" gap="$size.x2">
               <Stack width="$fluid" px="$size.x3">
-                <Text fontSize="$5" fontWeight="900" color="$colors.componentGreen">
+                <Text fontSize="$5" fontWeight="900" color="$colors.primaryGreen">
                   내가 참여한 일정 {participatedEvents.length}개
                 </Text>
               </Stack>
@@ -258,8 +258,8 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
                       p="$size.x2"
                       flexDirection="row"
                       borderWidth="$size.x0_5"
-                      borderColor="$colors.componentGreen"
-                      bg="$colors.componentGreen"
+                      borderColor="$colors.primaryGreen"
+                      bg="$colors.primaryGreen"
                       gap="$size.x2"
                       style={{ borderRadius: 8 }}>
                       <Stack
@@ -269,10 +269,10 @@ export const OrganizationCalendarSubScreen = memo<IOrganizationHomeSubScreen>(({
                         justify="center"
                         items="center"
                         style={{ borderRadius: 4 }}>
-                        <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.primaryGreen">
                           {eventStartHour}
                         </Text>
-                        <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
+                        <Text fontSize="$8" fontWeight="700" color="$colors.primaryGreen">
                           {eventStartMinute}
                         </Text>
                       </Stack>

@@ -5,7 +5,7 @@ const tokens = createTokens({
   colors: {
     darkGreen: '#00B906',
     lightGreen: '#B9E937',
-    componentGreen: '#3ABF67',
+    primaryGreen: '#3ABF67',
     errorRed: '#ff686a',
     lightGray: '#c3c3c3',
     mediumGray: '#888888',

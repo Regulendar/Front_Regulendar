@@ -105,7 +105,7 @@ export const Navbar = memo<INavbar>(({ itemValue, navbarItems, onChangeItemValue
                 px="$size.x2"
                 pressStyle={{ opacity: 0.6 }}
                 style={{ borderRadius: 8 }}>
-                <Text fontSize="$6" fontWeight="900" color="$colors.componentGreen">
+                <Text fontSize="$6" fontWeight="900" color="$colors.primaryGreen">
                   이벤트 생성하기
                 </Text>
               </Stack>

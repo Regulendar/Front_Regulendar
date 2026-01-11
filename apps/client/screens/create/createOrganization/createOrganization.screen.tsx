@@ -134,8 +134,8 @@ export const CreateOrganizationScreen = memo(() => {
           <Button
             px="$size.x6"
             py="$size.x3"
-            bg="$colors.componentGreen"
-            pressStyle={{ bg: '$colors.componentGreen', scale: 0.99, opacity: 0.8 }}
+            bg="$colors.primaryGreen"
+            pressStyle={{ bg: '$colors.primaryGreen', scale: 0.99, opacity: 0.8 }}
             disabled={isDisabled}
             onPress={handlePressCreateOrganization}>
             <Text fontSize="$8" fontWeight="700" color="$colors.white">
