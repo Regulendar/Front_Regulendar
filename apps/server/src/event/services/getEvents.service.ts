@@ -12,6 +12,7 @@ export class GetEventsService {
     eventDateYear,
     eventDateMonth,
     eventDateDay,
+    eventStatus,
   }: GetEventsInputDto): Promise<GetEventsOutputDto> {
     try {
       const events = await this.prismaService.event.findMany({
@@ -23,6 +24,7 @@ export class GetEventsService {
               },
             },
           }),
+          ...(eventStatus && { eventStatus }),
           hostOrganizationId: organizationId,
           eventDateYear,
           eventDateMonth,

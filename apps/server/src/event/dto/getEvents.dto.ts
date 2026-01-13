@@ -1,5 +1,6 @@
+import { EventStatus } from '@generated-prisma/enums';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsNumber, IsUUID } from 'class-validator';
+import { IsEnum, IsNumber, IsUUID } from 'class-validator';
 import { EventDto } from 'dto';
 
 @InputType()
@@ -23,6 +24,10 @@ export class GetEventsInputDto {
   @Field(() => Number, { nullable: true })
   @IsNumber()
   eventDateDay?: number;
+
+  @Field(() => EventStatus, { nullable: true })
+  @IsEnum(EventStatus)
+  eventStatus?: EventStatus;
 }
 
 @ObjectType()

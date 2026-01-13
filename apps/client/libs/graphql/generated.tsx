@@ -99,6 +99,7 @@ export type EventDto = {
   eventId: Scalars['String']['output'];
   eventParticipations: Array<EventParticipationDto>;
   eventStartAt: Scalars['DateTime']['output'];
+  eventStatus: EventStatus;
   eventTitle: Scalars['String']['output'];
   hostOrganizationId: Scalars['String']['output'];
 };
@@ -115,6 +116,13 @@ export enum EventRole {
   Participant = 'PARTICIPANT'
 }
 
+export enum EventStatus {
+  Cancelled = 'CANCELLED',
+  Completed = 'COMPLETED',
+  Processing = 'PROCESSING',
+  Scheduled = 'SCHEDULED'
+}
+
 export type GetEventInputDto = {
   eventId: Scalars['String']['input'];
 };
@@ -128,6 +136,7 @@ export type GetEventsInputDto = {
   eventDateDay?: InputMaybe<Scalars['Float']['input']>;
   eventDateMonth?: InputMaybe<Scalars['Float']['input']>;
   eventDateYear?: InputMaybe<Scalars['Float']['input']>;
+  eventStatus?: InputMaybe<EventStatus>;
   organizationId?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['String']['input']>;
 };
@@ -358,6 +367,7 @@ export type UpdateEventInputDto = {
   eventDuration?: InputMaybe<Scalars['Float']['input']>;
   eventId: Scalars['String']['input'];
   eventStartAt?: InputMaybe<Scalars['DateTime']['input']>;
+  eventStatus?: InputMaybe<EventStatus>;
   eventTitle?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -389,6 +399,13 @@ export type GetOrganizationQueryVariables = Exact<{
 
 
 export type GetOrganizationQuery = { __typename?: 'Query', getOrganization: { __typename?: 'GetOrganizationOutputDto', organization: { __typename?: 'OrganizationDto', organizationId: string, organizationName: string } } };
+
+export type GetMyScheduledEventsQueryVariables = Exact<{
+  input: GetEventsInputDto;
+}>;
+
+
+export type GetMyScheduledEventsQuery = { __typename?: 'Query', getEvents: { __typename?: 'GetEventsOutputDto', events: Array<{ __typename?: 'EventDto', eventId: string, eventTitle: string, eventDateYear: number, eventDateMonth: number, eventDateDay: number, eventDuration: number, eventStatus: EventStatus }> } };
 
 export type GetOrganizationsQueryVariables = Exact<{
   input: GetOrganizationsInputDto;
@@ -492,6 +509,57 @@ export type GetOrganizationQueryHookResult = ReturnType<typeof useGetOrganizatio
 export type GetOrganizationLazyQueryHookResult = ReturnType<typeof useGetOrganizationLazyQuery>;
 export type GetOrganizationSuspenseQueryHookResult = ReturnType<typeof useGetOrganizationSuspenseQuery>;
 export type GetOrganizationQueryResult = Apollo.QueryResult<GetOrganizationQuery, GetOrganizationQueryVariables>;
+export const GetMyScheduledEventsDocument = gql`
+    query getMyScheduledEvents($input: GetEventsInputDto!) {
+  getEvents(input: $input) {
+    events {
+      eventId
+      eventTitle
+      eventDateYear
+      eventDateMonth
+      eventDateDay
+      eventDuration
+      eventStatus
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMyScheduledEventsQuery__
+ *
+ * To run a query within a React component, call `useGetMyScheduledEventsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyScheduledEventsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyScheduledEventsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetMyScheduledEventsQuery(baseOptions: Apollo.QueryHookOptions<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables> & ({ variables: GetMyScheduledEventsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>(GetMyScheduledEventsDocument, options);
+      }
+export function useGetMyScheduledEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>(GetMyScheduledEventsDocument, options);
+        }
+// @ts-ignore
+export function useGetMyScheduledEventsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>): Apollo.UseSuspenseQueryResult<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>;
+export function useGetMyScheduledEventsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>): Apollo.UseSuspenseQueryResult<GetMyScheduledEventsQuery | undefined, GetMyScheduledEventsQueryVariables>;
+export function useGetMyScheduledEventsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>(GetMyScheduledEventsDocument, options);
+        }
+export type GetMyScheduledEventsQueryHookResult = ReturnType<typeof useGetMyScheduledEventsQuery>;
+export type GetMyScheduledEventsLazyQueryHookResult = ReturnType<typeof useGetMyScheduledEventsLazyQuery>;
+export type GetMyScheduledEventsSuspenseQueryHookResult = ReturnType<typeof useGetMyScheduledEventsSuspenseQuery>;
+export type GetMyScheduledEventsQueryResult = Apollo.QueryResult<GetMyScheduledEventsQuery, GetMyScheduledEventsQueryVariables>;
 export const GetOrganizationsDocument = gql`
     query getOrganizations($input: GetOrganizationsInputDto!) {
   getOrganizations(input: $input) {

@@ -185,6 +185,7 @@ input GetEventsInputDto {
   eventDateYear: Float
   eventDateMonth: Float
   eventDateDay: Float
+  eventStatus: EventStatus
 }
 
 type Mutation {
