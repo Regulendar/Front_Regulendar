@@ -1,0 +1,13 @@
+query getMyScheduledEvents($input: GetEventsInputDto!) {
+  getEvents(input: $input) {
+    events {
+      eventId
+      eventTitle
+      eventDateYear
+      eventDateMonth
+      eventDateDay
+      eventDuration
+      eventStatus
+    }
+  }
+}

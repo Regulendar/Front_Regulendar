@@ -400,6 +400,13 @@ export type GetOrganizationQueryVariables = Exact<{
 
 export type GetOrganizationQuery = { __typename?: 'Query', getOrganization: { __typename?: 'GetOrganizationOutputDto', organization: { __typename?: 'OrganizationDto', organizationId: string, organizationName: string } } };
 
+export type CheckIsOrganizationAdminQueryVariables = Exact<{
+  input: GetUserInputDto;
+}>;
+
+
+export type CheckIsOrganizationAdminQuery = { __typename?: 'Query', getUser: { __typename?: 'GetUserOutputDto', user: { __typename?: 'UserDto', organizationMembers: Array<{ __typename?: 'OrganizationMemberDto', organizationId: string, role: OrganizationRole }> } } };
+
 export type GetMyScheduledEventsQueryVariables = Exact<{
   input: GetEventsInputDto;
 }>;
@@ -509,6 +516,54 @@ export type GetOrganizationQueryHookResult = ReturnType<typeof useGetOrganizatio
 export type GetOrganizationLazyQueryHookResult = ReturnType<typeof useGetOrganizationLazyQuery>;
 export type GetOrganizationSuspenseQueryHookResult = ReturnType<typeof useGetOrganizationSuspenseQuery>;
 export type GetOrganizationQueryResult = Apollo.QueryResult<GetOrganizationQuery, GetOrganizationQueryVariables>;
+export const CheckIsOrganizationAdminDocument = gql`
+    query checkIsOrganizationAdmin($input: GetUserInputDto!) {
+  getUser(input: $input) {
+    user {
+      organizationMembers {
+        organizationId
+        role
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCheckIsOrganizationAdminQuery__
+ *
+ * To run a query within a React component, call `useCheckIsOrganizationAdminQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCheckIsOrganizationAdminQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCheckIsOrganizationAdminQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCheckIsOrganizationAdminQuery(baseOptions: Apollo.QueryHookOptions<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables> & ({ variables: CheckIsOrganizationAdminQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>(CheckIsOrganizationAdminDocument, options);
+      }
+export function useCheckIsOrganizationAdminLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>(CheckIsOrganizationAdminDocument, options);
+        }
+// @ts-ignore
+export function useCheckIsOrganizationAdminSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>): Apollo.UseSuspenseQueryResult<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>;
+export function useCheckIsOrganizationAdminSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>): Apollo.UseSuspenseQueryResult<CheckIsOrganizationAdminQuery | undefined, CheckIsOrganizationAdminQueryVariables>;
+export function useCheckIsOrganizationAdminSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>(CheckIsOrganizationAdminDocument, options);
+        }
+export type CheckIsOrganizationAdminQueryHookResult = ReturnType<typeof useCheckIsOrganizationAdminQuery>;
+export type CheckIsOrganizationAdminLazyQueryHookResult = ReturnType<typeof useCheckIsOrganizationAdminLazyQuery>;
+export type CheckIsOrganizationAdminSuspenseQueryHookResult = ReturnType<typeof useCheckIsOrganizationAdminSuspenseQuery>;
+export type CheckIsOrganizationAdminQueryResult = Apollo.QueryResult<CheckIsOrganizationAdminQuery, CheckIsOrganizationAdminQueryVariables>;
 export const GetMyScheduledEventsDocument = gql`
     query getMyScheduledEvents($input: GetEventsInputDto!) {
   getEvents(input: $input) {

@@ -1,12 +1,28 @@
 import { Button } from '@/components';
+import { EventStatus, useGetMyScheduledEventsLazyQuery } from '@/libs';
 import { getScreenSize } from '@/utils';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Image } from 'expo-image';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import DashedLine from 'react-native-dashed-line';
+import { useDidMount } from 'rooks';
 import { ScrollView, Stack, Text } from 'tamagui';
+
+type IOrganizationMainSubScreenProps = {
+  organizationId: string;
+};
+
+type IScheduledEvent = {
+  eventId: string;
+  eventTitle: string;
+  eventDuration: number;
+  eventDateYear: number;
+  eventDateMonth: number;
+  eventDateDay: number;
+  eventStatus: EventStatus;
+};
 
 type IParticipatedEventCardComponent = {
   eventId: string;
@@ -27,8 +43,10 @@ type IRecommendedEventCardComponent = {
   // TODO(@Milgam06): add Participations
 };
 
-export const OrganizationMainSubScreen = memo(() => {
+export const OrganizationMainSubScreen = memo<IOrganizationMainSubScreenProps>(({ organizationId }) => {
   const { windowWidth } = getScreenSize();
+  const [scheduledEvents, setScheduledEvents] = useState<IScheduledEvent[]>([]);
+  const [getMyScheduledEventsQuery] = useGetMyScheduledEventsLazyQuery();
 
   const ParticipatedEventCardComponent = memo<IParticipatedEventCardComponent>(
     ({ eventId, eventTitle, eventDuration, eventDateYear, eventDateMonth, eventDateDay }) => {
@@ -42,7 +60,7 @@ export const OrganizationMainSubScreen = memo(() => {
             width="$fluid"
             justify="space-between"
             py="$size.x3"
-            bg="$colors.componentGreen"
+            bg="$colors.primaryGreen"
             gap="$size.x4"
             style={{ borderRadius: 12 }}>
             <Stack flexDirection="row" justify="space-between" items="center" px="$size.x4">
@@ -64,10 +82,10 @@ export const OrganizationMainSubScreen = memo(() => {
                 justify="center"
                 items="center"
                 style={{ borderRadius: 8 }}>
-                <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
+                <Text fontSize="$8" fontWeight="700" color="$colors.primaryGreen">
                   {eventDateDay}
                 </Text>
-                <Text fontSize="$8" fontWeight="700" color="$colors.componentGreen">
+                <Text fontSize="$8" fontWeight="700" color="$colors.primaryGreen">
                   Wed
                 </Text>
               </Stack>
@@ -81,7 +99,7 @@ export const OrganizationMainSubScreen = memo(() => {
                 bg="$colors.backgroundWhite"
                 onPress={handlePressDetails}>
                 <FontAwesomeIcon size={20} icon={faInfoCircle} color="#3ABF67" />
-                <Text fontSize="$6" fontWeight="800" color="$colors.componentGreen">
+                <Text fontSize="$6" fontWeight="800" color="$colors.primaryGreen">
                   Details
                 </Text>
               </Button>
@@ -105,7 +123,7 @@ export const OrganizationMainSubScreen = memo(() => {
           p="$size.x2"
           flexDirection="row"
           borderWidth="$size.x0_5"
-          borderColor="$colors.darkGreen"
+          borderColor="$colors.primaryGreen"
           bg="$colors.backgroundWhite"
           gap="$size.x2"
           pressStyle={{ opacity: 0.8 }}
@@ -114,7 +132,7 @@ export const OrganizationMainSubScreen = memo(() => {
           <Stack
             px="$size.x2"
             py="$size.x1"
-            bg="$colors.componentGreen"
+            bg="$colors.primaryGreen"
             justify="center"
             items="center"
             style={{ borderRadius: 4 }}>
@@ -138,6 +156,28 @@ export const OrganizationMainSubScreen = memo(() => {
     }
   );
 
+  const fetchMyScheduledEvents = useCallback(async () => {
+    const { data: scheduledEventsData, error } = await getMyScheduledEventsQuery({
+      variables: {
+        input: {
+          organizationId,
+          eventStatus: EventStatus.Scheduled,
+        },
+      },
+    });
+    const hasScheduledEvents = scheduledEventsData && !error;
+    if (!hasScheduledEvents) {
+      console.log('No scheduled events found or error occurred:', error);
+      return;
+    }
+    console.log('Fetched scheduled events:', scheduledEventsData.getEvents.events);
+    setScheduledEvents(scheduledEventsData.getEvents.events);
+  }, [getMyScheduledEventsQuery, organizationId]);
+
+  useDidMount(async () => {
+    await fetchMyScheduledEvents();
+  });
+
   return (
     <ScrollView flex={1} width="$fluid">
       <Stack flex={1} width="$fluid" py="$size.x2" gap="$size.x5">
@@ -146,28 +186,42 @@ export const OrganizationMainSubScreen = memo(() => {
             <Text fontSize="$6" fontWeight="900">
               이번 달 참여 이벤트
             </Text>
-            <Text fontSize="$5" fontWeight="900" color="$colors.mediumGray">
-              0 / 2
-            </Text>
+            {scheduledEvents.length > 0 && (
+              <Text fontSize="$4" fontWeight="700" color="$colors.primaryGreen">
+                {scheduledEvents.length}개 예정
+              </Text>
+            )}
           </Stack>
-          <ScrollView width="$fluid" horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-            <ParticipatedEventCardComponent
-              eventDateDay={18}
-              eventDateMonth={9}
-              eventDateYear={2025}
-              eventDuration={30}
-              eventId="1"
-              eventTitle="프로젝트 마감"
-            />
-            <ParticipatedEventCardComponent
-              eventDateDay={18}
-              eventDateMonth={9}
-              eventDateYear={2025}
-              eventDuration={30}
-              eventId="1"
-              eventTitle="프로젝트 마감"
-            />
-          </ScrollView>
+          {scheduledEvents.length > 0 ? (
+            <ScrollView width="$fluid" horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+              {scheduledEvents.map((event) => (
+                <ParticipatedEventCardComponent
+                  key={event.eventId}
+                  eventDateDay={event.eventDateDay}
+                  eventDateMonth={event.eventDateMonth}
+                  eventDateYear={event.eventDateYear}
+                  eventDuration={event.eventDuration}
+                  eventId={event.eventId}
+                  eventTitle={event.eventTitle}
+                />
+              ))}
+            </ScrollView>
+          ) : (
+            <ScrollView width="$fluid" horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+              <Stack width={windowWidth} px="$size.x3">
+                <Stack
+                  width="$fluid"
+                  justify="space-between"
+                  py="$size.x3"
+                  borderWidth="$size.x0_5"
+                  borderColor="$colors.primaryGreen"
+                  gap="$size.x4"
+                  style={{ borderRadius: 12 }}>
+                  <Stack flexDirection="row" justify="space-between" items="center" px="$size.x4"></Stack>
+                </Stack>
+              </Stack>
+            </ScrollView>
+          )}
         </Stack>
         <Stack gap="$size.x2">
           <Stack px="$size.x5">
@@ -182,7 +236,7 @@ export const OrganizationMainSubScreen = memo(() => {
               justify="center"
               items="center"
               py="$size.x3"
-              bg="$colors.componentGreen"
+              bg="$colors.primaryGreen"
               gap="$size.x0_5"
               style={{ borderRadius: 12 }}>
               <Text fontSize="$13" fontWeight="700" color="$colors.backgroundWhite">
@@ -201,7 +255,7 @@ export const OrganizationMainSubScreen = memo(() => {
               bg="$colors.backgroundWhite"
               gap="$size.x3"
               borderWidth={1}
-              borderColor="$colors.componentGreen"
+              borderColor="$colors.primaryGreen"
               style={{ borderRadius: 12 }}>
               <Image
                 source="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Thinking%20Face.png"
@@ -209,7 +263,7 @@ export const OrganizationMainSubScreen = memo(() => {
                 contentFit="contain"
                 style={{ width: 100, aspectRatio: 1 }}
               />
-              <Text fontSize="$5" fontWeight="900" color="$colors.componentGreen">
+              <Text fontSize="$5" fontWeight="900" color="$colors.primaryGreen">
                 아직 게시물이 없어요!
               </Text>
             </Stack>
