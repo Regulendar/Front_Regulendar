@@ -6,3 +6,14 @@ query getOrganization($input: GetOrganizationInputDto!) {
     }
   }
 }
+
+query checkIsOrganizationAdmin($input: GetUserInputDto!) {
+  getUser(input: $input) {
+    user {
+      organizationMembers {
+        organizationId
+        role
+      }
+    }
+  }
+}

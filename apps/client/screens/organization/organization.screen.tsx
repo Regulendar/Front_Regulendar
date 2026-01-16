@@ -7,9 +7,9 @@ import { useDidMount } from 'rooks';
 import { Stack, Text } from 'tamagui';
 import { Image } from 'expo-image';
 import { OrganizationCalendarSubScreen, OrganizationChatSubScreen, OrganizationMainSubScreen } from './subScreens';
-import { Alert, Button, INavbarItem, Navbar } from '@/components';
+import { Alert, Button, IOrganizationNavbarItem, OrganizationNavbar } from '@/components';
 import { useUserStore } from '@/stores';
-import { useGetOrganizationLazyQuery } from '@/libs';
+import { OrganizationRole, useCheckIsOrganizationAdminLazyQuery, useGetOrganizationLazyQuery } from '@/libs';
 import { useRouter } from 'expo-router';
 import { ActivityIndicator } from 'react-native';
 
@@ -34,9 +34,11 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
   const [organization, setOrganization] = useState<IOrganization>();
   const [selectedItem, setSelectedItem] = useState<string>(EOrganizationScreenItem.Main);
   const [isFetchingOrganizationFailed, setIsFetchingOrganizationFailed] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [getOrganizationQuery, { loading, refetch }] = useGetOrganizationLazyQuery();
+  const [checkIsOrganizationAdminQuery] = useCheckIsOrganizationAdminLazyQuery();
 
-  const navbarItems: INavbarItem[] = [
+  const navbarItems: IOrganizationNavbarItem[] = [
     { value: EOrganizationScreenItem.Main, icon: faHome },
     { value: EOrganizationScreenItem.Calendar, icon: faCalendar },
     { value: EOrganizationScreenItem.Chat, icon: faMessage },
@@ -47,11 +49,41 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
       case EOrganizationScreenItem.Calendar:
         return <OrganizationCalendarSubScreen userId={userId} />;
       case EOrganizationScreenItem.Main:
-        return <OrganizationMainSubScreen />;
+        return <OrganizationMainSubScreen organizationId={organizationId} />;
       case EOrganizationScreenItem.Chat:
         return <OrganizationChatSubScreen />;
     }
-  }, [selectedItem, userId]);
+  }, [selectedItem, userId, organizationId]);
+
+  const checkIsAdmin = useCallback(async () => {
+    try {
+      const { data } = await checkIsOrganizationAdminQuery({
+        variables: {
+          input: {
+            id: userId,
+          },
+        },
+      });
+      if (!data) {
+        setIsAdmin(false);
+        return;
+      }
+      const organizationMemberData = data.getUser.user.organizationMembers.find(
+        ({ organizationId: memberId }) => memberId === organizationId
+      );
+      if (!organizationMemberData) {
+        setIsAdmin(false);
+        return;
+      }
+      const isUserAdmin =
+        organizationMemberData.role === OrganizationRole.Admin ||
+        organizationMemberData.role === OrganizationRole.Owner;
+      setIsAdmin(isUserAdmin);
+    } catch (error) {
+      // TODO(@Milgam06): Error handling
+      setIsAdmin(false);
+    }
+  }, [checkIsOrganizationAdminQuery, userId, organizationId]);
 
   const fetchData = useCallback(async () => {
     const { data: organizationData, error } = await getOrganizationQuery({
@@ -85,6 +117,7 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
   }, [refetch]);
 
   useDidMount(async () => {
+    await checkIsAdmin();
     await fetchData();
   });
 
@@ -108,11 +141,11 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
                 <Button
                   px={0}
                   py="$size.x2"
-                  bg="$colors.componentGreen"
+                  bg="$colors.primaryGreen"
                   fontSize="$7"
                   fontWeight="$600"
                   color="$colors.backgroundWhite"
-                  pressStyle={{ bg: '$colors.componentGreen', opacity: 0.8 }}
+                  pressStyle={{ bg: '$colors.primaryGreen', opacity: 0.8 }}
                   onPress={handlePressRefetchOrganization}>
                   다시 시도하기
                 </Button>
@@ -139,7 +172,12 @@ export const OrganizationScreen = memo<IOrganizationScreen>(({ organizationId })
           </>
         )}
       </SafeAreaView>
-      <Navbar itemValue={selectedItem} navbarItems={navbarItems} onChangeItemValue={handleChangeNavbarItem} />
+      <OrganizationNavbar
+        isAdmin={isAdmin}
+        itemValue={selectedItem}
+        navbarItems={navbarItems}
+        onChangeItemValue={handleChangeNavbarItem}
+      />
     </Stack>
   );
 });
