@@ -69991,11 +69991,39 @@
           "val": "#3ABF67",
           "variable": ""
         },
+        "softGreen": {
+          "isVar": true,
+          "key": "$softGreen",
+          "name": "t-colors-softGreen",
+          "val": "#EAF8F0",
+          "variable": ""
+        },
+        "fillGreen": {
+          "isVar": true,
+          "key": "$fillGreen",
+          "name": "t-colors-fillGreen",
+          "val": "#1F7A3F",
+          "variable": ""
+        },
         "errorRed": {
           "isVar": true,
           "key": "$errorRed",
           "name": "t-colors-errorRed",
           "val": "#ff686a",
+          "variable": ""
+        },
+        "warningYellow": {
+          "isVar": true,
+          "key": "$warningYellow",
+          "name": "t-colors-warningYellow",
+          "val": "#F59E0B",
+          "variable": ""
+        },
+        "infoBlue": {
+          "isVar": true,
+          "key": "$infoBlue",
+          "name": "t-colors-infoBlue",
+          "val": "#2563EB",
           "variable": ""
         },
         "lightGray": {
@@ -70192,6 +70220,20 @@
         "val": "#ff686a",
         "variable": ""
       },
+      "$colors.fillGreen": {
+        "isVar": true,
+        "key": "$fillGreen",
+        "name": "t-colors-fillGreen",
+        "val": "#1F7A3F",
+        "variable": ""
+      },
+      "$colors.infoBlue": {
+        "isVar": true,
+        "key": "$infoBlue",
+        "name": "t-colors-infoBlue",
+        "val": "#2563EB",
+        "variable": ""
+      },
       "$colors.lightGray": {
         "isVar": true,
         "key": "$lightGray",
@@ -70218,6 +70260,20 @@
         "key": "$primaryGreen",
         "name": "t-colors-primaryGreen",
         "val": "#3ABF67",
+        "variable": ""
+      },
+      "$colors.softGreen": {
+        "isVar": true,
+        "key": "$softGreen",
+        "name": "t-colors-softGreen",
+        "val": "#EAF8F0",
+        "variable": ""
+      },
+      "$colors.warningYellow": {
+        "isVar": true,
+        "key": "$warningYellow",
+        "name": "t-colors-warningYellow",
+        "val": "#F59E0B",
         "variable": ""
       },
       "$colors.white": {
